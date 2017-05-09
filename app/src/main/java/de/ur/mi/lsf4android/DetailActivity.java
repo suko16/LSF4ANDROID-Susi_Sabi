@@ -15,7 +15,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static de.ur.mi.lsf4android.R.id.table;
+import static de.ur.mi.lsf4android.R.id.fragment_ausfallende_tabelle;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String TITEL_EXTRA = "titel_extra";

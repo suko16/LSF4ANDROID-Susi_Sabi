@@ -58,17 +58,17 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> result = new ArrayList<>();
             try {
-                Document doc  = Jsoup.connect(urls[0]).get();
+                Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
                 Elements rows = table.select("tr");
                 htmlList = new ArrayList<>();
-                for(Element row : rows) {
+                for (Element row : rows) {
                     String[] string_row = new String[3];
                     Elements columns = row.select("td");
                     int i = 0;
                     rowCount++;
-                    for(Element column : columns) {
-                        switch(i) {
+                    for (Element column : columns) {
+                        switch (i) {
                             case 0:
                                 string_row[0] = column.text();
                                 break;
@@ -97,7 +97,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         private void callDetailActivity(String titel, int j) {
             Intent intent = new Intent(getActivity(), DetailActivity.class);
             intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
-            intent.putExtra(DetailActivity.HTML_EXTRA,htmlList.get(j));
+            intent.putExtra(DetailActivity.HTML_EXTRA, htmlList.get(j));
             startActivity(intent);
 
         }
@@ -106,86 +106,86 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             // Tabelle in fragment_ausfallende.xml bauen und mit result befüllen
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
-            table = (TableLayout) getView().findViewById(R.id.table);
+            table = (TableLayout) getView().findViewById(R.id.fragment_ausfallende_tabelle);
             addRow("Beginn", "Ende", "Titel", 1);
 
-            for(int i= 1; i< rowCount ; i++){
-                    veranstaltung = new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2]);
-                    addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getTitel(), i);
+            for (int i = 1; i < rowCount; i++) {
+                veranstaltung = new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2]);
+                addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getTitel(), i);
             }
         }
 
-        private void addRow (String begin_text, String end_text, String title_text, int k){
 
-            //int Wert braucht man, um über Clicklistener richtige URL zu öffnen.
+    private void addRow(String begin_text, String end_text, String title_text, int k) {
 
-            int counter = 0;
-            counter++;
+        //int Wert braucht man, um über Clicklistener richtige URL zu öffnen.
 
-            row = new TableRow(getActivity());
-          //  row = (TableRow) getView().findViewById(R.id.row1);
-            row.setId(counter);
-            row.setLayoutParams(
-                    new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT
-                    )
-            );
+        int counter = 0;
+        counter++;
 
-            begin = new TextView(getActivity());
-            begin.setId(counter);
-            begin.setText(begin_text);
-            begin.setLayoutParams(
-                    new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT
-                    )
-            );
+        row = new TableRow(getActivity());
 
-            row.addView(begin);
+        row.setId(counter);
+        row.setLayoutParams(
+                new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT
+                )
+        );
 
+        begin = new TextView(getActivity());
+        begin.setId(counter);
+        begin.setText(begin_text);
+        begin.setLayoutParams(
+                new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT
+                )
+        );
 
-            ende = new TextView(getActivity());
-            ende.setId(counter+200);
-            ende.setText(end_text);
-            ende.setLayoutParams(
-                    new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT
+        row.addView(begin);
 
-                    )
-            );
+        ende = new TextView(getActivity());
+        ende.setId(counter + 200);
+        ende.setText(end_text);
+        ende.setLayoutParams(
+                new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT
 
-            row.addView(ende);
+                )
+        );
 
-            title = new TextView(getActivity());
-            title.setId(counter+100);
-            title.setText(title_text);
-            title.setLayoutParams(
-                    new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT
-                    )
-            );
+        row.addView(ende);
 
-            final String header = title_text;
-            final int rowCountHtml = k-1; //richtige Stelle von ArrayList htmlList in CallDetailActivity ansprechen
+        title = new TextView(getActivity());
+        title.setId(counter + 100);
+        title.setText(title_text);
+        title.setLayoutParams(
+                new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT,
+                        TableRow.LayoutParams.WRAP_CONTENT
+                )
+        );
 
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callDetailActivity(header, rowCountHtml);
-                }
-            });
-            row.addView(title);
+        final String header = title_text;
+        final int rowCountHtml = k - 1; //richtige Stelle von ArrayList htmlList in CallDetailActivity ansprechen
 
-            table.addView(row, new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.MATCH_PARENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT
-                    )
-            );
-        }
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDetailActivity(header, rowCountHtml);
+            }
+        });
+        row.addView(title);
+
+        table.addView(row, new TableLayout.LayoutParams(
+                        TableLayout.LayoutParams.MATCH_PARENT,
+                        TableLayout.LayoutParams.WRAP_CONTENT
+                )
+        );
     }
+}
 
 
 }
