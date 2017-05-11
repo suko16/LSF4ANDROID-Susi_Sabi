@@ -10,3 +10,6 @@
     tools:showIn="@layout/app_bar_main">
 
 </android.support.constraint.ConstraintLayout>
+
+    <!--verglichen
+        von System gebaut-->

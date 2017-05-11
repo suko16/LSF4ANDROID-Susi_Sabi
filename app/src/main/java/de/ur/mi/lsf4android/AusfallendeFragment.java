@@ -1,5 +1,12 @@
+//verglichen
+//von Susi gebaut, von Sabi angepasst
+//muss noch mit ArrayAdapter und ListView umgebaut werden
+
+
 package de.ur.mi.lsf4android;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +16,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,6 +31,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
@@ -30,10 +39,23 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private TextView title;
     private TextView begin;
     private TextView ende;
-    private TableLayout table;
-    private TableRow row;
+    private TextView number;
+    public TableLayout table;
+    public TableRow row;
     private int rowCount = 0;
     private ArrayList<String> htmlList;
+    private EigeneVeranstaltungenDataSource dataSource;
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+    public ArrayList<String[]> result;
+    public boolean uebereinstimmung = false;
+
+    //notification:
+    NotificationManager notificationManager;
+    Notification noti;
+    long[] vibrate = {0,100};
+    private CreateNotificationActivity cN;
+
+
 
     public AusfallendeFragment() {
         // Required empty public constructor
@@ -50,7 +72,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
-        //title = (TextView) getView().findViewById(R.id.title_tabelle);
+
         return inflater.inflate(R.layout.fragment_ausfallende, container, false);
     }
 
@@ -63,7 +85,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 Elements rows = table.select("tr");
                 htmlList = new ArrayList<>();
                 for (Element row : rows) {
-                    String[] string_row = new String[3];
+                    String[] string_row = new String[4];
                     Elements columns = row.select("td");
                     int i = 0;
                     rowCount++;
@@ -75,8 +97,11 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                             case 1:
                                 string_row[1] = column.text();
                                 break;
+                            case 2:
+                                string_row[2] = column.text();
+                                break;
                             case 3:
-                                string_row[2] = column.select("a").text();
+                                string_row[3] = column.select("a").text();
 
                                 //get URL from titel
                                 Element link = column.select("a").first();
@@ -107,16 +132,22 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
             table = (TableLayout) getView().findViewById(R.id.fragment_ausfallende_tabelle);
-            addRow("Beginn", "Ende", "Titel", 1);
+            addRow("Beginn", "Ende", "Nummer", "Titel", 1);
 
             for (int i = 1; i < rowCount; i++) {
-                veranstaltung = new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2]);
-                addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getTitel(), i);
+                veranstaltung = new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]);
+                addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getNumber(), veranstaltung.getTitel(), i);
             }
+
+            if (uebereinstimmung == true) {
+                CreateNotificationActivity cN = new CreateNotificationActivity();
+
+                cN.createNotification();
+            }
+
         }
 
-
-    private void addRow(String begin_text, String end_text, String title_text, int k) {
+    private void addRow(String begin_text, String end_text, String number_text, String title_text, int k) {
 
         //int Wert braucht man, um über Clicklistener richtige URL zu öffnen.
 
@@ -158,6 +189,20 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
         row.addView(ende);
 
+
+            number = new TextView(getActivity());
+            number.setId(counter+300);
+            number.setText(number_text);
+            number.setLayoutParams(
+                    new TableRow.LayoutParams(
+                            TableRow.LayoutParams.MATCH_PARENT,
+                            TableRow.LayoutParams.WRAP_CONTENT
+                    )
+            );
+
+            row.addView(number);
+
+
         title = new TextView(getActivity());
         title.setId(counter + 100);
         title.setText(title_text);
@@ -177,6 +222,21 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 callDetailActivity(header, rowCountHtml);
             }
         });
+
+
+//Überprüft auf Übereinstimmungen zwischen Datenbank und Ausfallenden
+
+            dataSource = new EigeneVeranstaltungenDataSource(getActivity());
+            dataSource.open();
+            List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+
+            for (int j = 0; j < Veranstaltungsliste.size(); j++){
+                if(Veranstaltungsliste.get(j).getNumber().equals(number_text)){
+                    row.setBackgroundColor(0xFF00FF00);
+                    uebereinstimmung = true;
+                }
+            }
+
         row.addView(title);
 
         table.addView(row, new TableLayout.LayoutParams(
@@ -185,7 +245,5 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 )
         );
     }
-}
-
-
+    }
 }

@@ -1,3 +1,8 @@
+//verglichen
+//hat Susi gebaut
+//mit ArrayAdapter und Gridview umabuen
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;

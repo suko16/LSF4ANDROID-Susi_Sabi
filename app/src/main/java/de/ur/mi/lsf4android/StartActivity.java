@@ -1,3 +1,7 @@
+//fertig
+//von Susi gebaut
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -11,6 +15,7 @@ public class StartActivity extends AppCompatActivity {
     private Button ausfallendeVButton;
     private Button eigeneVButton;
     private Button VorVerzeichnisButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,16 @@ public class StartActivity extends AppCompatActivity {
                 clickVorVerzeichnis();
             }
         });
+
+
+        Button buttonLast = (Button) findViewById(R.id.button_last);
+
+        buttonLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickBaumLetzte();
+            }
+        });
     }
 
     private void clickAusfallend (){
@@ -60,7 +75,14 @@ public class StartActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
+    private void clickBaumLetzte () {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("BaumLetzte",true);
+        startActivity(intent);
+    }
 
 
 }
+
+
+

@@ -1,3 +1,7 @@
+//fertig
+//von Susi gebaut
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -49,6 +53,8 @@ public class MainActivity extends AppCompatActivity
             fragmentClass = EigeneFragment.class;
         } else if (intent != null && intent.getBooleanExtra("open_vorverzeichnis_fragment",false)){
             fragmentClass = AlleFragment.class;
+        }else if (intent != null && intent.getBooleanExtra("BaumLetzte", false)){
+            fragmentClass = BaumLetzteStufeFragment.class;
         }
         try {
             fragment = (Fragment) fragmentClass.newInstance();

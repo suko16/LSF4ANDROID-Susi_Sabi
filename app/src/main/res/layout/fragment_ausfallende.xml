@@ -14,5 +14,8 @@
         android:stretchColumns="1">
     </TableLayout>
 
-
 </FrameLayout>
+
+<!--verglichen
+von Susi gebaut
+muss noch mit ArrayAdapter und ListView angepasst werden-->

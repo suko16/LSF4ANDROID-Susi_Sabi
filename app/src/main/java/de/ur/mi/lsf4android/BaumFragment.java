@@ -1,3 +1,7 @@
+//verglichen
+//von Susi gebaut --> Zeigt Baumstruktur zum durchklicken
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Context;

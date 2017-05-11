@@ -23,3 +23,6 @@
     <include layout="@layout/content_main" />
 
 </android.support.design.widget.CoordinatorLayout>
+
+<!--verglichen
+von System gebaut-->

@@ -1,3 +1,7 @@
+//verglichen
+//von Susi gebaut --> Baumstrukur erste Seite
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
@@ -44,7 +48,6 @@ public class AlleFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         String[] url = new  String[1];
         url[0] = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743&P.vx=mittel";
         new DownloadHeadsTask().execute(url);
@@ -68,7 +71,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
                 String[] zweigUrl = new String[table_header.size()];
                 String[] headerString = new String[1];
 
-                headerString[0]= header.text();
+                headerString[0] = header.text();
 
                 for (int i = 0; i < zweigName.length; i++) {
                     zweigName[i] = table_header.get(i).text();
@@ -82,7 +85,6 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
             return arrayList;
         }
 
@@ -96,53 +98,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
             ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
             listView.setAdapter(adapter);
-
-
-            /*TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
-            view.setText(result.get(0)[0]);
-
-            TextView tableHeaderView = (TextView) getView().findViewById(R.id.vl2);
-            tableHeaderView.setText(result.get(1)[4]);
-
-            alleVorlesungenTabelle = (TableLayout) getView().findViewById(R.id.fragment_alle_tabelle);
-            for (int s = 1; s < result.get(0).length; s++) {
-                alleVorlesungenTabelle.addView(addRow(result.get(0)[s], s), new TableLayout.LayoutParams(
-                                TableLayout.LayoutParams.MATCH_PARENT,
-                                TableLayout.LayoutParams.WRAP_CONTENT
-                        )
-                );
-            }*/
         }
-
-       /* private TableRow addRow (String zweigName, int idCount){
-            TableRow zweig = new TableRow(getActivity());
-            zweig.setId(idCount);
-            zweig.setLayoutParams(
-                    new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT,
-                            TableRow.LayoutParams.WRAP_CONTENT
-                    )
-            );
-
-            TextView zweigInhalt = new TextView(getActivity());
-            zweigInhalt.setId(idCount);
-            zweigInhalt.setText(zweigName);
-
-           zweigInhalt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                   // url = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743&P.vx=mittel";
-                    //DownloadHeadsTask.execute(url);
-                    alleVorlesungenTabelle.setBackgroundColor(Color.GREEN);
-                }
-            });
-
-            zweig.addView(zweigInhalt);
-
-            return zweig;
-        }*/
     }
-    
-
 }
 

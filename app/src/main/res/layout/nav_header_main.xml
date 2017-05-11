@@ -32,3 +32,6 @@
         android:textSize="@dimen/lsf4android_fontSize_nav"/>
 
 </LinearLayout>
+
+<!--verglichen
+von System gebaut-->
