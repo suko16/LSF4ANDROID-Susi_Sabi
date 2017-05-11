@@ -10,6 +10,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -62,17 +64,18 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
                 Elements table_header = doc.select("a.ueb");
 
-                String[] zweigName = new String[table_header.size()+1];
-                String[] zweigUrl = new String[table_header.size()+1];
+                String[] zweigName = new String[table_header.size()];
+                String[] zweigUrl = new String[table_header.size()];
+                String[] headerString = new String[1];
 
-                zweigName[0]= header.text();
-                zweigUrl[0]= null;
+                headerString[0]= header.text();
 
-                for (int i = 1; i < zweigName.length; i++) {
-                    zweigName[i] = table_header.get(i-1).text();
-                    zweigUrl[i] = table_header.get(i-1).attr("href");
+                for (int i = 0; i < zweigName.length; i++) {
+                    zweigName[i] = table_header.get(i).text();
+                    zweigUrl[i] = table_header.get(i).attr("href");
                 }
 
+                arrayList.add(headerString);
                 arrayList.add(zweigName);
                 arrayList.add(zweigUrl);
 
@@ -84,7 +87,18 @@ public class AlleFragment extends android.support.v4.app.Fragment {
         }
 
         protected void onPostExecute(ArrayList<String[]> result) {
+
             TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
+            view.setText(result.get(0)[0]);
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_list_item_1, result.get(1));
+
+            ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
+            listView.setAdapter(adapter);
+
+
+            /*TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
             view.setText(result.get(0)[0]);
 
             TextView tableHeaderView = (TextView) getView().findViewById(R.id.vl2);
@@ -97,10 +111,10 @@ public class AlleFragment extends android.support.v4.app.Fragment {
                                 TableLayout.LayoutParams.WRAP_CONTENT
                         )
                 );
-            }
+            }*/
         }
 
-        private TableRow addRow (String zweigName, int idCount){
+       /* private TableRow addRow (String zweigName, int idCount){
             TableRow zweig = new TableRow(getActivity());
             zweig.setId(idCount);
             zweig.setLayoutParams(
@@ -126,7 +140,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             zweig.addView(zweigInhalt);
 
             return zweig;
-        }
+        }*/
     }
     
 

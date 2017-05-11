@@ -5,26 +5,14 @@
     android:orientation="vertical"
     tools:context="de.ur.mi.lsf4android.AlleFragment">
 
-
     <TextView
         android:id="@+id/header_Vorlesungsverzeichnis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/vl2"
+    <ListView
+        android:id="@+id/fragment_alle_listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TableLayout
-        android:id="@+id/fragment_alle_tabelle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TableRow>
-
-        </TableRow>
-
-    </TableLayout>
+        android:layout_height="wrap_content"></ListView>
 </LinearLayout>
