@@ -56,8 +56,8 @@ public class CreateNotificationActivity extends Activity {
                 .setContentText("Deine Veranstaltung fällt aus")
                 .setContentTitle("LSF4Android");
 
-        Intent intent = new Intent(this, NotificationReceiverActivity.class);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        //Intent intent = new Intent(this, NotificationReceiverActivity.class);
+       // PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
        // noti.vibrate = vibrate;
 
@@ -73,6 +73,8 @@ public class CreateNotificationActivity extends Activity {
 
 
 
+        Intent intent = new Intent(this, BackgroundService.class);
+        startService(intent);
 
 
        /* noti = new Notification.Builder(this)

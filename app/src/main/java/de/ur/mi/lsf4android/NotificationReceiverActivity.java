@@ -4,9 +4,6 @@
 
 package de.ur.mi.lsf4android;
 
-/**
- * Created by Sabi on 07.05.2017.
- */
 
 
 import android.app.Activity;

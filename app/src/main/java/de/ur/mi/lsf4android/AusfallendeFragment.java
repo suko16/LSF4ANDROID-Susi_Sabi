@@ -81,8 +81,8 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> result = new ArrayList<>();
-            try {
-                Document doc = Jsoup.connect(urls[0]).get();
+                try {
+                    Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
                 Elements rows = table.select("tr");
                 htmlList = new ArrayList<>();
