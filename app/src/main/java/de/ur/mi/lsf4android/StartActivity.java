@@ -14,7 +14,8 @@ public class StartActivity extends AppCompatActivity {
 
     private Button ausfallendeVButton;
     private Button eigeneVButton;
-    private Button VorVerzeichnisButton;
+    private Button vorVerzeichnisButton;
+    private Button buttonLast;
 
 
     @Override
@@ -23,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         ausfallendeVButton = (Button)findViewById(R.id.ausfallende_v_button);
         eigeneVButton = (Button)findViewById(R.id.eigene_v_button);
-        VorVerzeichnisButton = (Button)findViewById(R.id.alle_v_button);
+        vorVerzeichnisButton = (Button)findViewById(R.id.alle_v_button);
 
         ausfallendeVButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-        VorVerzeichnisButton.setOnClickListener(new View.OnClickListener() {
+        vorVerzeichnisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickVorVerzeichnis();
@@ -47,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
 
-        Button buttonLast = (Button) findViewById(R.id.button_last);
+        buttonLast = (Button) findViewById(R.id.button_last);
 
         buttonLast.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,24 +61,28 @@ public class StartActivity extends AppCompatActivity {
     private void clickAusfallend (){
         Intent i = new Intent(this,MainActivity.class);
         i.putExtra("open_ausfallend_fragment", true);
+        i.putExtra("Button_Ausfallend", ausfallendeVButton.getText());
         startActivity(i);
     }
 
     private void clickEigene (){
         Intent i = new Intent(this,MainActivity.class);
         i.putExtra("open_eigene_fragment", true);
+        i.putExtra("Button_Eigene", eigeneVButton.getText());
         startActivity(i);
     }
 
     private void clickVorVerzeichnis (){
         Intent i = new Intent(this,MainActivity.class);
         i.putExtra("open_vorverzeichnis_fragment", true);
+        i.putExtra("Button_VorVerzeichnis", vorVerzeichnisButton.getText());
         startActivity(i);
     }
 
     private void clickBaumLetzte () {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("BaumLetzte",true);
+        intent.putExtra("Button_BaumLetzte", buttonLast.getText());
         startActivity(intent);
     }
 

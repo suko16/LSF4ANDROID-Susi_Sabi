@@ -49,13 +49,23 @@ public class MainActivity extends AppCompatActivity
 
         if (intent != null && intent.getBooleanExtra("open_ausfallend_fragment",false)){
             fragmentClass = AusfallendeFragment.class;
+            setTitle(intent.getStringExtra("Button_Ausfallend"));
+
         } else if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
             fragmentClass = EigeneFragment.class;
+            setTitle(intent.getStringExtra("Button_Eigene"));
         } else if (intent != null && intent.getBooleanExtra("open_vorverzeichnis_fragment",false)){
             fragmentClass = AlleFragment.class;
+            setTitle(intent.getStringExtra("Button_VorVerzeichnis"));
+
+
         }else if (intent != null && intent.getBooleanExtra("BaumLetzte", false)){
             fragmentClass = BaumLetzteStufeFragment.class;
+            setTitle(intent.getStringExtra("Button_BaumLetzte"));
         }
+
+
+
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -64,6 +74,8 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
+
+
 
         /*ImageView urLogo = (ImageView) findViewById(R.id.urLogo);
         urLogo.setOnClickListener(new View.OnClickListener(){
