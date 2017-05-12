@@ -3,9 +3,6 @@
 
 package de.ur.mi.lsf4android;
 
-/**
- * Created by Sabi on 25.04.2017.
- */
 
 public class EigeneV_Objekt {
 

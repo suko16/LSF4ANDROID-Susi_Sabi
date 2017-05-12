@@ -20,27 +20,20 @@ import android.widget.Toast;
 
 public class EigeneFragment extends android.support.v4.app.Fragment implements ListView.OnItemLongClickListener {
 
-    //db:
+
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private EigeneVeranstaltungenDataSource dataSource;
     public ListView VeranstaltngslisteListView;
 
-
-    //ende db
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         View view = inflater.inflate(R.layout.fragment_eigene, container, false);
-
-
         VeranstaltngslisteListView = (ListView) view.findViewById(R.id.eigene_veranstaltungsliste);
-
         dataSource = new EigeneVeranstaltungenDataSource(getActivity());
-
         VeranstaltngslisteListView.setOnItemLongClickListener(this);
         return view;
     }

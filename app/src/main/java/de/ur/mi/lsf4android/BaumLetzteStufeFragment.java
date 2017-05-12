@@ -58,6 +58,7 @@ public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&root120171=40852|40107|37173|40116|37288|37231&trex=step");
         dataSource = new EigeneVeranstaltungenDataSource(getActivity());
         buttonList = new ArrayList<>();
+        table = (TableLayout) view.findViewById(R.id.table_all);
 
         return view;
     }
@@ -106,9 +107,8 @@ public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
 
         protected void onPostExecute(ArrayList<String[]> result) {
 
-            table = (TableLayout) getView().findViewById(R.id.table_all);
-            addRow("Number", "Titel");
 
+            addRow("Number", "Titel");
             for (int i = 1; i < rowCountForReading; i++) {
                 addRow(result.get(i)[0], result.get(i)[1]);
 
@@ -116,7 +116,6 @@ public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
         }
 
         private void addRow (final String number_text, final String title_text){
-            int counter = 0;
 
             row = new TableRow(getActivity());
             row.setId(rowCountForWriting);

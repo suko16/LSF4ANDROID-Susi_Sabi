@@ -72,8 +72,10 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
 
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+        View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
+        table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
 
-        return inflater.inflate(R.layout.fragment_ausfallende, container, false);
+        return view;
     }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -131,7 +133,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             // Tabelle in fragment_ausfallende.xml bauen und mit result befüllen
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
-            table = (TableLayout) getView().findViewById(R.id.fragment_ausfallende_tabelle);
+
             addRow("Beginn", "Ende", "Nummer", "Titel", 1);
 
             for (int i = 1; i < rowCount; i++) {
@@ -139,15 +141,19 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getNumber(), veranstaltung.getTitel(), i);
             }
 
-            if (uebereinstimmung == true) {
+         /*  if (uebereinstimmung == true) {
                 CreateNotificationActivity cN = new CreateNotificationActivity();
 
                 cN.createNotification();
-            }
+            }*/
 
         }
 
-    private void addRow(String begin_text, String end_text, String number_text, String title_text, int k) {
+
+
+
+            //Fügt in der Tabelle die Zeilen mit den entsprechenden Werten hinzu
+        private void addRow(String begin_text, String end_text, String number_text, String title_text, int k) {
 
         //int Wert braucht man, um über Clicklistener richtige URL zu öffnen.
 

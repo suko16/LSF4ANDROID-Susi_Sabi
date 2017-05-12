@@ -1,6 +1,7 @@
 //verglichen
 //von Susi gebaut --> Baumstrukur erste Seite
 
+// TODO: View view noch anpassen
 
 package de.ur.mi.lsf4android;
 
@@ -33,6 +34,8 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
     TableLayout alleVorlesungenTabelle;
     String url;
+    TextView textView;
+    ListView listView;
 
 
     public AlleFragment() {
@@ -47,13 +50,16 @@ public class AlleFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_alle, container, false);
+        textView= (TextView) view.findViewById(R.id.header_Vorlesungsverzeichnis);
+        listView = (ListView) view.findViewById(R.id.fragment_alle_listView);
 
         String[] url = new  String[1];
         url[0] = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743&P.vx=mittel";
         new DownloadHeadsTask().execute(url);
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_alle, container, false);
+        return view;
     }
 
     private class DownloadHeadsTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -90,13 +96,10 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
         protected void onPostExecute(ArrayList<String[]> result) {
 
-            TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
-            view.setText(result.get(0)[0]);
 
+            textView.setText(result.get(0)[0]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_list_item_1, result.get(1));
-
-            ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
             listView.setAdapter(adapter);
         }
     }
