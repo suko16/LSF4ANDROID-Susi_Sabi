@@ -5,7 +5,9 @@
 
 package de.ur.mi.lsf4android;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.Uri;
@@ -15,6 +17,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -34,6 +37,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
     TableLayout alleVorlesungenTabelle;
     String url;
+    allefragmentInterface mCallback;
     TextView textView;
     ListView listView;
 
@@ -94,14 +98,53 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             return arrayList;
         }
 
-        protected void onPostExecute(ArrayList<String[]> result) {
+        protected void onPostExecute(final ArrayList<String[]> result) {
 
+            TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
+            view.setText(result.get(0)[0]);
 
             textView.setText(result.get(0)[0]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_list_item_1, result.get(1));
+
+            ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
             listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(getActivity(),BaumActivity.class);
+                    intent.putExtra("HtmlExtra",result.get(2)[i]);
+                    startActivity(intent);
+                }
+            });
         }
     }
+
+
+
+
+    //Fragment kommuniziert mit Activity über Interface
+
+
+    public interface allefragmentInterface {
+        public void onArticleSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (allefragmentInterface) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
+
 }
 

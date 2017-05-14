@@ -23,7 +23,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AlleFragment.allefragmentInterface  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +87,24 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    @Override
+
+
+
+
+    public void onArticleSelected(int position) {
+        // The user selected the headline of an article from the HeadlinesFragment
+        // Do something here to display that article
+    }
+
+
+
+
+
+
+
+
+
+        @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {

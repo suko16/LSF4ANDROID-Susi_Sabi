@@ -69,10 +69,10 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
 
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
-        View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
+
         table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
 
         return view;
