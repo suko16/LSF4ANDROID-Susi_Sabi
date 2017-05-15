@@ -17,18 +17,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 // TODO: Quelle einfügen: https://developer.android.com/guide/components/services.html#Notifications
 
 public class BackgroundService extends IntentService {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
-
-    public ArrayList<String> result;
-
     public BackgroundService() {
         super("BackgroundService");
     }
+    ArrayList<String> result;
+    private EigeneVeranstaltungenDataSource dataSource;
+
 
     @Override
     public void onCreate() {
@@ -37,7 +38,8 @@ public class BackgroundService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        downLoadCancelledLectures();
+        // soll den Download übernehmen, aber wie aufrufen, mit welchen parametern?
+
     }
 
 
@@ -45,9 +47,8 @@ public class BackgroundService extends IntentService {
     // Intent intent = new Intent(this, BackgroundService.class); startService(intent);
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "bsp", Toast.LENGTH_LONG).show();
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
-
+//        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+        downLoadCancelledLectures();
         return Service.START_NOT_STICKY; //legt Verhalten nach Beendigung  des Services durch das System fest zB Service.START_NOT_STICKY
     }
 
@@ -57,14 +58,15 @@ public class BackgroundService extends IntentService {
 
 
     public void downLoadCancelledLectures() {
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&&HISCalendar_Date=27.04.2017&asi=");
 
     }
 
 
+
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String>> {
         protected ArrayList<String> doInBackground(String... urls) {
-            result = new ArrayList<>();
+           result = new ArrayList<>();
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
@@ -75,20 +77,16 @@ public class BackgroundService extends IntentService {
                     int i = 0;
                     for (Element column : columns) {
                         switch (i) {
-                            case 3:
-                                String titel = column.select("a").text();
-                                result.add(titel);
-
+                            case 2:
+                                result.add(column.text());
                                 break;
+
                         }
                         i++;
                     }
 
                 }
 
-                for(int i=0; i<result.size(); i++){
-                    Log.d(LOG_TAG, result.get(i));
-                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -96,5 +94,32 @@ public class BackgroundService extends IntentService {
                 return result;
             }
         }
+
+        protected void onPostExecute(ArrayList<String> result) {
+            checkIfCollision(result);
+        }
+    }
+
+    private void checkIfCollision(ArrayList<String> VeranstaltungsArray){
+        dataSource = new EigeneVeranstaltungenDataSource(this);
+        dataSource.open();
+        List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+
+        for (int j = 0; j < Veranstaltungsliste.size(); j++){
+            for(int i=0; i<VeranstaltungsArray.size(); i++){
+                if(Veranstaltungsliste.get(j).getNumber().equals(VeranstaltungsArray.get(i))) {
+                    sendNotification(Veranstaltungsliste.get(i).getTitel());
+
+                }
+            }
+        }
+
+    }
+
+
+    private void sendNotification(String titelAusfallendeVeranstaltung){
+        CreateNotificationActivity cN = new CreateNotificationActivity();
+        cN.createNotification(titelAusfallendeVeranstaltung); //wird nicht aufgerufen?
+
     }
 }

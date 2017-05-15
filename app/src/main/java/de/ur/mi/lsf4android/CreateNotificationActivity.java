@@ -29,63 +29,37 @@ public class CreateNotificationActivity extends Activity {
 
 
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_create);
-        notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        createNotification();
+
     }
 
-    public void createNotification() {
-        // Prepare intent which is triggered if the
-        // notification is selected
-           // Build notification
-           // Actions are just fake
+    public void createNotification(String titelAusfallendeVeranstaltung) {
 
 
-
-
-        //   b.setAutoCancel(true)
-              //
-        b = new NotificationCompat.Builder(this)
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        b = new NotificationCompat.Builder(this.getApplication()) //this?
                 .setSmallIcon(R.drawable.ic_menu_gallery)
-                .setTicker("Deine Veranstaltung fällt aus")
+                .setTicker("Deine Veranstaltung" + titelAusfallendeVeranstaltung + "fällt aus")
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentText("Deine Veranstaltung fällt aus")
+                .setContentText("Deine Veranstaltung" + titelAusfallendeVeranstaltung + "fällt aus")
                 .setContentTitle("LSF4Android");
 
-        //Intent intent = new Intent(this, NotificationReceiverActivity.class);
-       // PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        /*Intent intent = new Intent(this, NotificationReceiverActivity.class);
+            intent.putExtra("titel",titelAusfallendeVeranstaltung);
+            PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
 
-       // noti.vibrate = vibrate;
+            noti.vibrate = vibrate;
 
         notificationManager.notify(1, b.build());
 
 
 
-      /*  noti = new Notification.Builder(this.getApplication())
-                .setContentTitle("LSF4Android")
-                .setSmallIcon(R.drawable.ic_menu_camera)
-                .setContentText("Deine Veranstaltung fällt aus").build();
-*/
-
-
-
-        Intent intent = new Intent(this, BackgroundService.class);
-        startService(intent);
-
-
-       /* noti = new Notification.Builder(this)
-                   .setContentTitle("LSF4Android")
-                   .setSmallIcon(R.drawable.ic_menu_camera)
-                   .setContentText("Deine Veranstaltung fällt aus").build();
-
-  //         noti.vibrate = vibrate;
-
-
-           notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
            // hide the notification after its selected

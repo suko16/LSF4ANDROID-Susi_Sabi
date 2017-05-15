@@ -71,7 +71,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
 
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&&HISCalendar_Date=27.04.2017&asi=");
 
         table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
 
@@ -80,7 +80,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
-            ArrayList<String[]> result = new ArrayList<>();
+            result = new ArrayList<>();
                 try {
                     Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();

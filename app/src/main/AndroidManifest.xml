@@ -12,7 +12,6 @@
         android:theme="@style/AppTheme">
 
         <service android:name=".BackgroundService">
-
         </service>
 
         <activity
