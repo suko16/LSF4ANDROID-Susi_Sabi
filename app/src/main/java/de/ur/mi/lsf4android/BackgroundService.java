@@ -2,6 +2,7 @@ package de.ur.mi.lsf4android;
 
 import android.app.IntentService;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -19,7 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Quelle einfügen: https://developer.android.com/guide/components/services.html#Notifications
+
+// TODO: URL-Code-Anpassung für aktuelles Datum aus Ausfallende Veranstaltungen von Susi übernehmen
 
 public class BackgroundService extends IntentService {
 
@@ -80,11 +82,9 @@ public class BackgroundService extends IntentService {
                             case 2:
                                 result.add(column.text());
                                 break;
-
                         }
                         i++;
                     }
-
                 }
 
 
@@ -109,17 +109,14 @@ public class BackgroundService extends IntentService {
             for(int i=0; i<VeranstaltungsArray.size(); i++){
                 if(Veranstaltungsliste.get(j).getNumber().equals(VeranstaltungsArray.get(i))) {
                     sendNotification(Veranstaltungsliste.get(i).getTitel());
-
                 }
             }
         }
-
     }
 
 
     private void sendNotification(String titelAusfallendeVeranstaltung){
-        CreateNotificationActivity cN = new CreateNotificationActivity();
-        cN.createNotification(titelAusfallendeVeranstaltung); //wird nicht aufgerufen?
-
+        CreateNotificationActivity cN = new CreateNotificationActivity(getApplicationContext());
+        cN.createNotification(titelAusfallendeVeranstaltung);
     }
 }
