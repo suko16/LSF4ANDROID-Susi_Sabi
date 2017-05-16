@@ -48,14 +48,14 @@ public class StartActivity extends AppCompatActivity {
         });
 
 
-        buttonLast = (Button) findViewById(R.id.button_last);
+       // buttonLast = (Button) findViewById(R.id.button_last);
 
-        buttonLast.setOnClickListener(new View.OnClickListener() {
+        /*buttonLast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickBaumLetzte();
             }
-        });
+        });*/
     }
 
     private void clickAusfallend (){
@@ -79,12 +79,12 @@ public class StartActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void clickBaumLetzte () {
+   /* private void clickBaumLetzte () {
         Intent intent = new Intent(this,MainActivity.class);
         intent.putExtra("BaumLetzte",true);
         intent.putExtra("Button_BaumLetzte", buttonLast.getText());
         startActivity(intent);
-    }
+    }*/
 
 
 }

@@ -59,7 +59,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
         listView = (ListView) view.findViewById(R.id.fragment_alle_listView);
 
         String[] url = new  String[1];
-        url[0] = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743&P.vx=mittel";
+        url[0] = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
         new DownloadHeadsTask().execute(url);
 
         // Inflate the layout for this fragment
@@ -103,7 +103,6 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
             view.setText(result.get(0)[0]);
 
-            textView.setText(result.get(0)[0]);
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_list_item_1, result.get(1));
 
