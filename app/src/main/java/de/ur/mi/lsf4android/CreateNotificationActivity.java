@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 /**
  * Created by Sabi on 07.05.2017.
@@ -27,7 +28,7 @@ public class CreateNotificationActivity extends Activity {
     long[] vibrate = {0,100};
     NotificationCompat.Builder b;
     Context context = this;
-
+    public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
 
     public CreateNotificationActivity(){
@@ -47,13 +48,15 @@ public class CreateNotificationActivity extends Activity {
 
     public void createNotification(String titelAusfallendeVeranstaltung) {
 
-        noti = new Notification();
+     //   noti = new Notification();
         Intent notificationIntent = new Intent(this, AusfallendeFragment.class);
+        //Fehler: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.content.Context.getPackageName()' on a null object reference
+        //Absturz
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
 
-        noti.vibrate = vibrate;
+     //   noti.vibrate = vibrate;
 
         b.setSmallIcon(R.drawable.ic_menu_gallery)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
