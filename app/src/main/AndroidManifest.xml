@@ -61,9 +61,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
+
         <activity android:name=".BaumActivity"></activity>
     </application>
 </manifest>
 
 <!--verglichen
-von Susi gebaut, notification... von Sabi hinzugefügt-->
+von Susi gebaut, notification... von Sabi hinzugefügt->

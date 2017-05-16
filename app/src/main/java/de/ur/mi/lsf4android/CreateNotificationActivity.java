@@ -30,6 +30,8 @@ public class CreateNotificationActivity extends Activity {
 
 
 
+    public CreateNotificationActivity(){
+    }
 
     public CreateNotificationActivity(Context context){
         notificationManager = (NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -45,10 +47,13 @@ public class CreateNotificationActivity extends Activity {
 
     public void createNotification(String titelAusfallendeVeranstaltung) {
 
-        Intent intent = new Intent(this, NotificationReceiverActivity.class);
-        intent.putExtra("titel",titelAusfallendeVeranstaltung);
-        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        noti = new Notification();
+        Intent notificationIntent = new Intent(this, AusfallendeFragment.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
+
+        noti.vibrate = vibrate;
 
         b.setSmallIcon(R.drawable.ic_menu_gallery)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -59,10 +64,7 @@ public class CreateNotificationActivity extends Activity {
         notificationManager.notify(1, b.build());
 
 
-          /*  noti.vibrate = vibrate;
-
-
-
+          /*
 
 
 
