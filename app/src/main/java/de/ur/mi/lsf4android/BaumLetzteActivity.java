@@ -35,13 +35,6 @@ public class BaumLetzteActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.textView_activity_baum_letzte_titel);
     }
 
-
-   /* private void callDetailActivity(String titel) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
-        startActivity(intent);
-    }*/
-
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> result = new ArrayList<>();
