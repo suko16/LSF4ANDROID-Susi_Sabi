@@ -79,7 +79,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void clickBaumLetzte () {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,BaumLetzteActivity.class);
         intent.putExtra("BaumLetzte",true);
         intent.putExtra("Button_BaumLetzte", buttonLast.getText());
         startActivity(intent);

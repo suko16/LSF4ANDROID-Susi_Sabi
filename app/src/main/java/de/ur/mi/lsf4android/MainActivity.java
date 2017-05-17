@@ -84,6 +84,16 @@ public class MainActivity extends AppCompatActivity
 
 
 
+        /*ImageView urLogo = (ImageView) findViewById(R.id.urLogo);
+        urLogo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onUrLogoClicked();
+            }
+            });*/
+
+
+
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
 

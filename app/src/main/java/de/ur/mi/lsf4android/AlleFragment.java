@@ -37,7 +37,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
     TableLayout alleVorlesungenTabelle;
     String url;
-    allefragmentInterface mCallback;
+   // allefragmentInterface mCallback;
     TextView textView;
     ListView listView;
     ArrayAdapter<String> adapter;
@@ -100,18 +100,22 @@ public class AlleFragment extends android.support.v4.app.Fragment {
         }
 
         protected void onPostExecute(final ArrayList<String[]> result) {
+
             textView.setText(result.get(0)[0]);
 
             final Context context = getActivity();
+
             if (context != null) {
-                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, result.get(1));
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_list_item_1, result.get(1));
+
                 listView.setAdapter(adapter);
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Intent intent = new Intent(context, BaumActivity.class);
-                        intent.putExtra("HtmlExtra",result.get(2)[i]);
+                        intent.putExtra("HtmlExtra", result.get(2)[i]);
                         startActivity(intent);
                     }
                 });
@@ -125,7 +129,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
     //Fragment kommuniziert mit Activity über Interface
 
 
-    public interface allefragmentInterface {
+    /*public interface allefragmentInterface {
         public void onArticleSelected(int position);
     }
 
@@ -141,7 +145,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
         }
-    }
+    }*/
 
 
 }
