@@ -5,6 +5,7 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,8 +50,12 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
         Context context = getActivity();
         if (context != null) {
             ArrayList<EigeneV_Objekt> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
-            EigeneFragmentArrayAdapter adapter2 = new EigeneFragmentArrayAdapter(context, VeranstaltungslisteDB);
-            VeranstaltngslisteListView.setAdapter(adapter2);
+            EigeneFragmentArrayAdapter adapter = new EigeneFragmentArrayAdapter(context, VeranstaltungslisteDB);
+            VeranstaltngslisteListView.setAdapter(adapter);
+
+            //TODO: für den ClickListener mit Aufruf der Detailactivity kann ich ich keine HTML mitübergeben, weil wir ja hier keinen DownloadTask haben.. ne idee wie man das machen könnte?
+
+
         }
     }
 

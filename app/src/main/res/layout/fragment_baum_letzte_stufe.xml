@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
 
-<!-- LinearLayout benötigt?-->
+
 
         <ListView
             android:id="@+id/baum_letzte_stufe_fragment_listView"
