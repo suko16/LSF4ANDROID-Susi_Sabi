@@ -4,4 +4,31 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorLsf4Android">#000000</color>
+
+    <!--Farben der verschiedenen Fakultäten-->
+    <color name="Rechtswissenschaft">#CDD30F</color>
+    <color name="Wirtschaftswissenschaften">#AEA700</color>
+    <color name="Katholische_Theologie">#ECBC00</color>
+    <color name="Philosophie_Kunst_Geschichte_Gesellschaft">#EC6200</color>
+    <color name="Psychologie_Pädagogik_Sport">#BF002A</color>
+    <color name="Sprach_Literatur_Kultur">#73004B</color>
+    <color name="Biologie_VKLMedizin">#4FB800</color>
+    <color name="Mathematik">#009B77</color>
+    <color name="Physik">#008993</color>
+    <color name="Chemie_Pharmazie">#0087B2</color>
+    <color name="Medizin">#00556A</color>
+
+    <!--Farben der verschiedenen Fakultäten in opaque-->
+    <color name="Rechtswissenschaft_opaque">#66CDD30F</color>
+    <color name="Wirtschaftswissenschaften_opaque">#66AEA700</color>
+    <color name="Katholische_Theologie_opaque">#66ECBC00</color>
+    <color name="Philosophie_Kunst_Geschichte_Gesellschaft_opaque">#66EC6200</color>
+    <color name="Psychologie_Pädagogik_Sport_opaque">#66BF002A</color>
+    <color name="Sprach_Literatur_Kultur_opaque">#6673004B</color>
+    <color name="Biologie_VKLMedizin_opaque">#664FB800</color>
+    <color name="Mathematik_opaque">#66009B77</color>
+    <color name="Physik_opaque">#66008993</color>
+    <color name="Chemie_Pharmazie_opaque">#660087B2</color>
+    <color name="Medizin_opaque">#6600556A</color>
+
 </resources>

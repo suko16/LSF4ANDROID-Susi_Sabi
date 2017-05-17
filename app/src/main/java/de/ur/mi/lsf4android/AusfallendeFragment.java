@@ -144,7 +144,6 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
             intent.putExtra(DetailActivity.HTML_EXTRA, htmlList.get(j));
             startActivity(intent);
-
         }
 
         protected void onPostExecute(ArrayList<String[]> result) {
@@ -165,14 +164,13 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            callDetailActivity(veranstaltungen.get((int)l).getTitel(),(int)l);
+                            if(i!=0){
+                            callDetailActivity(veranstaltungen.get(i).getTitel(),i-1);
+                            }
                         } // TODO: Man kann in komplette Zeile klicken und nicht nur auf Titel. Schlimm?
                     });
                 }
             }
-
-
-
         }
 
 

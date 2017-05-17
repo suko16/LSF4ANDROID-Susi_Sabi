@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 public class DetailActivity extends AppCompatActivity {
     public static final String TITEL_EXTRA = "titel_extra";
     public static final String HTML_EXTRA = "html_extra";
+    private ListView detailActivityListview;
+    private DetailActivityArrayAdapter detailActivityArrayAdapter;
 
 
     @Override
@@ -32,9 +35,12 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String titel = intent.getStringExtra(TITEL_EXTRA);
-
         TextView tvTitel = (TextView) findViewById(R.id.veranstaltung_titel);
         tvTitel.setText(titel);
+        tvTitel.setBackgroundColor(getResources().getColor(R.color.Biologie_VKLMedizin));
+
+        detailActivityListview = (ListView) findViewById(R.id.listView_detail_activity);
+
 
         new DownloadDetailsTask().execute(intent.getStringExtra(HTML_EXTRA));
 
@@ -71,7 +77,11 @@ public class DetailActivity extends AppCompatActivity {
 
         protected void onPostExecute(String[][] result) {
 
-            TableLayout table = (TableLayout) findViewById(R.id.detail_tabelle);
+            detailActivityArrayAdapter = new DetailActivityArrayAdapter(DetailActivity.this, result);
+            detailActivityListview.setAdapter(detailActivityArrayAdapter);
+
+
+           /* TableLayout table = (TableLayout) findViewById(R.id.detail_tabelle);
             TableRow row;
             TextView head;
             TextView data;
@@ -82,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
                 data = (TextView) row.getChildAt(1);
                 head.setText(result[j][0]);
                 data.setText(result[j][1]);
-            }
+            }*/
         }
     }
 }
