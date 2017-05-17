@@ -83,7 +83,6 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
         table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
 
-
         return view;
     }
 
