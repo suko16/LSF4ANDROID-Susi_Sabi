@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+
+    <TextView
+        android:id="@+id/baum_letzte_nummer"
+        android:layout_width="0dp"
+        android:layout_weight="33"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/baum_letzte_name"
+        android:layout_width="0dp"
+        android:layout_weight="33"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/baum_letzte_button"
+        android:layout_width="0dp"
+        android:layout_weight="33"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

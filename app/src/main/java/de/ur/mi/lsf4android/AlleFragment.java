@@ -37,7 +37,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
     TableLayout alleVorlesungenTabelle;
     String url;
-    allefragmentInterface mCallback;
+   // allefragmentInterface mCallback;
     TextView textView;
     ListView listView;
 
@@ -126,7 +126,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
     //Fragment kommuniziert mit Activity über Interface
 
 
-    public interface allefragmentInterface {
+    /*public interface allefragmentInterface {
         public void onArticleSelected(int position);
     }
 
@@ -142,7 +142,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnHeadlineSelectedListener");
         }
-    }
+    }*/
 
 
 }

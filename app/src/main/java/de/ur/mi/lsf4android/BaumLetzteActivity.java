@@ -1,20 +1,20 @@
-//verglichen
-//von Sabi gebaut --> zeigt Tabelle der Veranstaltungen der Module an
-
-
 package de.ur.mi.lsf4android;
 
+import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,81 +23,59 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
+public class BaumLetzteActivity extends Activity {
 
-    public TextView title;
-    private TextView number;
-    private TableLayout table;
-    private TableRow row;
-    private int rowCountForReading = 0;
     public EigeneVeranstaltungenDataSource dataSource;
     public ArrayList<Button> buttonList;
-    int rowCountForWriting = 0;
-
-
-    public BaumLetzteStufeFragment() {
-
-        // Required empty public constructor
-    }
-
-    public static BaumLetzteStufeFragment newInstance() {
-        BaumLetzteStufeFragment fragment = new BaumLetzteStufeFragment();
-        return fragment;
-    }
+    ListView listView;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Inflate the layout for this fragment
+        setContentView(R.layout.fragment_baum_letzte_stufe);
+        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743|37604&P.vx=mittel");
+        listView = (ListView) this.findViewById(R.id.baum_letzte_stufe_fragment_listView);
 
-        View view = inflater.inflate(R.layout.fragment_baum_letzte_stufe, container, false);
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&root120171=40852|40107|37173|40116|37288|37231&trex=step");
-        dataSource = new EigeneVeranstaltungenDataSource(getActivity());
-        buttonList = new ArrayList<>();
-        table = (TableLayout) view.findViewById(R.id.table_all);
-
-        return view;
     }
 
 
-    private void callDetailActivity(String titel) {
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
+   /* private void callDetailActivity(String titel) {
+        Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
         startActivity(intent);
-    }
+    }*/
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> result = new ArrayList<>();
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
-                Element table = doc.select("table").last();
+                Elements table = doc.select("table[summary=Übersicht über alle Veranstaltungen]");
                 Elements rows = table.select("tr");
-                for (Element row : rows) {
-                    String[] string_row = new String[3];
-                    Elements columns = row.select("td");
-                    int i = 0;
-                    rowCountForReading++;
-                    for (Element column : columns) {
-                        switch (i) {
-                            case 0:
-                                string_row[0] = column.text();
-                                break;
-                            case 1:
-                                string_row[1] = column.text();
-                                break;
-                            case 3:
-                                string_row[2] = column.select("a").text();
-                                break;
-                        }
-                        i++;
+                Elements header = rows.select("th");
+
+                String[] numbers = new String[rows.size()];
+                String[] titles = new String[rows.size()];
+                String[] html = new String[rows.size()];
+
+                for (int s = 0; s < rows.size(); s++) {
+                    if (s == 0) {
+                        numbers[s] = header.get(0).text();
+                        titles[s] = header.get(1).text();
+                        html[s] = "hate keine html";
+                    } else {
+                        numbers[s] = rows.get(s).select("td").get(0).text();
+                        titles[s] = rows.get(s).select("td").get(1).text();
+                        html[s] = rows.get(s).select("td").get(1).select("a[href]").html();
                     }
-                    result.add(string_row);
                 }
+
+                result.add(numbers);
+                result.add(titles);
+                result.add(html);
+
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -105,10 +83,60 @@ public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
             }
         }
 
+
+
+
+
+
+
+            /*    for (int k = 0; k<3; k++) {
+                    //String[] numbers = new String[3];
+                    //String[] titles = new String [rows.size()];
+                    Elements columns = rows.select("td");
+                    int i = 0;
+                    rowCountForReading++;
+                    for (int j = 0; j<rows.size();j++) {
+                        switch (i) {
+                            case 0:
+                                numbers[j] = columns.text();
+                                break;
+                            case 1:
+                                titles[j] = columns.text();
+                                break;
+                            case 3:
+                                html[j] = columns.select("a").text();
+                                break;
+                        }
+                        i++;
+                    }
+                    result.add(numbers);
+                    result.add(titles);
+                    result.add(html);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                return result;
+            }
+        }*/
+
         protected void onPostExecute(ArrayList<String[]> result) {
 
+            // BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(getActivity(), result);
 
-            addRow("Number", "Titel");
+           /* BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(this,result);
+
+            ListView listView = (ListView) this.findViewById(R.id.baum_letzte_stufe_fragment_listView);
+            listView.setAdapter(adapter);*/
+
+
+            //setAdapter(result);
+
+            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, R.layout.baum_letzte_row, result);
+            listView.setAdapter(adapter);
+
+
+         /*   addRow("Number", "Titel");
             for (int i = 1; i < rowCountForReading; i++) {
                 addRow(result.get(i)[0], result.get(i)[1]);
 
@@ -199,7 +227,25 @@ public class BaumLetzteStufeFragment extends android.support.v4.app.Fragment{
                     )
             );
 
+        }*/
+
         }
 
+
+      /*  private void setAdapter(ArrayList<String[]> result) {
+            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, R.layout.baum_letzte_row, result);
+            listView.setAdapter(adapter);
+
+            ArrayAdapter arrayAdapter = new ArrayAdapter(BaumLetzteActivity.this, android.R.layout.simple_list_item_1, result.get(0));
+            ListView listView = (ListView) findViewById(R.id.baum_letzte_stufe_fragment_listView);
+            listView.setAdapter(arrayAdapter);
+
+        }*/
     }
+
 }
+
+
+
+
+

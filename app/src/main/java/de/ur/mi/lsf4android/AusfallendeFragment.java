@@ -30,7 +30,10 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AusfallendeFragment extends android.support.v4.app.Fragment {
@@ -70,10 +73,16 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
+        Calendar calendar = Calendar.getInstance();
 
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&&HISCalendar_Date=27.04.2017&asi=");
+        SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
+        String date = datumsformat.format(calendar.getTime());
+
+        String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=24.05.2017&&HISCalendar_Date=23.05.2017&&HISCalendar_Date=13.06.2017&&HISCalendar_Date=20.06.2017&&HISCalendar_Date=" + date + "&asi=";
+        new DownloadLSFTask().execute(url);
 
         table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
+
 
         return view;
     }
