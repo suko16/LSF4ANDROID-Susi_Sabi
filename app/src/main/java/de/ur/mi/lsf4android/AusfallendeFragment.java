@@ -5,19 +5,14 @@
 
 package de.ur.mi.lsf4android;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -27,15 +22,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class AusfallendeFragment extends android.support.v4.app.Fragment {
@@ -46,7 +37,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private TextView ende;
     private TextView number;
     public ListView list;
-    public VeranstaltungsAdapter adapter;
+    public AusfallendeFragmentArrayAdapter adapter;
     public TableLayout table;
     public TableRow row;
     private int rowCount = 0;
@@ -54,13 +45,6 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private EigeneVeranstaltungenDataSource dataSource;
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     public ArrayList<String[]> result;
-    public boolean uebereinstimmung = false;
-
-    //notification:
-    NotificationManager notificationManager;
-    Notification noti;
-    long[] vibrate = {0,100};
-    private CreateNotificationActivity cN;
 
 
 
@@ -82,19 +66,15 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
         //String date = datumsformat.format(calendar.getTime());
 
-        String date = "26.06.2017 ";
+        String date = "27.04.2017 ";
         String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=24.05.2017&&HISCalendar_Date=23.05.2017&&HISCalendar_Date=13.06.2017&&HISCalendar_Date=20.06.2017&&HISCalendar_Date=" + date + "&asi=";
         new DownloadLSFTask().execute(url);
 
         list = (ListView) view.findViewById(R.id.list);
-
         return view;
     }
 
-    public void fillListView(ArrayList<Veranstaltung> veranstaltungen) {
 
-        list.setAdapter(adapter);
-    }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
@@ -158,7 +138,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 }
                 Context context = getActivity();
                 if (context != null) {
-                    adapter = new VeranstaltungsAdapter(context, veranstaltungen);
+                    adapter = new AusfallendeFragmentArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -168,11 +148,33 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                             callDetailActivity(veranstaltungen.get(i).getTitel(),i-1);
                             }
                         } // TODO: Man kann in komplette Zeile klicken und nicht nur auf Titel. Schlimm?
+                        // TODO: Nö find ich nicht :D bloß in letzteStufe muss mans anders machen damit auf den Button geklickt werden kann
                     });
+
+
+
+                    //Überprüft auf Übereinstimmungen zwischen Datenbank und Ausfallenden
+
+                    dataSource = new EigeneVeranstaltungenDataSource(getActivity());
+                    dataSource.open();
+                    List<EigeneV_Objekt> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
+
+                    for (int j = 0; j < VeranstaltungslisteDB.size(); j++){
+                        for (int i=0; i<veranstaltungen.size(); i++){
+                            if(VeranstaltungslisteDB.get(j).getNumber().equals(veranstaltungen.get(i).getNumber())){
+                               veranstaltungen.get(i).setTitel(veranstaltungen.get(i).getTitel().toUpperCase());
+
+                                //TODO: neues Layout erstellen und Zeile übergeben
+
+                        }
+                        }
+                    }
+
+
                 }
             }
         }
-
+/*
 
             //Fügt in der Tabelle die Zeilen mit den entsprechenden Werten hinzu
         private void addRow(String begin_text, String end_text, String number_text, String title_text, int k) {
@@ -252,18 +254,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         });
 
 
-//Überprüft auf Übereinstimmungen zwischen Datenbank und Ausfallenden
 
-            dataSource = new EigeneVeranstaltungenDataSource(getActivity());
-            dataSource.open();
-            List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
-
-            for (int j = 0; j < Veranstaltungsliste.size(); j++){
-                if(Veranstaltungsliste.get(j).getNumber().equals(number_text)){
-                    row.setBackgroundColor(0xFF00FF00);
-                    uebereinstimmung = true;
-                }
-            }
 
         row.addView(title);
 
@@ -273,5 +264,8 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 )
         );
     }
+    */
+
     }
+
 }

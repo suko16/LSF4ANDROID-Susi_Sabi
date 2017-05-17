@@ -92,8 +92,8 @@ public class EigeneVeranstaltungenDataSource {
 
 
 
-    public List<EigeneV_Objekt> getAllVeranstaltungen() {
-        List<EigeneV_Objekt> Veranstaltungsliste = new ArrayList<>();
+    public ArrayList<EigeneV_Objekt> getAllVeranstaltungen() {
+        ArrayList<EigeneV_Objekt> Veranstaltungsliste = new ArrayList<>(); //List?
 
         cursor = database.query(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
                 columns, null, null, null, null, null);
@@ -133,30 +133,4 @@ public class EigeneVeranstaltungenDataSource {
 
 
 
-      /*  public EigeneV_Objekt updateID (EigeneV_Objekt veranstaltung, int newIndex) {
-
-        ContentValues values = new ContentValues();
-        values.put(EigeneVeranstaltungenDbHelper.COLUMN_BEGINN, veranstaltung.getBeginn());
-        values.put(EigeneVeranstaltungenDbHelper.COLUMN_ENDE, veranstaltung.getEnde());
-        values.put(EigeneVeranstaltungenDbHelper.COLUMN_TITEL, veranstaltung.getTitel());
-
-        database.update(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
-                values,
-                EigeneVeranstaltungenDbHelper.COLUMN_ID + "=" + newIndex,
-                null);
-        Log.d(LOG_TAG, "Eintrag gändert! ID: " + veranstaltung.getId() + " Inhalt: " + veranstaltung.toString());
-
-
-        Cursor cursor = database.query(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
-                columns, EigeneVeranstaltungenDbHelper.COLUMN_ID + "=" + newIndex,
-                null, null, null, null);
-
-        cursor.moveToFirst();
-        EigeneV_Objekt v = cursorToVeranstaltung(cursor);
-        cursor.close();
-
-       return veranstaltung;
-    }
-
-*/
 }
