@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private TextView begin;
     private TextView ende;
     private TextView number;
+    public ListView list;
+    public VeranstaltungsAdapter adapter;
     public TableLayout table;
     public TableRow row;
     private int rowCount = 0;
@@ -73,9 +76,14 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&&HISCalendar_Date=27.04.2017&asi=");
 
-        table = (TableLayout) view.findViewById(R.id.fragment_ausfallende_tabelle);
+        list = (ListView) view.findViewById(R.id.list);
 
         return view;
+    }
+
+    public void fillListView(ArrayList<Veranstaltung> veranstaltungen) {
+
+        list.setAdapter(adapter);
     }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -133,19 +141,18 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             // Tabelle in fragment_ausfallende.xml bauen und mit result befüllen
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
-
-            addRow("Beginn", "Ende", "Nummer", "Titel", 1);
-
-            for (int i = 1; i < rowCount; i++) {
-                veranstaltung = new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]);
-                addRow(veranstaltung.getBeginn(), veranstaltung.getEnde(), veranstaltung.getNumber(), veranstaltung.getTitel(), i);
+            if(result.size() != 0) {
+                ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
+                veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
+                for (int i = 1; i < result.size(); i++) {
+                    veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]));
+                }
+                Context context = getActivity();
+                if (context != null) {
+                    adapter = new VeranstaltungsAdapter(context, veranstaltungen);
+                    list.setAdapter(adapter);
+                }
             }
-
-         /*  if (uebereinstimmung == true) {
-                CreateNotificationActivity cN = new CreateNotificationActivity();
-
-                cN.createNotification();
-            }*/
 
         }
 

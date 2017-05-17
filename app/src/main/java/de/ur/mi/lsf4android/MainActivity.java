@@ -40,6 +40,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ImageView urLogo = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.urLogo);
+        urLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onUrLogoClicked();
+            }
+        });
 
         //Bei Activitywechseln von StartActivity auf MainActivity
         // wird zusätzlich richtiges Fragment durch Extra geladen.
@@ -74,16 +81,6 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
-
-
-
-        /*ImageView urLogo = (ImageView) findViewById(R.id.urLogo);
-        urLogo.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                onUrLogoClicked();
-            }
-            });*/
 
 
 
@@ -175,10 +172,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-   /* private void onUrLogoClicked(){
+   private void onUrLogoClicked(){
         Intent i = new Intent(this,StartActivity.class);
         startActivity(i);
-    }*/
+    }
 
 }
 

@@ -4,16 +4,10 @@
     android:layout_height="match_parent"
     tools:context="de.ur.mi.lsf4android.AusfallendeFragment">
 
-
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_ausfallende_tabelle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
-        <!--android:stretchColumns="1"-->
-
-    </TableLayout>
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>
 

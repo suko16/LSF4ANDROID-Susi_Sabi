@@ -40,6 +40,7 @@ public class AlleFragment extends android.support.v4.app.Fragment {
     allefragmentInterface mCallback;
     TextView textView;
     ListView listView;
+    ArrayAdapter<String> adapter;
 
 
     public AlleFragment() {
@@ -99,24 +100,22 @@ public class AlleFragment extends android.support.v4.app.Fragment {
         }
 
         protected void onPostExecute(final ArrayList<String[]> result) {
+            textView.setText(result.get(0)[0]);
 
-            TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
-            view.setText(result.get(0)[0]);
+            final Context context = getActivity();
+            if (context != null) {
+                adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, result.get(1));
+                listView.setAdapter(adapter);
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, result.get(1));
-
-            ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
-            listView.setAdapter(adapter);
-
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getActivity(),BaumActivity.class);
-                    intent.putExtra("HtmlExtra",result.get(2)[i]);
-                    startActivity(intent);
-                }
-            });
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(context, BaumActivity.class);
+                        intent.putExtra("HtmlExtra",result.get(2)[i]);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
     }
 

@@ -49,20 +49,22 @@ public class CreateNotificationActivity extends Activity {
     public void createNotification(String titelAusfallendeVeranstaltung) {
 
      //   noti = new Notification();
-        Intent notificationIntent = new Intent(this, AusfallendeFragment.class);
+/*
+
+        Intent notificationIntent = new Intent(CreateNotificationActivity.this, AusfallendeFragment.class);
         //Fehler: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.content.Context.getPackageName()' on a null object reference
         //Absturz
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-
+*/
      //   noti.vibrate = vibrate;
 
         b.setSmallIcon(R.drawable.ic_menu_gallery)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentText("Deine Veranstaltung" + titelAusfallendeVeranstaltung + "fällt aus")
                 .setContentTitle("LSF4Android")
-                .setContentIntent(pIntent);
+               // .setContentIntent(pIntent)
+        ;
 
         notificationManager.notify(1, b.build());
 
