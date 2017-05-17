@@ -5,30 +5,13 @@
     android:layout_height="match_parent"
     >
 
-
 <!-- LinearLayout benötigt?-->
-
-       <!-- <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/table_all"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_width="match_parent">
-        </TableLayout>-->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello"/>
 
         <ListView
             android:id="@+id/baum_letzte_stufe_fragment_listView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </ListView>
-
-
-
 
 </LinearLayout>
 

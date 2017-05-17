@@ -16,6 +16,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
@@ -79,8 +80,9 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
-        String date = datumsformat.format(calendar.getTime());
+        //String date = datumsformat.format(calendar.getTime());
 
+        String date = "26.06.2017 ";
         String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=24.05.2017&&HISCalendar_Date=23.05.2017&&HISCalendar_Date=13.06.2017&&HISCalendar_Date=20.06.2017&&HISCalendar_Date=" + date + "&asi=";
         new DownloadLSFTask().execute(url);
 
@@ -150,7 +152,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
             if(result.size() != 0) {
-                ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
+                final ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
                 veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
                 for (int i = 1; i < result.size(); i++) {
                     veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]));
@@ -159,12 +161,19 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 if (context != null) {
                     adapter = new VeranstaltungsAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            callDetailActivity(veranstaltungen.get((int)l).getTitel(),(int)l);
+                        } // TODO: Man kann in komplette Zeile klicken und nicht nur auf Titel. Schlimm?
+                    });
                 }
             }
 
+
+
         }
-
-
 
 
             //Fügt in der Tabelle die Zeilen mit den entsprechenden Werten hinzu

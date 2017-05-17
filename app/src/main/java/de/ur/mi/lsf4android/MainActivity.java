@@ -23,7 +23,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +61,12 @@ public class MainActivity extends AppCompatActivity
         } else if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
             fragmentClass = EigeneFragment.class;
             setTitle(intent.getStringExtra("Button_Eigene"));
-        } else if (intent != null && intent.getBooleanExtra("open_vorverzeichnis_fragment",false)) {
+        } else if (intent != null && intent.getBooleanExtra("open_vorverzeichnis_fragment",false)){
             fragmentClass = AlleFragment.class;
             setTitle(intent.getStringExtra("Button_VorVerzeichnis"));
         }
-/*
 
-        }else if (intent != null && intent.getBooleanExtra("BaumLetzte", false)){
-            fragmentClass = BaumLetzteStufeFragment.class;
-            setTitle(intent.getStringExtra("Button_BaumLetzte"));
-        }
 
-*/
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -85,11 +79,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        /*ImageView urLogo = (ImageView) findViewById(R.id.urLogo);
+       /* ImageView urLogo = (ImageView) findViewById(R.id.urLogo);
         urLogo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                onUrLogoClicked();
+                //onUrLogoClicked();
             }
             });*/
 
