@@ -1,43 +1,38 @@
 package de.ur.mi.lsf4android;
 
-import android.app.Activity;
-import android.app.ListActivity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class BaumLetzteActivity extends Activity {
+public class BaumLetzteActivity extends AppCompatActivity {
 
     public EigeneVeranstaltungenDataSource dataSource;
     public ArrayList<Button> buttonList;
     ListView listView;
+    private TextView vstNr;
+    private TextView title;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_baum_letzte_stufe);
+        setContentView(R.layout.fragment_baum_letzte);
         new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743|37604&P.vx=mittel");
-        listView = (ListView) this.findViewById(R.id.baum_letzte_stufe_fragment_listView);
-
+        listView = (ListView) findViewById(R.id.baum_letzte_stufe_fragment_listView);
+        vstNr = (TextView) findViewById(R.id.textView_activity_baum_letzte_vst_Nr);
+        title = (TextView) findViewById(R.id.textView_activity_baum_letzte_titel);
     }
 
 
@@ -59,19 +54,20 @@ public class BaumLetzteActivity extends Activity {
                 String[] numbers = new String[rows.size()];
                 String[] titles = new String[rows.size()];
                 String[] html = new String[rows.size()];
+                String[] headLine = new String[header.size()];
 
                 for (int s = 0; s < rows.size(); s++) {
                     if (s == 0) {
-                        numbers[s] = header.get(0).text();
-                        titles[s] = header.get(1).text();
-                        html[s] = "hate keine html";
+                        headLine[0] = header.get(0).text();
+                        headLine[1] = header.get(1).text();
                     } else {
-                        numbers[s] = rows.get(s).select("td").get(0).text();
-                        titles[s] = rows.get(s).select("td").get(1).text();
-                        html[s] = rows.get(s).select("td").get(1).select("a[href]").html();
+                        numbers[s-1] = rows.get(s).select("td").get(0).text();
+                        titles[s-1] = rows.get(s).select("td").get(1).select("a.regular").text();
+                        html[s-1] = rows.get(s).select("td").get(1).select("a").attr("href");
                     }
                 }
 
+                result.add(headLine);
                 result.add(numbers);
                 result.add(titles);
                 result.add(html);
@@ -122,19 +118,11 @@ public class BaumLetzteActivity extends Activity {
 
         protected void onPostExecute(ArrayList<String[]> result) {
 
-            // BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(getActivity(), result);
-
-           /* BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(this,result);
-
-            ListView listView = (ListView) this.findViewById(R.id.baum_letzte_stufe_fragment_listView);
-            listView.setAdapter(adapter);*/
-
-
-            //setAdapter(result);
+           vstNr.setText(result.get(0)[0]);
+           title.setText(result.get(0)[1]);
 
             BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result);
             listView.setAdapter(adapter);
-
            //TODO: Zugriff auf Buttons -> OnClickListener und Prüfmethoden s. unten
 
          /*   addRow("Number", "Titel");

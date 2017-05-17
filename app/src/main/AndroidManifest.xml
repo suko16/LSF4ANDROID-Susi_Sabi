@@ -57,8 +57,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
-        <activity android:name=".BaumActivity" />
-        <activity android:name=".BaumLetzteActivity"></activity>
+        <activity android:name=".BaumActivity"
+            android:label="Baum"/>
+        <activity android:name=".BaumLetzteActivity"
+            android:label="Letzte Seite"></activity>
     </application>
 </manifest>
 

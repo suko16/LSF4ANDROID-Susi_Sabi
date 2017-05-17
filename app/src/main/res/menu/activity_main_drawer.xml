@@ -6,11 +6,12 @@
             android:id="@+id/nav_ausfallende_V"
             android:title="@string/ausfallende_V"/>
         <item
+            android:id="@+id/nav_eigene_V"
+            android:title="@string/eigene_V" />
+        <item
             android:id="@+id/nav_alle_V"
             android:title="@string/alle_V" />
-        <item
-            android:id="@+id/nav_eigene_V"
-            android:title="@string/eigene_V" />#
+
     </group>
 
 </menu>

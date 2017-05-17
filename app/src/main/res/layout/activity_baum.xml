@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="de.ur.mi.lsf4android.BaumActivity">
 
-
     <TextView
         android:id="@+id/header_Vorlesungsverzeichnis"
         android:layout_width="match_parent"
