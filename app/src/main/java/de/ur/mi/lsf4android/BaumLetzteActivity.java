@@ -132,7 +132,7 @@ public class BaumLetzteActivity extends Activity {
 
             //setAdapter(result);
 
-            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, R.layout.baum_letzte_row, result);
+            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result);
             listView.setAdapter(adapter);
 
 
@@ -232,14 +232,13 @@ public class BaumLetzteActivity extends Activity {
         }
 
 
-      /*  private void setAdapter(ArrayList<String[]> result) {
-            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, R.layout.baum_letzte_row, result);
-            listView.setAdapter(adapter);
+       /* private void setAdapter(ArrayList<String[]> result) {
+           // BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, R.layout.baum_letzte_row, result);
+            //listView.setAdapter(adapter);
 
             ArrayAdapter arrayAdapter = new ArrayAdapter(BaumLetzteActivity.this, android.R.layout.simple_list_item_1, result.get(0));
             ListView listView = (ListView) findViewById(R.id.baum_letzte_stufe_fragment_listView);
             listView.setAdapter(arrayAdapter);
-
         }*/
     }
 

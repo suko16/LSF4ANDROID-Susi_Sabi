@@ -18,12 +18,12 @@ import java.util.ArrayList;
  * Created by Susanne on 16.05.2017.
  */
 
-public class BaumLetzteArrayAdapter extends ArrayAdapter<ArrayList<String[]>> {
+public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
     private final Context context;
     private final ArrayList<String[]> values;
 
-    public BaumLetzteArrayAdapter(Context context, int layout, ArrayList<String[]> values) {
-        super(context, layout);
+    public BaumLetzteArrayAdapter(Context context, ArrayList<String[]> values) {
+        super(context, R.layout.baum_letzte_row, values);
         this.context = context;
         this.values = values;
     }
@@ -33,19 +33,14 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<ArrayList<String[]>> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
-        View rowView = inflater.inflate(R.layout.baum_letzte_row, parent, true);
+        View rowView = inflater.inflate(R.layout.baum_letzte_row, parent, false);
         TextView textViewNumber = (TextView) rowView.findViewById(R.id.baum_letzte_nummer);
         TextView textViewName = (TextView) rowView.findViewById(R.id.baum_letzte_name);
         Button button = (Button) rowView.findViewById(R.id.baum_letzte_button);
 
-
-        //textViewNumber.setText(values.get(0)[position]);
-        //textViewName.setText(values.get(1)[position]);
+        textViewNumber.setText(values.get(0)[position]);
+        textViewName.setText(values.get(1)[position]);
         button.setText("Add");
-
-        textViewNumber.setText("nummer 1");
-        textViewName.setText("nummer 2");
 
         return rowView;
 
