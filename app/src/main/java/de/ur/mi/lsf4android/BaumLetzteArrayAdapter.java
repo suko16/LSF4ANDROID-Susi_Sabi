@@ -41,7 +41,6 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
         textViewNumber.setText(values.get(0)[position]);
         textViewName.setText(values.get(1)[position]);
         button.setText("Add");
-
         return rowView;
 
     }

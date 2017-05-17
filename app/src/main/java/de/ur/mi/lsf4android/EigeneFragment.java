@@ -105,7 +105,6 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
     };
 
 
-
     public EigeneFragment() {
         // Required empty public constructor
     }

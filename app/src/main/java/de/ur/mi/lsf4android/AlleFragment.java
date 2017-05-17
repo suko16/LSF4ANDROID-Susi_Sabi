@@ -100,23 +100,25 @@ public class AlleFragment extends android.support.v4.app.Fragment {
 
         protected void onPostExecute(final ArrayList<String[]> result) {
 
-            TextView view = (TextView) getView().findViewById(R.id.header_Vorlesungsverzeichnis);
-            view.setText(result.get(0)[0]);
+            textView.setText(result.get(0)[0]);
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                    android.R.layout.simple_list_item_1, result.get(1));
+            final Context context = getActivity();
 
-            ListView listView = (ListView) getView().findViewById(R.id.fragment_alle_listView);
-            listView.setAdapter(adapter);
+            if (context != null) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_list_item_1, result.get(1));
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getActivity(),BaumActivity.class);
-                    intent.putExtra("HtmlExtra",result.get(2)[i]);
-                    startActivity(intent);
-                }
-            });
+                listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent intent = new Intent(context, BaumActivity.class);
+                        intent.putExtra("HtmlExtra", result.get(2)[i]);
+                        startActivity(intent);
+                    }
+                });
+            }
         }
     }
 
