@@ -138,8 +138,14 @@ public class MainActivity extends AppCompatActivity
         Class fragmentClass;
         switch(item.getItemId()) {
             case R.id.nav_ausfallende_V:
-                fragmentClass = AusfallendeFragment.class;
+               fragmentClass = AusfallendeFragment.class;
+               /* Intent i= new Intent(this, AusfallendeActivity.class);
+                startActivity(i);*/
                 break;
+
+            //TODO: es fehlt der start der AusfallendeActivity aus der Navigation mit den Fragments
+            //TODO: mit dem intent öffnets zwar die klasse aber über AusfallendeFragment (sieht man wenn man zurück geht). Fällt dir noch was ein?
+
             case R.id.nav_eigene_V:
                 fragmentClass = EigeneFragment.class;
                 break;

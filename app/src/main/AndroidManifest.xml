@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+
+    <!-- TODO: labels in Strings-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/uni_logo"
@@ -18,7 +21,6 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,12 +33,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.StartActivity" />
         </activity>
+
         <activity
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            >
-
+            android:label="Detailansicht">
         </activity>
+
         <activity
             android:name=".NotificationReceiverActivity"
             android:label="NotificationReceiverActivity"
@@ -46,6 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
+
         <activity
             android:name=".CreateNotificationActivity"
             android:label="CreateNotificationActivity"
@@ -54,12 +57,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
+
         <activity
             android:name=".BaumActivity"
-            android:label="Baum" />
-        <activity android:name=".BaumLetzteActivity" />
-        <activity android:name=".AusfallendeActivity"
-            android:label="AusfallendeActivity"></activity>
+            android:label="Vorlesungsverzeichnis" />
+
+        <activity
+            android:name=".BaumLetzteActivity"
+            android:label="Vorlesungsverzeichnis"
+            android:parentActivityName=".MainActivity"/>
+
+        <activity
+            android:name=".AusfallendeActivity"
+            android:label="Ausfallende Veranstaltungen">
+        </activity>
     </application>
 
 </manifest><!--

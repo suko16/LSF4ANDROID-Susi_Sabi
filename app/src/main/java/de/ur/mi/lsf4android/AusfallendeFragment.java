@@ -42,7 +42,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private TextView ende;
     private TextView number;
     public ListView list;
-    public AusfallendeFragmentArrayAdapter adapter;
+    public AusfallendeActivityArrayAdapter adapter;
     public TableLayout table;
     public TableRow row;
     private int rowCount = 0;
@@ -184,7 +184,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 }
                 Context context = getActivity();
                 if (context != null) {
-                    adapter = new AusfallendeFragmentArrayAdapter(context, veranstaltungen);
+                    adapter = new AusfallendeActivityArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -193,8 +193,7 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                             if(i!=0){
                             callDetailActivity(veranstaltungen.get(i).getTitel(),i-1);
                             }
-                        } // TODO: Man kann in komplette Zeile klicken und nicht nur auf Titel. Schlimm?
-                        // TODO: Nö find ich nicht :D bloß in letzteStufe muss mans anders machen damit auf den Button geklickt werden kann
+                        }
                     });
 
 
@@ -209,8 +208,6 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                         for (int i=0; i<veranstaltungen.size(); i++){
                             if(VeranstaltungslisteDB.get(j).getNumber().equals(veranstaltungen.get(i).getNumber())){
                                veranstaltungen.get(i).setTitel(veranstaltungen.get(i).getTitel().toUpperCase());
-
-                                //TODO: neues Layout erstellen und Zeile übergeben
 
                         }
                         }

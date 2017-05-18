@@ -125,7 +125,7 @@ public class BaumLetzteActivity extends AppCompatActivity {
             listView.setAdapter(adapter);
 
 
-           //TODO: Zugriff auf Buttons -> OnClickListener und Prüfmethoden s. unten
+
 
          /*   addRow("Number", "Titel");
             for (int i = 1; i < rowCountForReading; i++) {

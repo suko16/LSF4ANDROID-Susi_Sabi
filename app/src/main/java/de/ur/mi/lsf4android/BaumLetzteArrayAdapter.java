@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Susanne on 16.05.2017.
@@ -29,6 +30,7 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
     private TextView textViewName;
     private Button button;
     private ImageView imageView;
+    public EigeneVeranstaltungenDataSource dataSource;
 
 
     public BaumLetzteArrayAdapter(Context context, String[] number, String[] title, String[] html) {
@@ -51,8 +53,11 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
         button.setId(position);
         //imageView = (ImageView) rowView.findViewById(R.id.imageView_button);
 
+//TODO Textsize hier anpassen?
         textViewNumber.setText(number[position]);
+        textViewNumber.setTextColor(Color.BLACK);
         textViewName.setText(title[position]);
+        textViewName.setTextColor(Color.BLACK);
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +68,63 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
             }
         });
 
+
+
+
+
         long i = getItemId(position);
+
+
+       /*
+TODO: ich würde gerne die Buttons je nachdem ob der Kurs schon gespeichert ist grün oder rot machen, kann aber außerhalb einer onClick view.getParent nicht verwenden.
+TODO: hast du ne idee wie ich das aufrufen könnte? wenn ich das weglasse überprüfts mir nur die letzte veranstaltung und passt den button entsprechend an.. also brauch ich vmtl auch das
+TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nicht zur verfügung und mit convertView und getView etc gehts nicht...
+
+
+       //Überprüft vor dem erstellen welche Buttons für welche Veranstaltung
+
+
+        LinearLayout vwParentRow = (ViewGroup)(LinearLayout)view.getParent();
+
+        final TextView veranstaltungTitel = (TextView) vwParentRow.getChildAt(1);
+        TextView veranstaltungsNumber = (TextView) vwParentRow.getChildAt(0);
+
+        dataSource = new EigeneVeranstaltungenDataSource(getContext());
+        dataSource.open();
+        List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+        final String number = veranstaltungsNumber.getText().toString();
+
+        for(int j=0; j< Veranstaltungsliste.size(); j++) {
+            if (Veranstaltungsliste.get(j).getNumber().equals(number)) {
+                Button ButtonMinus = (Button) vwParentRow.getChildAt(2);
+
+                ButtonMinus.setBackgroundResource(R.mipmap.remove_button);
+                // ButtonMinus .setOnClickListener(delete);
+            } else {
+
+                Button ButtonPlus = (Button) vwParentRow.getChildAt(2);
+                ButtonPlus.setBackgroundResource(R.mipmap.add_button);
+                ButtonPlus.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        dataSource.createVeranstaltung(veranstaltungTitel.getText().toString(), number);
+                        CharSequence text = veranstaltungTitel.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
+                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+            }
+        }
+
+
+*/
+
+
+
+
+
+
 
         //final Button zweiButton = (Button) button.findViewById(getPosition("button")+1);
         button.setOnClickListener(new View.OnClickListener() {
@@ -72,23 +133,45 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
                 LinearLayout vwParentRow = (LinearLayout)view.getParent();
 
                 //holt sich die Zeile in dem das View liegt und sucht sich das passende Kindelement heraus
-                Button buttonZwei = (Button)vwParentRow.getChildAt(2);
 
-                buttonZwei.setBackgroundResource(R.mipmap.remove_button);
+               /* Button buttonZwei = (Button)vwParentRow.getChildAt(2);
+                buttonZwei.setBackgroundResource(R.mipmap.remove_button);*/
+
+               //TODO: das mit dem roten Button würde ich nur machen wenn s.oben geht :)
 
                 //und so kannst du auf dem Namen der Veranstaltung zugreifen
                 TextView veranstaltungTitel = (TextView) vwParentRow.getChildAt(1);
-                CharSequence text = veranstaltungTitel.getText();
-                int duration = Toast.LENGTH_SHORT;
+                TextView veranstaltungsNumber = (TextView) vwParentRow.getChildAt(0);
 
-                Toast toast = Toast.makeText(context, text, duration);
+
+                //Bei Klick überprüfen ob Veranstaltung schon gespeichert, wenn nicht speichern in Datenbank
+
+
+                dataSource = new EigeneVeranstaltungenDataSource(getContext());
+                dataSource.open();
+                List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+                String number = veranstaltungsNumber.getText().toString();
+
+                for(int i=0; i< Veranstaltungsliste.size(); i++){
+                    if(Veranstaltungsliste.get(i).getNumber().equals(number)){
+                        CharSequence text = veranstaltungTitel.getText() + " ist bereits in den Eigenen Veranstaltungen gespeichert";
+                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                        toast.show();
+                        return;
+                    }
+                }
+
+                dataSource.createVeranstaltung(veranstaltungTitel.getText().toString(), number, html[position]);
+                CharSequence text = veranstaltungTitel.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                 toast.show();
 
-                //TODO: Jetzt musst du "nur noch" den Button und den Text aus dem Textview mit der Datenbank verbinden, oder?
+
+
+
 
             }
         });
-
         return rowView;
 
     }

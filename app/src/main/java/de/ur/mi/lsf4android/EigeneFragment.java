@@ -17,19 +17,21 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
-//TODO: IDS ausblenden
-
-//TODO: schöne Ansicht
+import org.w3c.dom.Text;
 
 
-public class EigeneFragment extends android.support.v4.app.Fragment implements ListView.OnItemLongClickListener {
+public class EigeneFragment extends android.support.v4.app.Fragment implements ListView.OnItemClickListener, ListView.OnItemLongClickListener {
 
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private EigeneVeranstaltungenDataSource dataSource;
     public ListView VeranstaltngslisteListView;
+    private TextView number;
+    private TextView title;
 
 
     @Override
@@ -38,8 +40,11 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_eigene, container, false);
+        number = (TextView) view.findViewById(R.id.textView_eigeneFragment_number);
+        title = (TextView) view.findViewById(R.id.textView_eigeneFragment_title);
         VeranstaltngslisteListView = (ListView) view.findViewById(R.id.eigene_veranstaltungsliste);
         dataSource = new EigeneVeranstaltungenDataSource(getActivity());
+        VeranstaltngslisteListView.setOnItemClickListener(this);
         VeranstaltngslisteListView.setOnItemLongClickListener(this);
         return view;
     }
@@ -47,6 +52,8 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
     public void showAllListEntries() {
 
+        number.setText("Nr.");
+        title.setText("Titel");
         Context context = getActivity();
         if (context != null) {
             ArrayList<EigeneV_Objekt> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
@@ -76,6 +83,20 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
 
 
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        int positionListView = (int)id;
+
+        EigeneV_Objekt selectedVeranstaltung = (EigeneV_Objekt) VeranstaltngslisteListView.getItemAtPosition(positionListView);
+        String titelSelectedVeranstaltung = selectedVeranstaltung.getTitel();
+
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(DetailActivity.TITEL_EXTRA, titelSelectedVeranstaltung);
+        intent.putExtra(DetailActivity.HTML_EXTRA, selectedVeranstaltung.getHtml());
+        startActivity(intent);
+    }
 
 
     @Override

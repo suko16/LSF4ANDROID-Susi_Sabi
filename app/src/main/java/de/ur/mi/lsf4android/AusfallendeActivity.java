@@ -19,10 +19,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -35,7 +33,7 @@ public class AusfallendeActivity extends AppCompatActivity {
     private TextView ende;
     private TextView number;
     public ListView list;
-    public AusfallendeFragmentArrayAdapter adapter;
+    public AusfallendeActivityArrayAdapter adapter;
     public TableLayout table;
     public TableRow row;
     private int rowCount = 0;
@@ -50,6 +48,7 @@ public class AusfallendeActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +60,17 @@ public class AusfallendeActivity extends AppCompatActivity {
         String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
         new DownloadLSFTask().execute(url);
 
-        list = (ListView) findViewById(R.id.list);
+        list = (ListView) findViewById(R.id.ausfallendeActivity_ListView);
 
         //dateEditText = (EditText) view.findViewById(R.id.date);
         datePickerButton = (Button) findViewById(R.id.button_date_picker);
         dateTextView = (TextView) findViewById(R.id.textView_date);
         dateTextView.setText(date);
+        title = (TextView) findViewById(R.id.textView_ausfallendeActivity_title);
+        begin = (TextView) findViewById(R.id.textView_ausfallendeActivity_beginn);
+        number = (TextView) findViewById(R.id.textView_ausfallendeActivity_number);
+        ende = (TextView) findViewById(R.id.textView_ausfallendeActivity_ende);
+
 
 
         datePickerButton.setOnClickListener(new View.OnClickListener() {
@@ -152,15 +156,21 @@ public class AusfallendeActivity extends AppCompatActivity {
             // Tabelle in fragment_ausfallende.xml bauen und mit result befüllen
             //String titel = result.get(1)[2];
             //callDetailActivity(titel);
+
+            begin.setText("Beginn");
+            ende.setText("Ende");
+            number.setText("Nr.");
+            title.setText("Titel");
+
             if (result.size() != 0) {
                 final ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
-                veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
+              //  veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
                 for (int i = 1; i < result.size(); i++) {
                     veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]));
                 }
                 Context context = AusfallendeActivity.this;
                 if (context != null) {
-                    adapter = new AusfallendeFragmentArrayAdapter(context, veranstaltungen);
+                    adapter = new AusfallendeActivityArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
 
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

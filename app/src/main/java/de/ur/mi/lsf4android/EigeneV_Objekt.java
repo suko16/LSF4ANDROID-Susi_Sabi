@@ -9,11 +9,13 @@ public class EigeneV_Objekt {
     public long id;
     public String titel;
     public String number;
+    public String html;
 
-    public EigeneV_Objekt(String titel, String number, long id){
+    public EigeneV_Objekt(String titel, String number, long id, String html){
         this.titel = titel;
         this.id = id;
         this.number = number;
+        this.html = html;
     }
 
 
@@ -35,11 +37,10 @@ public class EigeneV_Objekt {
         this.id = id;
     }
 
-
-    @Override
-    public String toString() {
-        String output = id+ " " + number + " " + titel;
-        return output;
+    public String getHtml(){
+        return html;
     }
+
+
 
 }

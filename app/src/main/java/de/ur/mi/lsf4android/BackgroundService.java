@@ -22,6 +22,7 @@ import java.util.List;
 
 
 // TODO: URL-Code-Anpassung für aktuelles Datum aus Ausfallende Veranstaltungen von Susi übernehmen
+//TODO: Überprüfung auf nächsten 3 Tage
 
 public class BackgroundService extends IntentService {
 
@@ -60,7 +61,7 @@ public class BackgroundService extends IntentService {
 
 
     public void downLoadCancelledLectures() {
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&&HISCalendar_Date=27.04.2017&asi=");
+        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=29.05.2017&&HISCalendar_Date=30.05.2017&&HISCalendar_Date=26.05.2017&&HISCalendar_Date=19.05.2017&&HISCalendar_Date=18.05.2017&asi=");
 
     }
 
@@ -108,7 +109,7 @@ public class BackgroundService extends IntentService {
         for (int j = 0; j < Veranstaltungsliste.size(); j++){
             for(int i=0; i<VeranstaltungsArray.size(); i++){
                 if(Veranstaltungsliste.get(j).getNumber().equals(VeranstaltungsArray.get(i))) {
-                    sendNotification(Veranstaltungsliste.get(i).getTitel());
+                    sendNotification(Veranstaltungsliste.get(j).getTitel());
                 }
             }
         }

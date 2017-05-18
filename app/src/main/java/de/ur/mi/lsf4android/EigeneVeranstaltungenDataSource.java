@@ -32,9 +32,11 @@ public class EigeneVeranstaltungenDataSource {
             EigeneVeranstaltungenDbHelper.COLUMN_ID,
             EigeneVeranstaltungenDbHelper.COLUMN_NUMBER,
             EigeneVeranstaltungenDbHelper.COLUMN_TITEL,
+            EigeneVeranstaltungenDbHelper.COLUMN_HTML
 
 
     };
+
 
 
 
@@ -57,10 +59,11 @@ public class EigeneVeranstaltungenDataSource {
     }
 
 
-    public EigeneV_Objekt createVeranstaltung(String titel, String number) {
+    public EigeneV_Objekt createVeranstaltung(String titel, String number, String html) {
         ContentValues values = new ContentValues();
         values.put(EigeneVeranstaltungenDbHelper.COLUMN_TITEL, titel);
         values.put(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER, number);
+        values.put(EigeneVeranstaltungenDbHelper.COLUMN_HTML, html);
 
         open();
 
@@ -120,12 +123,14 @@ public class EigeneVeranstaltungenDataSource {
         int idIndex = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_ID);
         int idNumber = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER);
         int idTitel = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_TITEL);
+        int idHtml = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_HTML);
 
         String titel = cursor.getString(idTitel);
         String number = cursor.getString(idNumber);
         long id = cursor.getLong(idIndex);
+        String html = cursor.getString(idHtml);
 
-        EigeneV_Objekt veranstaltung = new EigeneV_Objekt(titel, number, id);
+        EigeneV_Objekt veranstaltung = new EigeneV_Objekt(titel, number, id, html);
 
         return veranstaltung;
     }

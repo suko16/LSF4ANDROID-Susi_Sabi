@@ -59,9 +59,9 @@ public class CreateNotificationActivity extends Activity {
 */
      //   noti.vibrate = vibrate;
 
-        b.setSmallIcon(R.drawable.ic_menu_gallery)
+        b.setSmallIcon(R.mipmap.uni_logo)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentText("Deine Veranstaltung" + titelAusfallendeVeranstaltung + "fällt aus")
+                .setContentText("Deine Veranstaltung '" + titelAusfallendeVeranstaltung + "' entfällt")
                 .setContentTitle("LSF4Android")
                // .setContentIntent(pIntent)
         ;

@@ -60,6 +60,10 @@ public class StartActivity extends AppCompatActivity {
                 clickBaumLetzte();
             }
         });
+
+
+        Intent Service = new Intent(this, BackgroundService.class);
+        startService(Service);
     }
 
     private void clickAusfallend (){

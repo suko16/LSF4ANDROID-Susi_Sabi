@@ -1,6 +1,7 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,11 +16,11 @@ import java.util.ArrayList;
  * Created by Sabi on 17.05.2017.
  */
 
-public class AusfallendeFragmentArrayAdapter extends ArrayAdapter<Veranstaltung> {
+public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung> {
     private final Context context;
     private final ArrayList<Veranstaltung> veranstaltungen;
 
-    public AusfallendeFragmentArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
+    public AusfallendeActivityArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
         super(context, -1, veranstaltungen);
         this.context = context;
         this.veranstaltungen = veranstaltungen;
@@ -35,9 +36,17 @@ public class AusfallendeFragmentArrayAdapter extends ArrayAdapter<Veranstaltung>
         TextView nummer = (TextView) rowView.findViewById(R.id.nummer);
         TextView titel = (TextView) rowView.findViewById(R.id.titel);
         beginn.setText(veranstaltungen.get(position).getBeginn());
+        beginn.setTextColor(Color.BLACK);
+        beginn.setTextSize(18);
         ende.setText(veranstaltungen.get(position).getEnde());
+        ende.setTextColor(Color.BLACK);
+        ende.setTextSize(18);
         nummer.setText(veranstaltungen.get(position).getNumber());
+        nummer.setTextColor(Color.BLACK);
+        nummer.setTextSize(18);
         titel.setText(veranstaltungen.get(position).getTitel());
+        titel.setTextColor(Color.BLACK);
+        titel.setTextSize(18);
         return rowView;
     }
 
