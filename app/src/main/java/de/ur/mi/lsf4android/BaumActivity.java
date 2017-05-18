@@ -21,6 +21,8 @@ import java.util.ArrayList;
 public class BaumActivity extends AppCompatActivity {
 
     private Intent extra;
+    private ListView listView;
+
 
 
     @Override
@@ -68,7 +70,9 @@ public class BaumActivity extends AppCompatActivity {
 
         protected void onPostExecute(final ArrayList<String[]> result) {
             writeHeader(result.get(0)[0]);
-            buildList(result.get(1));
+            buildList(result.get(1), result.get(2));
+
+
 
            /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(,
                     android.R.layout.simple_list_item_1, result.get(1));
@@ -91,28 +95,24 @@ public class BaumActivity extends AppCompatActivity {
         view.setText(totalHeader);
     }
 
-    private void buildList(final String[] headers) {
+    private void buildList(String[] headers, final String[] headerHtmls ) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, headers);
-        ListView listView = (ListView) findViewById(R.id.fragment_alle_listView);
+        listView = (ListView) findViewById(R.id.fragment_alle_listView);
         listView.setAdapter(adapter);
 
-       final String[] html = headers;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                handleClickOnListItem(headers,i);
+                handleClickOnListItem(headerHtmls,i);
             }
         });
     }
 
     private void handleClickOnListItem(String[] headers, int j){
-        /*Intent intent = new Intent(this,BaumActivity.class);
+        Intent intent = new Intent(this,BaumActivity.class);
         intent.putExtra("HtmlExtra",headers[j]);
-        startActivity(intent);*/
-
-
-
+        this.finish();
+        startActivity(intent);
     }
-
 }
