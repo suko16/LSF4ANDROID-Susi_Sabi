@@ -3,6 +3,9 @@
 
 // TODO: View view noch anpassen
 
+//TODO: kann man eigentlich löschen, wird nicht mehr verwendet. Ist jetzt Baum Activity.
+
+
 package de.ur.mi.lsf4android;
 
 import android.app.Activity;

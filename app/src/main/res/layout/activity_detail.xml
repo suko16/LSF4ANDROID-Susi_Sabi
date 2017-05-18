@@ -6,8 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.ur.mi.lsf4android.DetailActivity">
-
+    >
 
     <TextView
         android:id="@+id/veranstaltung_titel"

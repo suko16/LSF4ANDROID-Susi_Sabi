@@ -33,7 +33,10 @@
         </activity>
         <activity
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"></activity>
+            android:label="@string/title_activity_detail"
+            >
+
+        </activity>
         <activity
             android:name=".NotificationReceiverActivity"
             android:label="NotificationReceiverActivity"

@@ -7,8 +7,10 @@ package de.ur.mi.lsf4android;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -21,7 +23,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity{
     public static final String TITEL_EXTRA = "titel_extra";
     public static final String HTML_EXTRA = "html_extra";
     private ListView detailActivityListview;
