@@ -21,15 +21,18 @@ import java.util.ArrayList;
 public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
     private final Context context;
     private final ArrayList<String[]> values;
+    private final Button[] buttonArray;
     private TextView textViewNumber;
     private TextView textViewName;
     private Button button;
     private ImageView imageView;
 
-    public BaumLetzteArrayAdapter(Context context, ArrayList<String[]> values) {
+
+    public BaumLetzteArrayAdapter(Context context, ArrayList<String[]> values, Button[] buttonArray) {
         super(context, R.layout.row_baum_letzte, values);
         this.context = context;
         this.values = values;
+        this.buttonArray = buttonArray;
     }
 
     @Override
@@ -40,8 +43,8 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
         View rowView = inflater.inflate(R.layout.row_baum_letzte, parent, false);
         textViewNumber = (TextView) rowView.findViewById(R.id.baum_letzte_nummer);
         textViewName = (TextView) rowView.findViewById(R.id.baum_letzte_name);
-        button = (Button) rowView.findViewById(R.id.button_baum_letzte);
-        //button.setId(position);
+        buttonArray[position] = (Button) rowView.findViewById(R.id.button_baum_letzte);
+
         //imageView = (ImageView) rowView.findViewById(R.id.imageView_button);
 
         textViewNumber.setText(values.get(1)[position]);
@@ -49,17 +52,18 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, DetailActivity.class);
+                Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra(DetailActivity.TITEL_EXTRA, values.get(2)[position]);
                 intent.putExtra(DetailActivity.HTML_EXTRA, values.get(3)[position]);
                 context.startActivity(intent);
             }
         });
 
-         button.setOnClickListener(new View.OnClickListener() {
+
+        buttonArray[position].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                button.setBackgroundResource(R.mipmap.remove_button);
+                buttonArray[position].setBackgroundResource(R.mipmap.remove_button);
             }
         });
 

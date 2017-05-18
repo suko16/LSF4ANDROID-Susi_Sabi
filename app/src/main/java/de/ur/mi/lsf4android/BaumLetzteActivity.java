@@ -114,8 +114,10 @@ public class BaumLetzteActivity extends AppCompatActivity {
            vstNr.setText(result.get(0)[0]);
            title.setText(result.get(0)[1]);
 
-            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result);
+            Button[] buttonArray = new Button[result.get(1).length];
+            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result, buttonArray);
             listView.setAdapter(adapter);
+
            //TODO: Zugriff auf Buttons -> OnClickListener und Prüfmethoden s. unten
 
          /*   addRow("Number", "Titel");
