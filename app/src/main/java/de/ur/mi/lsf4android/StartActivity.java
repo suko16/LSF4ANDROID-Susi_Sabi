@@ -19,6 +19,8 @@ public class StartActivity extends AppCompatActivity {
     private Button eigeneVButton;
     private Button vorVerzeichnisButton;
     private Button buttonLast;
+    private String vorlesungsverzeichnis_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
+
 
 
     @Override
@@ -46,7 +48,7 @@ public class StartActivity extends AppCompatActivity {
         vorVerzeichnisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                clickVorVerzeichnis();
+                clickAlle();
             }
         });
 
@@ -78,17 +80,17 @@ public class StartActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void clickVorVerzeichnis (){
-        Intent i = new Intent(this,MainActivity.class);
-        i.putExtra("open_vorverzeichnis_fragment", true);
+    private void clickAlle(){
+        Intent i = new Intent(this,BaumActivity.class);
+        i.putExtra("HtmlExtra", vorlesungsverzeichnis_html);
         i.putExtra("Button_VorVerzeichnis", vorVerzeichnisButton.getText());
         startActivity(i);
     }
 
     private void clickBaumLetzte () {
         Intent intent = new Intent(this,BaumLetzteActivity.class);
-        intent.putExtra("BaumLetzte",true);
-        intent.putExtra("Button_BaumLetzte", buttonLast.getText());
+        intent.putExtra("html", "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743|37688&P.vx=mittel");
+        intent.putExtra("header", "Beispiel");
         startActivity(intent);
     }
 

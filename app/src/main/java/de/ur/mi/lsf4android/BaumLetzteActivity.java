@@ -1,5 +1,6 @@
 package de.ur.mi.lsf4android;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,10 +30,15 @@ public class BaumLetzteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_baum_letzte);
-        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743|37604&P.vx=mittel");
+
+        Intent intent = getIntent();
+
+        new DownloadLSFTask().execute(intent.getStringExtra("html"));
         listView = (ListView) findViewById(R.id.baum_letzte_stufe_fragment_listView);
         vstNr = (TextView) findViewById(R.id.textView_activity_baum_letzte_vst_Nr);
         title = (TextView) findViewById(R.id.textView_activity_baum_letzte_titel);
+
+       this.setTitle(intent.getStringExtra("header"));
     }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -44,10 +50,11 @@ public class BaumLetzteActivity extends AppCompatActivity {
                 Elements rows = table.select("tr");
                 Elements header = rows.select("th");
 
-                String[] numbers = new String[rows.size()];
-                String[] titles = new String[rows.size()];
-                String[] html = new String[rows.size()];
                 String[] headLine = new String[header.size()];
+                String[] numbers = new String[rows.size()-1];
+                String[] titles = new String[rows.size()-1];
+                String[] html = new String[rows.size()-1];
+
 
                 for (int s = 0; s < rows.size(); s++) {
                     if (s == 0) {
@@ -114,11 +121,9 @@ public class BaumLetzteActivity extends AppCompatActivity {
            vstNr.setText(result.get(0)[0]);
            title.setText(result.get(0)[1]);
 
-            Button[] buttonArray = new Button[result.get(1).length];
-            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result, buttonArray);
+            BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result.get(1), result.get(2), result.get(3));
             listView.setAdapter(adapter);
 
-            BaumLetzteActivity.this.setTitle("Hallo");
 
            //TODO: Zugriff auf Buttons -> OnClickListener und Prüfmethoden s. unten
 

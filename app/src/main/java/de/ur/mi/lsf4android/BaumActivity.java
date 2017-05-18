@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -43,24 +44,34 @@ public class BaumActivity extends AppCompatActivity {
 
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
-                Elements header = doc.select("h1");
 
+                Elements header = doc.select("h1");
+                Elements tables = doc.select("table");
+                Elements vorlesungenTabelle = doc.select("table[summary='Übersicht über alle Veranstaltungen'");
                 Elements table_header = doc.select("a.ueb");
 
-                String[] zweigName = new String[table_header.size()];
-                String[] zweigUrl = new String[table_header.size()];
-                String[] headerString = new String[1];
+                String[] zweigName_1 = new String[table_header.size()];
+                String[] zweigUrl_2 = new String[table_header.size()];
+                String[] headerString_0 = new String[1];
+                String[] modul_3 = new String[2];
 
-                headerString[0] = header.text();
+                headerString_0[0] = header.text();
 
-                for (int i = 0; i < zweigName.length; i++) {
-                    zweigName[i] = table_header.get(i).text();
-                    zweigUrl[i] = table_header.get(i).attr("href");
+                for (int i = 0; i < zweigName_1.length; i++) {
+                    zweigName_1[i] = table_header.get(i).text();
+                    zweigUrl_2[i] = table_header.get(i).attr("href");
                 }
 
-                arrayList.add(headerString);
-                arrayList.add(zweigName);
-                arrayList.add(zweigUrl);
+
+                if (tables.last() == vorlesungenTabelle.last() && vorlesungenTabelle.size() != 0){
+                    modul_3[0] = table_header.last().text();
+                    modul_3[1] = table_header.last().attr("href");
+                }
+
+                arrayList.add(headerString_0);
+                arrayList.add(zweigName_1);
+                arrayList.add(zweigUrl_2);
+                arrayList.add(modul_3);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -70,7 +81,7 @@ public class BaumActivity extends AppCompatActivity {
 
         protected void onPostExecute(final ArrayList<String[]> result) {
             writeHeader(result.get(0)[0]);
-            buildList(result.get(1), result.get(2));
+            buildList(result.get(1), result.get(2), result.get(3));
 
 
 
@@ -95,24 +106,48 @@ public class BaumActivity extends AppCompatActivity {
         view.setText(totalHeader);
     }
 
-    private void buildList(String[] headers, final String[] headerHtmls ) {
+    private void buildList(String[] headers, final String[] headerHtmls, final String[] modulAuflistung ) {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, headers);
         listView = (ListView) findViewById(R.id.fragment_alle_listView);
         listView.setAdapter(adapter);
+        listView.setItemsCanFocus(true);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                handleClickOnListItem(headerHtmls,i);
+
+                handleClickOnListItem(headerHtmls,i, modulAuflistung);
+
+
+                /*if (modulAuflistung[1] == null){
+                    handleClickOnListItem(headerHtmls,i);
+                }else{
+                    Intent openDetailActivity = new Intent(BaumActivity.this, BaumLetzteActivity.class);
+                    openDetailActivity.putExtra("header", modulAuflistung[0]);
+                    openDetailActivity.putExtra("html", modulAuflistung[1]);
+                    startActivity(openDetailActivity);
+                }*/
+
             }
         });
     }
 
-    private void handleClickOnListItem(String[] headers, int j){
-        Intent intent = new Intent(this,BaumActivity.class);
-        intent.putExtra("HtmlExtra",headers[j]);
-        this.finish();
-        startActivity(intent);
+    private void handleClickOnListItem(String[] headers, int j, String[] modulAuflistung){
+
+        if (modulAuflistung[1] == null){
+           // ((TextView)view.findViewById(R.id.yourTextViewId)).getText();
+            Intent intent = new Intent(this,BaumActivity.class);
+            intent.putExtra("HtmlExtra", headers[j]);
+            this.finish();
+            startActivity(intent);
+
+        }else{
+            Intent openDetailActivity = new Intent(BaumActivity.this, BaumLetzteActivity.class);
+            openDetailActivity.putExtra("header", modulAuflistung[0]);
+            openDetailActivity.putExtra("html", modulAuflistung[1]);
+            startActivity(openDetailActivity);
+        }
+
     }
 }
