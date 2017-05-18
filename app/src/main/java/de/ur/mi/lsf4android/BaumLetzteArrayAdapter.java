@@ -59,14 +59,12 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String[]> {
             }
         });
 
-
         buttonArray[position].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buttonArray[position].setBackgroundResource(R.mipmap.remove_button);
             }
         });
-
 
         return rowView;
 

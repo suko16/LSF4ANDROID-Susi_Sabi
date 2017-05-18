@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".BackgroundService"></service>
+        <service android:name=".BackgroundService" />
 
         <activity
             android:name=".StartActivity"
@@ -22,23 +22,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:parentActivityName=".StartActivity"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.StartActivity" />
         </activity>
-
         <activity
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail">
-        </activity>
-
+            android:label="@string/title_activity_detail"></activity>
         <activity
             android:name=".NotificationReceiverActivity"
             android:label="NotificationReceiverActivity"
@@ -48,7 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
-
         <activity
             android:name=".CreateNotificationActivity"
             android:label="CreateNotificationActivity"
@@ -57,12 +51,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
-        <activity android:name=".BaumActivity"
-            android:label="Baum"/>
-        <activity android:name=".BaumLetzteActivity"
-            android:label="Letzte Seite"></activity>
+        <activity
+            android:name=".BaumActivity"
+            android:label="Baum" />
+        <activity android:name=".BaumLetzteActivity" />
+        <activity android:name=".AusfallendeActivity"
+            android:label="AusfallendeActivity"></activity>
     </application>
-</manifest>
 
-<!--verglichen
-von Susi gebaut, notification... von Sabi hinzugefügt-->
+</manifest><!--
+verglichen
+von Susi gebaut, notification... von Sabi hinzugefügt
+-->

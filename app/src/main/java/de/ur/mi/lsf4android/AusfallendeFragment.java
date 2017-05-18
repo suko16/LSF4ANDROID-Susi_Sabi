@@ -5,14 +5,19 @@
 
 package de.ur.mi.lsf4android;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -31,7 +36,7 @@ import java.util.List;
 
 public class AusfallendeFragment extends android.support.v4.app.Fragment {
 
-    public Veranstaltung veranstaltung;
+  /*  public Veranstaltung veranstaltung;
     private TextView title;
     private TextView begin;
     private TextView ende;
@@ -45,6 +50,10 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     private EigeneVeranstaltungenDataSource dataSource;
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
     public ArrayList<String[]> result;
+    //EditText dateEditText;
+    private DatePickerDialog datePickerDialog;
+    private Button datePickerButton;
+    private String date;
 
 
 
@@ -60,18 +69,55 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_ausfallende, container, false);
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
-        //String date = datumsformat.format(calendar.getTime());
+        date = datumsformat.format(calendar.getTime());
 
-        String date = "27.04.2017 ";
-        String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=24.05.2017&&HISCalendar_Date=23.05.2017&&HISCalendar_Date=13.06.2017&&HISCalendar_Date=20.06.2017&&HISCalendar_Date=" + date + "&asi=";
+
+        String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=24.05.2017&&HISCalendar_Date=23.05.2017&&HISCalendar_Date=13.06.2017&&HISCalendar_Date=" + date +"&&HISCalendar_Date=" + date + "&asi=";
         new DownloadLSFTask().execute(url);
 
         list = (ListView) view.findViewById(R.id.list);
+
+        //dateEditText = (EditText) view.findViewById(R.id.date);
+        datePickerButton = (Button) view.findViewById(R.id.button_date_picker);
+
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                datePickerButton.setText(dayOfMonth + "."
+                                        + (monthOfYear + 1) + "." + year);
+                                date = dayOfMonth + "."
+                                        + (monthOfYear + 1) + "." + year;
+                                reloadFragment();
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
         return view;
+    }
+
+    private void reloadFragment(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
 
@@ -264,8 +310,8 @@ public class AusfallendeFragment extends android.support.v4.app.Fragment {
                 )
         );
     }
-    */
 
-    }
+
+    }*/
 
 }

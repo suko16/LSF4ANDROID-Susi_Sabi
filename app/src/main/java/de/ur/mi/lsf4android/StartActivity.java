@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class StartActivity extends AppCompatActivity {
 
     private Button ausfallendeVButton;
@@ -58,9 +61,13 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void clickAusfallend (){
-        Intent i = new Intent(this,MainActivity.class);
-        i.putExtra("open_ausfallend_fragment", true);
-        i.putExtra("Button_Ausfallend", ausfallendeVButton.getText());
+        Calendar calendar = Calendar.getInstance();
+
+        SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
+        String date = datumsformat.format(calendar.getTime());
+
+        Intent i = new Intent(this,AusfallendeActivity.class);
+        i.putExtra("date", date);
         startActivity(i);
     }
 
