@@ -54,36 +54,13 @@ public class MainActivity extends AppCompatActivity
         //Bei Activitywechseln von StartActivity auf MainActivity
         // wird zusätzlich richtiges Fragment durch Extra geladen.
         Intent intent = getIntent();
-        Fragment fragment = null;
-        Class fragmentClass = null;
-
-
         if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
-            fragmentClass = EigeneFragment.class;
+            startEigeneFragment();
             setTitle(intent.getStringExtra("Button_Eigene"));
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
-
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
-
-    }
-
-
-
-
-
-    public void onArticleSelected(int position) {
-        // The user selected the headline of an article from the HeadlinesFragment
-        // Do something here to display that article
     }
 
         @Override
@@ -96,7 +73,6 @@ public class MainActivity extends AppCompatActivity
             }
     }
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -104,10 +80,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_ausfallende_V:
                 startAusfallendeActivity();
                 break;
-
-            //TODO: es fehlt der start der AusfallendeActivity aus der Navigation mit den Fragments
-            //TODO: mit dem intent öffnets zwar die klasse aber über AusfallendeFragment (sieht man wenn man zurück geht). Fällt dir noch was ein?
-
             case R.id.nav_eigene_V:
                startEigeneFragment();
                 break;
