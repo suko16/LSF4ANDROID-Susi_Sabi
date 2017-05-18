@@ -150,4 +150,7 @@ public class BaumActivity extends AppCompatActivity {
         }
 
     }
+
+    //TODO: Man muss zweimal auf lettes Item klicken, um BaumLetzteActivity zu öffnen. ALso um die Veranstaltungen des Moduls anzeigen zu lassen.
+    //TODO: Wenn man von BaumLetzte wieder zurück geht, kann man andere Zeilen nicht mehr drücken.
 }

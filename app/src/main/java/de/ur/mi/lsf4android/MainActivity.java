@@ -22,6 +22,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
@@ -54,19 +57,11 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         Class fragmentClass = null;
 
-        if (intent != null && intent.getBooleanExtra("open_ausfallend_fragment",false)){
-            fragmentClass = AusfallendeFragment.class;
-            setTitle(intent.getStringExtra("Button_Ausfallend"));
 
-        } else if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
+        if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
             fragmentClass = EigeneFragment.class;
             setTitle(intent.getStringExtra("Button_Eigene"));
-        } else if (intent != null && intent.getBooleanExtra("open_vorverzeichnis_fragment",false)){
-            fragmentClass = AlleFragment.class;
-            setTitle(intent.getStringExtra("Button_VorVerzeichnis"));
         }
-
-
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
@@ -76,9 +71,6 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
-
-
-
 
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
@@ -94,11 +86,6 @@ public class MainActivity extends AppCompatActivity
         // Do something here to display that article
     }
 
-
-
-
-
-
         @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -109,61 +96,28 @@ public class MainActivity extends AppCompatActivity
             }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment fragment = null;
-        Class fragmentClass;
         switch(item.getItemId()) {
             case R.id.nav_ausfallende_V:
-               fragmentClass = AusfallendeFragment.class;
-               /* Intent i= new Intent(this, AusfallendeActivity.class);
-                startActivity(i);*/
+                startAusfallendeActivity();
                 break;
 
             //TODO: es fehlt der start der AusfallendeActivity aus der Navigation mit den Fragments
             //TODO: mit dem intent öffnets zwar die klasse aber über AusfallendeFragment (sieht man wenn man zurück geht). Fällt dir noch was ein?
 
             case R.id.nav_eigene_V:
-                fragmentClass = EigeneFragment.class;
+               startEigeneFragment();
                 break;
             case R.id.nav_alle_V:
-                fragmentClass = AlleFragment.class;
+                startAlleActivity();
                 break;
             default:
-                fragmentClass = AusfallendeFragment.class;
+                startAusfallendeActivity();
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
         item.setChecked(true);
         setTitle(item.getTitle());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,6 +128,35 @@ public class MainActivity extends AppCompatActivity
    private void onUrLogoClicked(){
         Intent i = new Intent(this,StartActivity.class);
         startActivity(i);
+    }
+
+    private void startAusfallendeActivity(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
+        String date = datumsformat.format(calendar.getTime());
+        Intent intentAusfallende = new Intent(this, AusfallendeActivity.class);
+        intentAusfallende.putExtra("date", date);
+        startActivity(intentAusfallende);
+    }
+
+    private void startEigeneFragment(){
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        fragmentClass = EigeneFragment.class;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
+    }
+
+    private void startAlleActivity(){
+        Intent intentAlle = new Intent(this, BaumActivity.class);
+        intentAlle.putExtra("HtmlExtra","https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel");
+        startActivity(intentAlle);
     }
 
 }
