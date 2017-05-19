@@ -41,7 +41,7 @@ public class BaumLetzteActivity extends NavigationActivity {
         vstNr = (TextView) findViewById(R.id.textView_activity_baum_letzte_vst_Nr);
         title = (TextView) findViewById(R.id.textView_activity_baum_letzte_titel);
 
-        this.setTitle(intent.getStringExtra("header"));
+       this.setTitle(intent.getStringExtra("header"));
     }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -54,9 +54,9 @@ public class BaumLetzteActivity extends NavigationActivity {
                 Elements header = rows.select("th");
 
                 String[] headLine = new String[header.size()];
-                String[] numbers = new String[rows.size() - 1];
-                String[] titles = new String[rows.size() - 1];
-                String[] html = new String[rows.size() - 1];
+                String[] numbers = new String[rows.size()-1];
+                String[] titles = new String[rows.size()-1];
+                String[] html = new String[rows.size()-1];
 
 
                 for (int s = 0; s < rows.size(); s++) {
@@ -64,9 +64,9 @@ public class BaumLetzteActivity extends NavigationActivity {
                         headLine[0] = header.get(0).text();
                         headLine[1] = header.get(1).text();
                     } else {
-                        numbers[s - 1] = rows.get(s).select("td").get(0).text();
-                        titles[s - 1] = rows.get(s).select("td").get(1).select("a.regular").text();
-                        html[s - 1] = rows.get(s).select("td").get(1).select("a").attr("href");
+                        numbers[s-1] = rows.get(s).select("td").get(0).text();
+                        titles[s-1] = rows.get(s).select("td").get(1).select("a.regular").text();
+                        html[s-1] = rows.get(s).select("td").get(1).select("a").attr("href");
                     }
                 }
 
@@ -85,8 +85,8 @@ public class BaumLetzteActivity extends NavigationActivity {
 
         protected void onPostExecute(ArrayList<String[]> result) {
 
-            vstNr.setText(result.get(0)[0]);
-            title.setText(result.get(0)[1]);
+           vstNr.setText(result.get(0)[0]);
+           title.setText(result.get(0)[1]);
 
             BaumLetzteArrayAdapter adapter = new BaumLetzteArrayAdapter(BaumLetzteActivity.this, result.get(1), result.get(2), result.get(3));
             listView.setAdapter(adapter);

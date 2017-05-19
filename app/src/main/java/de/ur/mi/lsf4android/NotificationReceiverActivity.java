@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class NotificationReceiverActivity extends Activity {
     // prepare intent which is triggered if the
-// notification is selected
+    // notification is selected
     TextView result;
 
     @Override

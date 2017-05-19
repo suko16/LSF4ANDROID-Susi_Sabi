@@ -6,22 +6,18 @@ package de.ur.mi.lsf4android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 
 public class EigeneFragment extends android.support.v4.app.Fragment implements ListView.OnItemClickListener, ListView.OnItemLongClickListener {
@@ -32,6 +28,9 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
     public ListView VeranstaltngslisteListView;
     private TextView number;
     private TextView title;
+    private ArrayList ArrayListAusfallendeVeranstaltungen;
+    private ArrayList<String> arrayListAusfallende_Number;
+
 
 
     @Override
@@ -46,6 +45,7 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
         dataSource = new EigeneVeranstaltungenDataSource(getActivity());
         VeranstaltngslisteListView.setOnItemClickListener(this);
         VeranstaltngslisteListView.setOnItemLongClickListener(this);
+
         return view;
     }
 
@@ -60,8 +60,24 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
             EigeneFragmentArrayAdapter adapter = new EigeneFragmentArrayAdapter(context, VeranstaltungslisteDB);
             VeranstaltngslisteListView.setAdapter(adapter);
 
-            //TODO: für den ClickListener mit Aufruf der Detailactivity kann ich ich keine HTML mitübergeben, weil wir ja hier keinen DownloadTask haben.. ne idee wie man das machen könnte?
-
+            //Abgleich mit Downloadergebnis aus BackgroundService
+            //Problem: result = null
+          /* BackgroundService bS = new BackgroundService();
+            if(bS.result != null) {
+                arrayListAusfallende_Number = new ArrayList<>();
+                for (int i = 1; i < bS.result.size(); i++) {
+                    arrayListAusfallende_Number.add(bS.result.get(i));
+                }
+            }
+            if(ArrayListAusfallendeVeranstaltungen!= null && VeranstaltungslisteDB != null){
+                for(int i=0; i<VeranstaltungslisteDB.size(); i++){
+                    for(int j = 0; j< arrayListAusfallende_Number.size(); j++){
+                        if(VeranstaltungslisteDB.get(i).getNumber().equals(arrayListAusfallende_Number.get(j))){
+                            VeranstaltngslisteListView.getChildAt(i).setBackgroundColor(Color.GREEN);
+                        }
+                    }
+                }
+            }*/
 
         }
     }

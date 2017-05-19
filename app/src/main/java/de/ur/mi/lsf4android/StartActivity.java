@@ -100,7 +100,7 @@ public class StartActivity extends AppCompatActivity {
 
     private void clickBaumLetzte () {
         Intent intent = new Intent(this,BaumLetzteActivity.class);
-        intent.putExtra("html", "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852|40107|39734|37625|39743|37688&P.vx=mittel");
+        intent.putExtra("html", "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&root120171=40852|38761|38743|38726&trex=step");
         intent.putExtra("header", "Beispiel");
         startActivity(intent);
     }

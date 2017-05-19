@@ -36,15 +36,7 @@
             android:label="Detailansicht">
 
         </activity>
-        <activity
-            android:name=".NotificationReceiverActivity"
-            android:label="NotificationReceiverActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.ur.mi.lsf4android.MainActivity" />
-        </activity>
+
         <activity
             android:name=".CreateNotificationActivity"
             android:label="CreateNotificationActivity"
@@ -52,6 +44,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.ur.mi.lsf4android.MainActivity" />
+        </activity>
+        <activity
+            android:name=".NotificationReceiverActivity"
+            android:label="NotificationReceiverActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".CreateNotificationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.ur.mi.lsf4android.CreateNotificationActivity" />
+                <!--launchMode?!-->
         </activity>
         <activity
             android:name=".BaumActivity"

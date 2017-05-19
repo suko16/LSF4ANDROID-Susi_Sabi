@@ -190,6 +190,7 @@ public class EigeneVeranstaltungenDataSource {
 
         EigeneV_Objekt veranstaltung = new EigeneV_Objekt(titel, number, id, html);
 
+
         return veranstaltung;
     }*/
 
