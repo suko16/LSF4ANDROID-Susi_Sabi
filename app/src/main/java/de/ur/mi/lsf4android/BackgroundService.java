@@ -23,8 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-// TODO: URL-Code-Anpassung für aktuelles Datum aus Ausfallende Veranstaltungen von Susi übernehmen
-//TODO: Überprüfung auf nächsten 3 Tage
+
 
 public class BackgroundService extends IntentService {
 

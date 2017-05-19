@@ -31,7 +31,7 @@ public class EigeneFragmentArrayAdapter extends ArrayAdapter<Veranstaltung> {
         TextView number = (TextView) rowView.findViewById(R.id.number_eigene);
         TextView titel = (TextView) rowView.findViewById(R.id.titel_eigene);
 
-        //TODO: SUSI LESEN :D
+        //TODO: Textsize
         //setTextSize ist vmlt schlecht fürs responsive oder? kann man des im layout mit dimens angeben? //
         // android:textSize="@dimen/font_size"/> funktioniert aber nur bei TextViews und wir haben ja n listview
         //oder wir legen ein layout textview an das alle textviews referenzieren und geben da ne size mit dimens an?

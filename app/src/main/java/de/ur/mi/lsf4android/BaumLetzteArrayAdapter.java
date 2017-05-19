@@ -73,53 +73,58 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
 
 
 
-        long i = getItemId(position);
-
-
-       /*
-TODO: ich würde gerne die Buttons je nachdem ob der Kurs schon gespeichert ist grün oder rot machen, kann aber außerhalb einer onClick view.getParent nicht verwenden.
-TODO: hast du ne idee wie ich das aufrufen könnte? wenn ich das weglasse überprüfts mir nur die letzte veranstaltung und passt den button entsprechend an.. also brauch ich vmtl auch das
-TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nicht zur verfügung und mit convertView und getView etc gehts nicht...
-
-
        //Überprüft vor dem erstellen welche Buttons für welche Veranstaltung
+        //dementsprechender ClickListener gesetzt
 
-
-        LinearLayout vwParentRow = (ViewGroup)(LinearLayout)view.getParent();
-
-        final TextView veranstaltungTitel = (TextView) vwParentRow.getChildAt(1);
-        TextView veranstaltungsNumber = (TextView) vwParentRow.getChildAt(0);
 
         dataSource = new EigeneVeranstaltungenDataSource(getContext());
         dataSource.open();
-        List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
-        final String number = veranstaltungsNumber.getText().toString();
+        final List<Veranstaltung> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
+        String current = textViewNumber.getText().toString();
+        for(int j=0; j< VeranstaltungslisteDB.size(); j++) {
+            if (VeranstaltungslisteDB.get(j).getNumber().equals(current)) {
+                final int temp = j;
 
-        for(int j=0; j< Veranstaltungsliste.size(); j++) {
-            if (Veranstaltungsliste.get(j).getNumber().equals(number)) {
-                Button ButtonMinus = (Button) vwParentRow.getChildAt(2);
+                button.setBackgroundResource(R.mipmap.remove_button);
+                button.setOnClickListener(new View.OnClickListener() {
 
-                ButtonMinus.setBackgroundResource(R.mipmap.remove_button);
-                // ButtonMinus .setOnClickListener(delete);
+                    @Override
+                    public void onClick(View view){
+
+                        LinearLayout vwParentRow = (LinearLayout)view.getParent();
+                        Button buttonView = (Button) vwParentRow.getChildAt(2);
+                        dataSource.deleteVeranstaltung(VeranstaltungslisteDB.get(temp));
+                        CharSequence text = VeranstaltungslisteDB.get(temp).getTitel() + " wurde gelöscht";
+
+                        Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+                        toast.show();
+                        buttonView.setBackgroundResource(R.mipmap.add_button);
+                    }
+                });
+
+                break;
             } else {
 
-                Button ButtonPlus = (Button) vwParentRow.getChildAt(2);
-                ButtonPlus.setBackgroundResource(R.mipmap.add_button);
-                ButtonPlus.setOnClickListener(new View.OnClickListener() {
+              button.setBackgroundResource(R.mipmap.add_button);
+              button.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
-                        dataSource.createVeranstaltung(veranstaltungTitel.getText().toString(), number);
-                        CharSequence text = veranstaltungTitel.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
+                        LinearLayout vwParentRow = (LinearLayout)view.getParent();
+                        TextView tempTitle = (TextView) vwParentRow.getChildAt(1);
+                        TextView tempNumber = (TextView) vwParentRow.getChildAt(0);
+                        Button buttonView = (Button) vwParentRow.getChildAt(2);
+                        dataSource.createVeranstaltung(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
+                        CharSequence text = tempTitle.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
+                        buttonView.setBackgroundResource(R.mipmap.remove_button);
                     }
                 });
             }
         }
 
 
-*/
 
 
 
@@ -127,7 +132,9 @@ TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nic
 
 
 
-        //final Button zweiButton = (Button) button.findViewById(getPosition("button")+1);
+/*
+
+        /final Button zweiButton = (Button) button.findViewById(getPosition("button")+1);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,14 +142,15 @@ TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nic
 
                 //holt sich die Zeile in dem das View liegt und sucht sich das passende Kindelement heraus
 
-               /* Button buttonZwei = (Button)vwParentRow.getChildAt(2);
-                buttonZwei.setBackgroundResource(R.mipmap.remove_button);*/
+               *//**//* Button buttonZwei = (Button)vwParentRow.getChildAt(2);
+                buttonZwei.setBackgroundResource(R.mipmap.remove_button);*//**//*
 
-               //TODO: das mit dem roten Button würde ich nur machen wenn s.oben geht :)
+
 
                 //und so kannst du auf dem Namen der Veranstaltung zugreifen
                 TextView veranstaltungTitel = (TextView) vwParentRow.getChildAt(1);
                 TextView veranstaltungsNumber = (TextView) vwParentRow.getChildAt(0);
+
 
 
                 //Bei Klick überprüfen ob Veranstaltung schon gespeichert, wenn nicht speichern in Datenbank
@@ -172,7 +180,9 @@ TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nic
 
 
             }
-        });
+        });*/
+
+
         return rowView;
 
     }
