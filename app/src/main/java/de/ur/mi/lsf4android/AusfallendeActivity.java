@@ -3,6 +3,7 @@ package de.ur.mi.lsf4android;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -117,7 +118,6 @@ public class AusfallendeActivity extends NavigationActivity {
     @Override
     public void onPause() {
         super.onPause();
-        dataSource.close();
     }
 
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
@@ -207,34 +207,12 @@ public class AusfallendeActivity extends NavigationActivity {
 
                             //TODO: neues Layout erstellen und Zeile übergeben
 
-                        }
-                    }
                 }
 
-                //Überprüft auf Übereinstimmungen zwischen Datenbank und Ausfallenden
 
-                   /* dataSource = new EigeneVeranstaltungenDataSource(AusfallendeActivity.this);
-                    dataSource.open();
-                    List<EigeneV_Objekt> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
-
-                    for (int j = 0; j < VeranstaltungslisteDB.size(); j++) {
-                        for (int i = 0; i < veranstaltungen.size(); i++) {
-                            if (VeranstaltungslisteDB.get(j).getNumber().equals(veranstaltungen.get(i).getNumber())) {
-                                veranstaltungen.get(i).setTitel(veranstaltungen.get(i).getTitel().toUpperCase());
-
-                                //TODO: neues Layout erstellen und Zeile übergeben
-
-                            }
-                        }
-                    }*/
-
-                    dataSource.close();
-
-                    //TODO: Navigation Drawer bei jeder Activity einfügen
-
-
-                }
             }
         }
+        }
+
 
     }

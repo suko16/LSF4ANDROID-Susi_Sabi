@@ -8,10 +8,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sabi on 17.05.2017.
@@ -20,6 +23,10 @@ import java.util.ArrayList;
 public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung> {
     private final Context context;
     private final ArrayList<Veranstaltung> veranstaltungen;
+    private EigeneVeranstaltungenDataSource dataSource;
+    View rowView;
+    TextView nummer;
+    View row;
 
     public AusfallendeActivityArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
         super(context, -1, veranstaltungen);
@@ -31,10 +38,10 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.row_ausfallende, parent, false);
+        rowView = inflater.inflate(R.layout.row_ausfallende, parent, false);
         TextView beginn = (TextView) rowView.findViewById(R.id.beginn);
         TextView ende = (TextView) rowView.findViewById(R.id.ende);
-        TextView nummer = (TextView) rowView.findViewById(R.id.nummer);
+        nummer = (TextView) rowView.findViewById(R.id.nummer);
         TextView titel = (TextView) rowView.findViewById(R.id.titel);
         beginn.setText(veranstaltungen.get(position).getBeginn());
         ende.setText(veranstaltungen.get(position).getEnde());
@@ -47,6 +54,21 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
                 callDetailActivity(veranstaltungen.get(position).getTitel(), veranstaltungen.get(position).getHtml());
             }
         });
+
+        dataSource = new EigeneVeranstaltungenDataSource(context);
+        dataSource.open();
+        List<Veranstaltung> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
+
+        for (int j = 0; j < VeranstaltungslisteDB.size(); j++) {
+                if (VeranstaltungslisteDB.get(j).getNumber().equals(nummer.getText().toString())) {
+                    titel.setText(titel.getText().toString().toUpperCase());
+                    rowView.setBackgroundColor(Color.YELLOW);
+                }
+        }
+
+        dataSource.close();
+
+
         return rowView;
     }
 
@@ -63,6 +85,15 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
         intent.putExtra("open_detail_start",true);
         context.startActivity(intent);
     }
+
+
+
+    private void checkCollision(){
+
+
+
+    }
+
 
 }
 

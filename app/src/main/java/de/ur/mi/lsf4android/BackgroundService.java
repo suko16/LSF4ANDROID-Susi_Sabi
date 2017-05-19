@@ -23,8 +23,7 @@ import java.util.Calendar;
 import java.util.List;
 
 
-// TODO: URL-Code-Anpassung für aktuelles Datum aus Ausfallende Veranstaltungen von Susi übernehmen
-//TODO: Überprüfung auf nächsten 3 Tage
+
 
 public class BackgroundService extends IntentService {
 
@@ -37,15 +36,23 @@ public class BackgroundService extends IntentService {
     String url;
     String date;
     int countNotifications=0;
+    ArrayList<String[]> remindNotifications;
+
+
+    public BackgroundService(String name){
+        super(name);
+    }
 
     @Override
     public void onCreate() {
 
+        remindNotifications = new ArrayList<>();
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        // soll den Download übernehmen, aber wie aufrufen, mit welchen parametern?
+
+
     }
 
 
@@ -53,9 +60,10 @@ public class BackgroundService extends IntentService {
     // Intent intent = new Intent(this, BackgroundService.class); startService(intent);
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+
         downLoadCancelledLectures();
-        return Service.START_NOT_STICKY; //legt Verhalten nach Beendigung  des Services durch das System fest zB Service.START_NOT_STICKY
+// new DownloadLSFTask().execute("https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=04.05.2017&asi=");
+        return Service.START_NOT_STICKY;//legt Verhalten nach Beendigung  des Services durch das System fest zB Service.START_NOT_STICKY onStartCommand(intent,flags,startId)
     }
 
     @Override
@@ -115,8 +123,6 @@ public class BackgroundService extends IntentService {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                           /* Intent resultToEigene = new Intent(getApplication(), EigeneFragment.class);
-                            resultToEigene.getStringArrayListExtra("Download", result);*/
 
                 return result;
             }
@@ -151,8 +157,31 @@ public class BackgroundService extends IntentService {
 
 
     private void sendNotification(String titelAusfallendeVeranstaltung, String date, int countNotifications){
+
+        // wenn bereits über eine ausfallende Veranstaltung an einem bestimmten Tag benachrichtigt wurde, dann nicht nochmal benachrichtigen
+        //(nur wenn andere Veranstaltung oder anderer Tag)
+        // Damit der Nutzer nicht jeden Tag die Notification für die Benachrichtigung wegen der Veranstaltung bekommt, die in 3 Tagen ausfällt
+
+
+        if(remindNotifications!=null){
+            for(int w=0; w<remindNotifications.size(); w++){
+                if(remindNotifications.get(w)[0].equals(titelAusfallendeVeranstaltung) && remindNotifications.get(w)[1].equals(date)){
+                        return;
+                }
+            }
+        }
+
+        String[] current = new String[2];
+        current[0]=titelAusfallendeVeranstaltung;
+        current[1]= date;
+        remindNotifications.add(current);
+
+
+        //neue Benachrichtigung erzeugen
+
         CreateNotificationActivity cN = new CreateNotificationActivity(getApplicationContext());
         cN.createNotification(titelAusfallendeVeranstaltung, date, countNotifications);
+
     }
 }
 

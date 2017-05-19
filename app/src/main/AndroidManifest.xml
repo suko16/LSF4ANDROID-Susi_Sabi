@@ -39,7 +39,7 @@
 
         <activity
             android:name=".CreateNotificationActivity"
-            android:label="CreateNotificationActivity"
+            android:label="Ausfallende Veranstaltungen"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -58,12 +58,18 @@
         <activity
             android:name=".BaumActivity"
             android:label="Vorlesungsverzeichnis" />
+
         <activity
             android:name=".BaumLetzteActivity"
             android:label="Vorlesungsverzeichnis" />
         <activity
             android:name=".AusfallendeActivity"
-            android:label="Ausfallende Veranstaltungen">
+            android:label="Ausfallende Veranstaltungen"
+            android:launchMode="standard"
+            android:parentActivityName=".CreateNotificationActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.ur.mi.lsf4android.CreateNotificationActivity" />
         </activity>
         <activity
             android:name=".DetailActivityWithFragments"
