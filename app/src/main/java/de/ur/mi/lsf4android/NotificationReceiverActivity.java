@@ -19,14 +19,16 @@ public class NotificationReceiverActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notification_result);
+        /*setContentView(R.layout.notification_result);
         result = (TextView) findViewById(R.id.notification_result);
-
+*/
     }
 
     @Override
     protected void onNewIntent(Intent intent){
-        result.setText("Du hast die Notification aufgerufen");
+       /* Intent receive = getIntent();
+        String titel = receive.getStringExtra("TITEL");
+        result.setText("Du hast die Notification aufgerufen " + titel);*/
     }
 
 }

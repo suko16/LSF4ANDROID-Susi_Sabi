@@ -6,7 +6,7 @@
 
 
     <string name="ausfallende_V">Ausfallende Veranstaltungen</string>
-    <string name="alle_V">Alle Veranstaltungen</string>
+    <string name="alle_V">Vorlesungsverzeichnis</string>
     <string name="eigene_V">Eigene Veranstaltungen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_detail">DetailActivity</string>

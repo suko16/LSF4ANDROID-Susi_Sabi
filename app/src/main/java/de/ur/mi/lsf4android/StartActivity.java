@@ -106,6 +106,13 @@ public class StartActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPause(){
+        super.onPause();
+
+        Intent Service = new Intent(this, BackgroundService.class);
+        startService(Service);
+    }
 }
 
 
