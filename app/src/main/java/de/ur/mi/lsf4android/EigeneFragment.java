@@ -121,6 +121,7 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
         int positionListView = (int)id;
 
+
         Veranstaltung selectedVeranstaltung = (Veranstaltung) VeranstaltngslisteListView.getItemAtPosition(positionListView);
         dataSource.deleteVeranstaltung(selectedVeranstaltung);
 
