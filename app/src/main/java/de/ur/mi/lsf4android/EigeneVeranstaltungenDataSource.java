@@ -59,7 +59,31 @@ public class EigeneVeranstaltungenDataSource {
     }
 
 
-    public EigeneV_Objekt createVeranstaltung(String titel, String number, String html) {
+    public Veranstaltung createVeranstaltung(String titel, String number, String html) {
+        ContentValues values = new ContentValues();
+        values.put(EigeneVeranstaltungenDbHelper.COLUMN_TITEL, titel);
+        values.put(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER, number);
+        values.put(EigeneVeranstaltungenDbHelper.COLUMN_HTML, html);
+
+        open();
+
+
+        long insertId = database.insert(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN, null, values);
+
+        Cursor cursor = database.query(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
+                columns, EigeneVeranstaltungenDbHelper.COLUMN_ID + "=" + insertId,
+                null, null, null, null);
+
+        cursor.moveToFirst();
+        Veranstaltung veranstaltung = cursorToVeranstaltung(cursor);
+
+
+        cursor.close();
+
+        return veranstaltung;
+    }
+
+   /* public EigeneV_Objekt createVeranstaltung(String titel, String number, String html) {
         ContentValues values = new ContentValues();
         values.put(EigeneVeranstaltungenDbHelper.COLUMN_TITEL, titel);
         values.put(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER, number);
@@ -81,10 +105,10 @@ public class EigeneVeranstaltungenDataSource {
         cursor.close();
 
         return veranstaltung;
-    }
+    }*/
 
 
-    public void deleteVeranstaltung(EigeneV_Objekt veranstaltung) {
+    public void deleteVeranstaltung(Veranstaltung veranstaltung) {
         long id = veranstaltung.getId();
 
         database.delete(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
@@ -94,8 +118,28 @@ public class EigeneVeranstaltungenDataSource {
     }
 
 
+    public ArrayList<Veranstaltung> getAllVeranstaltungen() {
+        ArrayList<Veranstaltung> Veranstaltungsliste = new ArrayList<>(); //List?
 
-    public ArrayList<EigeneV_Objekt> getAllVeranstaltungen() {
+        cursor = database.query(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
+                columns, null, null, null, null, null);
+
+        cursor.moveToFirst();
+        Veranstaltung veranstaltung;
+
+
+        while(!cursor.isAfterLast()) {
+            veranstaltung = cursorToVeranstaltung(cursor);
+            Veranstaltungsliste.add(veranstaltung);
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+
+        return Veranstaltungsliste;
+    }
+
+    /*public ArrayList<EigeneV_Objekt> getAllVeranstaltungen() {
         ArrayList<EigeneV_Objekt> Veranstaltungsliste = new ArrayList<>(); //List?
 
         cursor = database.query(EigeneVeranstaltungenDbHelper.TABLE_EIGENE_VERANSTALTUNGEN,
@@ -114,12 +158,26 @@ public class EigeneVeranstaltungenDataSource {
         cursor.close();
 
         return Veranstaltungsliste;
+    }*/
+
+
+    private Veranstaltung cursorToVeranstaltung(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_ID);
+        int idNumber = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER);
+        int idTitel = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_TITEL);
+        int idHtml = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_HTML);
+
+        String titel = cursor.getString(idTitel);
+        String number = cursor.getString(idNumber);
+        long id = cursor.getLong(idIndex);
+        String html = cursor.getString(idHtml);
+
+        Veranstaltung veranstaltung = new Veranstaltung(titel, number, id, html);
+
+        return veranstaltung;
     }
 
-
-
-
-    private EigeneV_Objekt cursorToVeranstaltung(Cursor cursor) {
+    /*private EigeneV_Objekt cursorToVeranstaltung(Cursor cursor) {
         int idIndex = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_ID);
         int idNumber = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_NUMBER);
         int idTitel = cursor.getColumnIndex(EigeneVeranstaltungenDbHelper.COLUMN_TITEL);
@@ -133,7 +191,7 @@ public class EigeneVeranstaltungenDataSource {
         EigeneV_Objekt veranstaltung = new EigeneV_Objekt(titel, number, id, html);
 
         return veranstaltung;
-    }
+    }*/
 
 
 

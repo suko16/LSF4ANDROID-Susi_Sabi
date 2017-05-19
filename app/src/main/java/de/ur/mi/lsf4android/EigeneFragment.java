@@ -56,7 +56,7 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
         title.setText("Titel");
         Context context = getActivity();
         if (context != null) {
-            ArrayList<EigeneV_Objekt> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
+            ArrayList<Veranstaltung> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
             EigeneFragmentArrayAdapter adapter = new EigeneFragmentArrayAdapter(context, VeranstaltungslisteDB);
             VeranstaltngslisteListView.setAdapter(adapter);
 
@@ -89,7 +89,7 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
         int positionListView = (int)id;
 
-        EigeneV_Objekt selectedVeranstaltung = (EigeneV_Objekt) VeranstaltngslisteListView.getItemAtPosition(positionListView);
+        Veranstaltung selectedVeranstaltung = (Veranstaltung) VeranstaltngslisteListView.getItemAtPosition(positionListView);
         String titelSelectedVeranstaltung = selectedVeranstaltung.getTitel();
 
         Intent intent = new Intent(getActivity(), DetailActivity.class);
@@ -104,7 +104,7 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
 
         int positionListView = (int)id;
 
-        EigeneV_Objekt selectedVeranstaltung = (EigeneV_Objekt) VeranstaltngslisteListView.getItemAtPosition(positionListView);
+        Veranstaltung selectedVeranstaltung = (Veranstaltung) VeranstaltngslisteListView.getItemAtPosition(positionListView);
         dataSource.deleteVeranstaltung(selectedVeranstaltung);
 
         CharSequence text = selectedVeranstaltung.getTitel() + " wurde gelöscht";

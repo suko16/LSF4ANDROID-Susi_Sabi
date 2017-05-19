@@ -149,7 +149,7 @@ TODO: mit dem Child und ParentRow.. bloß des View view hab ich ohne OnClick nic
 
                 dataSource = new EigeneVeranstaltungenDataSource(getContext());
                 dataSource.open();
-                List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+                List<Veranstaltung> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
                 String number = veranstaltungsNumber.getText().toString();
 
                 for(int i=0; i< Veranstaltungsliste.size(); i++){

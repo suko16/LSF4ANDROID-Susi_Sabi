@@ -12,6 +12,7 @@ public class Veranstaltung {
     public String ende;
     public String number;
     public String html;
+    public long id;
 
 
     public Veranstaltung(String beginn, String ende, String number, String titel, String html) {
@@ -22,9 +23,18 @@ public class Veranstaltung {
         this.html = html;
 
     }
+
+    public Veranstaltung(String titel, String number, long id, String html){
+        this.titel = titel;
+        this.id = id;
+        this.number = number;
+        this.html = html;
+    }
+
     public Veranstaltung(){
         Veranstaltung v = new Veranstaltung("", "", "", "", "");
     }
+
 
     public void setTitel(String titel) {
         this.titel = titel;
@@ -56,4 +66,11 @@ public class Veranstaltung {
 
     public void setHtml(String html) {this.html = html;}
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

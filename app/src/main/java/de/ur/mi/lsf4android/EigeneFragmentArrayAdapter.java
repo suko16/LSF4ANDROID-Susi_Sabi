@@ -12,12 +12,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class EigeneFragmentArrayAdapter extends ArrayAdapter<EigeneV_Objekt> {
+public class EigeneFragmentArrayAdapter extends ArrayAdapter<Veranstaltung> {
 
     private final Context context;
-    private final ArrayList<EigeneV_Objekt> veranstaltungen;
+    private final ArrayList<Veranstaltung> veranstaltungen;
 
-    public EigeneFragmentArrayAdapter(@NonNull Context context, ArrayList<EigeneV_Objekt> veranstaltungen) {
+    public EigeneFragmentArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
         super(context, -1, veranstaltungen);
         this.context = context;
         this.veranstaltungen = veranstaltungen;

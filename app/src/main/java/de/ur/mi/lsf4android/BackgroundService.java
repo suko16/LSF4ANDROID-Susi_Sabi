@@ -104,7 +104,7 @@ public class BackgroundService extends IntentService {
     private void checkIfCollision(ArrayList<String> VeranstaltungsArray){
         dataSource = new EigeneVeranstaltungenDataSource(this);
         dataSource.open();
-        List<EigeneV_Objekt> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
+        List<Veranstaltung> Veranstaltungsliste = dataSource.getAllVeranstaltungen();
 
         for (int j = 0; j < Veranstaltungsliste.size(); j++){
             for(int i=0; i<VeranstaltungsArray.size(); i++){
