@@ -106,6 +106,20 @@ public class AusfallendeActivity extends NavigationActivity {
         });
     }
 
+    private void callDetailActivity(String titel, int j) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
+        intent.putExtra(DetailActivity.HTML_EXTRA, htmlList.get(j));
+        startActivity(intent);
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        dataSource.close();
+    }
+
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             result = new ArrayList<>();
@@ -169,6 +183,15 @@ public class AusfallendeActivity extends NavigationActivity {
                 if (context != null) {
                     adapter = new AusfallendeActivityArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
+
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            if (i != 0) {
+                                callDetailActivity(veranstaltungen.get(i).getTitel(), i - 1);
+                            }
+                        }
+                    });
                 }
 
 
@@ -205,6 +228,8 @@ public class AusfallendeActivity extends NavigationActivity {
                             }
                         }
                     }*/
+
+                    dataSource.close();
 
                     //TODO: Navigation Drawer bei jeder Activity einfügen
 

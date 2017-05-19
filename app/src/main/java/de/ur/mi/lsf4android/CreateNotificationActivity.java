@@ -11,6 +11,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -46,9 +47,18 @@ public class CreateNotificationActivity extends Activity {
     }
 
 
-    public void createNotification(String titelAusfallendeVeranstaltung) {
+    public void createNotification(String titelAusfallendeVeranstaltung, String date, int notificationID) {
 
-     //   noti = new Notification();
+        //Erstellt trotz permanenter Aktulaisierung keine Notations, die bereits angezeigt werden
+        StatusBarNotification[] AllActiveNotifications = notificationManager.getActiveNotifications();
+        for(int r = 0; r<AllActiveNotifications.length; r++){
+            if(AllActiveNotifications[r].getNotification().getSortKey().equals(titelAusfallendeVeranstaltung)){
+
+                return;
+            }
+        }
+
+
 /*
 
         Intent notificationIntent = new Intent(CreateNotificationActivity.this, AusfallendeFragment.class);
@@ -59,26 +69,27 @@ public class CreateNotificationActivity extends Activity {
 */
      //   noti.vibrate = vibrate;
 
+
+
         b.setSmallIcon(R.mipmap.uni_logo)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentText("Deine Veranstaltung '" + titelAusfallendeVeranstaltung + "' entfällt")
+                .setContentText("Am " + date + " entfällt '" + titelAusfallendeVeranstaltung + "'")
                 .setContentTitle("LSF4Android")
+                .setSortKey(titelAusfallendeVeranstaltung)
+
                // .setContentIntent(pIntent)
         ;
 
-        notificationManager.notify(1, b.build());
+        notificationManager.notify(notificationID, b.build());
 
+    
 
-          /*
-
-
-
-
-           // hide the notification after its selected
-           noti.flags |= Notification.FLAG_AUTO_CANCEL;
+         // hide the notification after its selected
+          /* noti.flags |= Notification.FLAG_AUTO_CANCEL;
 
            notificationManager.notify(0, noti);
+*/
 
-       */
     }
+
 }
