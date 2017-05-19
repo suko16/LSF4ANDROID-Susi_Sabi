@@ -19,6 +19,7 @@ public class StartActivity extends AppCompatActivity {
     private Button eigeneVButton;
     private Button vorVerzeichnisButton;
     private Button buttonLast;
+    private Button buttonDetail2;
     private String vorlesungsverzeichnis_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
 
 
@@ -52,6 +53,9 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         buttonLast = (Button) findViewById(R.id.button_last);
 
         buttonLast.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +64,9 @@ public class StartActivity extends AppCompatActivity {
                 clickBaumLetzte();
             }
         });
+
+
+
 
 
         Intent Service = new Intent(this, BackgroundService.class);

@@ -61,9 +61,10 @@ public class BaumLetzteArrayAdapter extends ArrayAdapter<String> {
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailActivity.class);
-                intent.putExtra(DetailActivity.TITEL_EXTRA, title[position]);
-                intent.putExtra(DetailActivity.HTML_EXTRA, html[position]);
+                Intent intent = new Intent(context, DetailActivityWithFragments.class);
+                intent.putExtra("titel", title[position]);
+                intent.putExtra("html", html[position]);
+                intent.putExtra("open_detail_start",true);
                 context.startActivity(intent);
             }
         });

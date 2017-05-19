@@ -35,7 +35,7 @@ public class DetailActivity extends NavigationActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.activity_detail, contentConstraintLayout);
 
         Intent intent = getIntent();
@@ -81,23 +81,8 @@ public class DetailActivity extends NavigationActivity{
 
 
         protected void onPostExecute(String[][] result) {
-
             detailActivityArrayAdapter = new DetailActivityArrayAdapter(DetailActivity.this, result);
             detailActivityListview.setAdapter(detailActivityArrayAdapter);
-
-
-           /* TableLayout table = (TableLayout) findViewById(R.id.detail_tabelle);
-            TableRow row;
-            TextView head;
-            TextView data;
-
-            for (int j = 0; j < result.length; j++) {
-                row = (TableRow) table.getChildAt(j);
-                head = (TextView) row.getChildAt(0);
-                data = (TextView) row.getChildAt(1);
-                head.setText(result[j][0]);
-                data.setText(result[j][1]);
-            }*/
         }
     }
 }

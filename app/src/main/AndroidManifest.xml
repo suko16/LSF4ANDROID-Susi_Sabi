@@ -63,6 +63,10 @@
             android:name=".AusfallendeActivity"
             android:label="Ausfallende Veranstaltungen">
         </activity>
+        <activity
+            android:name=".DetailActivityWithFragments"
+            android:label="DetailActivityWithFragments">
+        </activity>
     </application>
 
 </manifest><!--

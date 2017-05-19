@@ -55,7 +55,7 @@ public class AusfallendeActivity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.activity_ausfallende, contentConstraintLayout);
 
         Intent intent = getIntent();
