@@ -2,6 +2,7 @@ package de.ur.mi.lsf4android;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +18,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class BaumLetzteActivity extends AppCompatActivity {
+public class BaumLetzteActivity extends NavigationActivity {
 
     public EigeneVeranstaltungenDataSource dataSource;
     public ArrayList<Button> buttonList;
@@ -29,7 +30,9 @@ public class BaumLetzteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_baum_letzte);
+
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.fragment_baum_letzte, contentConstraintLayout);
 
         Intent intent = getIntent();
 

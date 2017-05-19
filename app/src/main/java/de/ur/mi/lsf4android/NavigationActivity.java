@@ -6,8 +6,6 @@ package de.ur.mi.lsf4android;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,23 +19,23 @@ import android.widget.ImageView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity
+public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.navigation_layout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ImageView urLogo = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.urLogo);
         urLogo.setOnClickListener(new View.OnClickListener() {
@@ -47,26 +45,18 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //Bei Activitywechseln von StartActivity auf MainActivity
-        // wird zusätzlich richtiges Fragment durch Extra geladen.
-        Intent intent = getIntent();
-        if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
-            startEigeneFragment();
-            setTitle(intent.getStringExtra("Button_Eigene"));
-        }
-
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }
 
-        @Override
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-            }
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -77,7 +67,7 @@ public class MainActivity extends AppCompatActivity
                 startAusfallendeActivity();
                 break;
             case R.id.nav_eigene_V:
-               startEigeneFragment();
+                startEigeneFragment();
                 break;
             case R.id.nav_alle_V:
                 startAlleActivity();
@@ -88,12 +78,12 @@ public class MainActivity extends AppCompatActivity
 
         item.setChecked(true);
         setTitle(item.getTitle());
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-   private void onUrLogoClicked(){
+    private void onUrLogoClicked(){
         Intent i = new Intent(this,StartActivity.class);
         startActivity(i);
     }
@@ -108,18 +98,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void startEigeneFragment(){
-        Fragment fragment = null;
-        Class fragmentClass = null;
-        fragmentClass = EigeneFragment.class;
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_main, fragment).commit();
+        Intent i = new Intent(this,MainActivity.class);
+        i.putExtra("open_eigene_fragment", true);
+        i.putExtra("Button_Eigene", "Eigene Veranstaltungen");
+        startActivity(i);
     }
+
 
     private void startAlleActivity(){
         Intent intentAlle = new Intent(this, BaumActivity.class);
