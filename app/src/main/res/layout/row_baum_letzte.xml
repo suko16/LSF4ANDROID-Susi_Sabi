@@ -29,12 +29,5 @@
         android:layout_marginRight="10dp"
         android:focusable="false"/>
 
-   <!-- <ImageView
-        android:id="@+id/imageView_button"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/add_button"
-        android:clickable="true"/>-->
 
 </LinearLayout>

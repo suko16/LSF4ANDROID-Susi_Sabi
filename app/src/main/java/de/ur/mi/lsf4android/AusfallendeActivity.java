@@ -107,9 +107,9 @@ public class AusfallendeActivity extends NavigationActivity {
     }
 
     private void callDetailActivity(String titel, int j) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
-        intent.putExtra(DetailActivity.HTML_EXTRA, htmlList.get(j));
+        Intent intent = new Intent(this, DetailFragment.class);
+        intent.putExtra("titel", titel);
+        intent.putExtra("html", htmlList.get(j));
         startActivity(intent);
     }
 
@@ -195,7 +195,6 @@ public class AusfallendeActivity extends NavigationActivity {
                 }
 
 
-                Veranstaltung testVeranstaltung = new Veranstaltung("titel","nummer", 2, "html");
 
                 dataSource = new EigeneVeranstaltungenDataSource(AusfallendeActivity.this);
                 dataSource.open();

@@ -43,6 +43,7 @@ public class DetailActivityWithFragments extends NavigationActivity implements D
                     e.printStackTrace();
                 }
                 fragmentManager.beginTransaction().replace(R.id.fragment_content_navigation, fragment, "DETAIL_FRAGMENT").commit();
+                setTitle("Detail");
             }
         }
 
@@ -65,6 +66,7 @@ public class DetailActivityWithFragments extends NavigationActivity implements D
             }
             fragment.setArguments(bundle);
             fragmentManager.beginTransaction().replace(R.id.fragment_content_navigation, fragment, fragmentName).commit();
+            setTitle(fragmentName);
         }
 
    /*     @Override

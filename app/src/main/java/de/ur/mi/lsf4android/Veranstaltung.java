@@ -13,6 +13,7 @@ public class Veranstaltung {
     public String number;
     public String html;
     public long id;
+    public int group;
 
 
     public Veranstaltung(String beginn, String ende, String number, String titel, String html) {
@@ -29,6 +30,15 @@ public class Veranstaltung {
         this.id = id;
         this.number = number;
         this.html = html;
+    }
+
+    public Veranstaltung (String day, String time, String room, String teacher, int group){
+        titel = day;
+        beginn = time;
+        ende = room;
+        number = teacher;
+        this.group = group;
+
     }
 
     public Veranstaltung(){
@@ -73,4 +83,10 @@ public class Veranstaltung {
     public void setId(long id) {
         this.id = id;
     }
+
+    public int getGroup() {return group;}
+
+    public void setGroup(int group) {this.group = group;}
+
+
 }

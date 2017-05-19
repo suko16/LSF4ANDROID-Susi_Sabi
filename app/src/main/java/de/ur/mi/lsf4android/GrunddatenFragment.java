@@ -38,9 +38,9 @@ public class GrunddatenFragment extends android.support.v4.app.Fragment{
 
             View view = inflater.inflate(R.layout.fragment_detail, container, false);
 
-            TextView tvTitel = (TextView) view.findViewById(R.id.detail_header);
-            tvTitel.setText(getArguments().getString("titel"));
-            tvTitel.setBackgroundColor(getResources().getColor(R.color.Biologie_VKLMedizin));
+            TextView header = (TextView) view.findViewById(R.id.detail_header);
+            header.setText(getArguments().getString("titel"));
+            header.setBackgroundColor(getResources().getColor(R.color.Biologie_VKLMedizin));
 
             detailActivityListview = (ListView) view.findViewById(R.id.detail_listView);
 

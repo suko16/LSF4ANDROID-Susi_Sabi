@@ -37,17 +37,9 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
         TextView nummer = (TextView) rowView.findViewById(R.id.nummer);
         TextView titel = (TextView) rowView.findViewById(R.id.titel);
         beginn.setText(veranstaltungen.get(position).getBeginn());
-        beginn.setTextColor(Color.BLACK);
-        beginn.setTextSize(18);
         ende.setText(veranstaltungen.get(position).getEnde());
-        ende.setTextColor(Color.BLACK);
-        ende.setTextSize(18);
         nummer.setText(veranstaltungen.get(position).getNumber());
-        nummer.setTextColor(Color.BLACK);
-        nummer.setTextSize(18);
         titel.setText(veranstaltungen.get(position).getTitel());
-        titel.setTextColor(Color.BLACK);
-        titel.setTextSize(18);
 
         titel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +56,11 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
     }
 
 
-    private void callDetailActivity(String titel, String html) {
-        Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
-        intent.putExtra(DetailActivity.HTML_EXTRA, html);
+    private void callDetailActivity(String title, String html) {
+        Intent intent = new Intent(context, DetailActivityWithFragments.class);
+        intent.putExtra("titel", title);
+        intent.putExtra("html", html);
+        intent.putExtra("open_detail_start",true);
         context.startActivity(intent);
     }
 

@@ -4,39 +4,51 @@
     android:layout_height="?android:attr/listPreferredItemHeight">
 
     <TextView
-        android:id="@+id/beginn"
+        android:id="@+id/group"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        />
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/room"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/ende"
+        android:id="@+id/teacher"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:textAlignment="center"
+        android:layout_weight="3"
         android:textColor="@android:color/black"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/nummer"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
-
-    <TextView
-        android:id="@+id/titel"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="4"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:textAlignment="center"/>
 
 
 </LinearLayout>

@@ -108,9 +108,10 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
         Veranstaltung selectedVeranstaltung = (Veranstaltung) VeranstaltngslisteListView.getItemAtPosition(positionListView);
         String titelSelectedVeranstaltung = selectedVeranstaltung.getTitel();
 
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra(DetailActivity.TITEL_EXTRA, titelSelectedVeranstaltung);
-        intent.putExtra(DetailActivity.HTML_EXTRA, selectedVeranstaltung.getHtml());
+        Intent intent = new Intent(getActivity(), DetailActivityWithFragments.class);
+        intent.putExtra("titel", titelSelectedVeranstaltung);
+        intent.putExtra("html", selectedVeranstaltung.getHtml());
+        intent.putExtra("open_detail_start",true);
         startActivity(intent);
     }
 
