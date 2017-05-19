@@ -1,6 +1,7 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,7 +29,7 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row_ausfallende, parent, false);
         TextView beginn = (TextView) rowView.findViewById(R.id.beginn);
@@ -47,6 +48,13 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
         titel.setText(veranstaltungen.get(position).getTitel());
         titel.setTextColor(Color.BLACK);
         titel.setTextSize(18);
+
+        titel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callDetailActivity(veranstaltungen.get(position).getTitel(), veranstaltungen.get(position).getHtml());
+            }
+        });
         return rowView;
     }
 
@@ -54,4 +62,15 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
     public int getCount() {
         return veranstaltungen.size();
     }
+
+
+    private void callDetailActivity(String titel, String html) {
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
+        intent.putExtra(DetailActivity.HTML_EXTRA, html);
+        context.startActivity(intent);
+    }
+
 }
+
+

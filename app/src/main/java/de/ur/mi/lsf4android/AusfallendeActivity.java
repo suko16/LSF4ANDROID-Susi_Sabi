@@ -106,13 +106,6 @@ public class AusfallendeActivity extends NavigationActivity {
         });
     }
 
-    private void callDetailActivity(String titel, int j) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.TITEL_EXTRA, titel);
-        intent.putExtra(DetailActivity.HTML_EXTRA, htmlList.get(j));
-        startActivity(intent);
-    }
-
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             result = new ArrayList<>();
@@ -122,7 +115,7 @@ public class AusfallendeActivity extends NavigationActivity {
                 Elements rows = table.select("tr");
                 htmlList = new ArrayList<>();
                 for (Element row : rows) {
-                    String[] string_row = new String[4];
+                    String[] string_row = new String[5];
                     Elements columns = row.select("td");
                     int i = 0;
                     rowCount++;
@@ -142,7 +135,7 @@ public class AusfallendeActivity extends NavigationActivity {
 
                                 //get URL from titel
                                 Element link = column.select("a").first();
-                                htmlList.add(link.attr("href"));
+                                string_row[4] = link.attr("href");
                                 break;
                         }
                         i++;
@@ -170,22 +163,13 @@ public class AusfallendeActivity extends NavigationActivity {
                 final ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
               //  veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
                 for (int i = 1; i < result.size(); i++) {
-                    veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3]));
+                    veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3], result.get(i)[4]));
                 }
                 Context context = AusfallendeActivity.this;
                 if (context != null) {
                     adapter = new AusfallendeActivityArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
-
-                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (i != 0) {
-                                callDetailActivity(veranstaltungen.get(i).getTitel(), i - 1);
-                            }
-                        } // TODO: Man kann in komplette Zeile klicken und nicht nur auf Titel. Schlimm?
-                        // TODO: Nö find ich nicht :D bloß in letzteStufe muss mans anders machen damit auf den Button geklickt werden kann
-                    });
+                }
 
 
                     //Überprüft auf Übereinstimmungen zwischen Datenbank und Ausfallenden
@@ -211,5 +195,5 @@ public class AusfallendeActivity extends NavigationActivity {
                 }
             }
         }
+
     }
-}

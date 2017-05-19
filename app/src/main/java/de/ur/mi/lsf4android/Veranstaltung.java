@@ -11,17 +11,19 @@ public class Veranstaltung {
     public String beginn;
     public String ende;
     public String number;
+    public String html;
 
 
-    public Veranstaltung(String beginn, String ende, String number, String titel) {
+    public Veranstaltung(String beginn, String ende, String number, String titel, String html) {
         this.titel = titel;
         this.beginn = beginn;
         this.ende = ende;
         this.number = number;
+        this.html = html;
 
     }
     public Veranstaltung(){
-        Veranstaltung v = new Veranstaltung("", "", "", "");
+        Veranstaltung v = new Veranstaltung("", "", "", "", "");
     }
 
     public void setTitel(String titel) {
@@ -50,6 +52,8 @@ public class Veranstaltung {
 
     public String getNumber() {return number;}
 
+    public String getHtml() {return html;}
 
+    public void setHtml(String html) {this.html = html;}
 
 }

@@ -7,6 +7,7 @@ package de.ur.mi.lsf4android;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DetailActivity extends AppCompatActivity{
+public class DetailActivity extends NavigationActivity{
     public static final String TITEL_EXTRA = "titel_extra";
     public static final String HTML_EXTRA = "html_extra";
     private ListView detailActivityListview;
@@ -33,7 +34,9 @@ public class DetailActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.activity_detail, contentConstraintLayout);
 
         Intent intent = getIntent();
         String titel = intent.getStringExtra(TITEL_EXTRA);
