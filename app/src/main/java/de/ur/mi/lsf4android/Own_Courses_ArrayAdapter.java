@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
     private final Context context;
     private final ArrayList<Course> own_courses_arrayList;
-    private Own_Courses_DataSource dataSource; //TODO: löschen, wenn Activity nicht geht
 
     //constructor
     public Own_Courses_ArrayAdapter(@NonNull Context context, ArrayList<Course> own_courses_arrayList) {
@@ -32,9 +31,7 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         View rowView = inflater.inflate(R.layout.own_courses_row, parent, false);
         TextView number = (TextView) rowView.findViewById(R.id.own_courses_number);
         TextView title = (TextView) rowView.findViewById(R.id.own_courses_title);
-        number.setTextSize(18);
         number.setTextColor(Color.BLACK);
-        title.setTextSize(18);
         title.setTextColor(Color.BLACK);
         number.setText(own_courses_arrayList.get(position).getNumber());
         title.setText(own_courses_arrayList.get(position).getTitle());

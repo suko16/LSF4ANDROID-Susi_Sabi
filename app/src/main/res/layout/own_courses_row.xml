@@ -11,13 +11,15 @@
         android:textAlignment="center"
         android:layout_gravity="center_horizontal"
         android:paddingTop="@dimen/padding_medium"
-        android:paddingBottom="@dimen/padding_medium"/>
+        android:paddingBottom="@dimen/padding_medium"
+        android:textSize="@dimen/text_medium"/>/>
     <TextView
         android:id="@+id/own_courses_title"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
         android:layout_marginStart="@dimen/margin_medium"
-        android:padding="@dimen/padding_medium"/>
+        android:padding="@dimen/padding_medium"
+        android:textSize="@dimen/text_medium"/>/>
 </LinearLayout>
 
