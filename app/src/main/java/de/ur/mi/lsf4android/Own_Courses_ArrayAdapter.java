@@ -35,39 +35,6 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         title.setTextColor(Color.BLACK);
         number.setText(own_courses_arrayList.get(position).getNumber());
         title.setText(own_courses_arrayList.get(position).getTitle());
-
-       /* title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, Single_View_With_Fragments.class);
-                intent.putExtra("titel", own_courses_arrayList.get(position).getTitle());
-                intent.putExtra("html", own_courses_arrayList.get(position).getHtml());
-                intent.putExtra("open_detail_start",true);
-                context.startActivity(intent);
-            }
-        });
-
-
-        title.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-
-                Course selectedCourse = own_courses_arrayList.get(position);
-                dataSource = new Own_Courses_DataSource(getContext());
-                dataSource.open();
-                dataSource.deleteCourse(selectedCourse);
-                notifyDataSetChanged();
-                CharSequence text = selectedCourse.getTitle() + " wurde gelöscht";
-
-                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-                toast.show();
-                notifyDataSetChanged();
-
-                return true;
-            }
-
-        });
-        notifyDataSetChanged();*/
         return rowView;
     }
 

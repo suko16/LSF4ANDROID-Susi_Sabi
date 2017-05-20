@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- TODO: labels in Strings -->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/uni_logo"
@@ -33,13 +33,13 @@
         </activity>
         <activity
             android:name=".Single_View_Activity"
-            android:label="Detailansicht">
+            android:label="@string/detail">
 
         </activity>
 
         <activity
             android:name=".NotificationActivity"
-            android:label="Ausfallende Veranstaltungen"
+            android:label="@string/notification"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,14 +47,14 @@
         </activity>
         <activity
             android:name=".Course_Overview_Path_Activity"
-            android:label="Vorlesungsverzeichnis" />
+            android:label="@string/alle_V" />
 
         <activity
             android:name=".Course_Listing_Activity"
-            android:label="Vorlesungsverzeichnis" />
+            android:label="@string/alle_V" />
         <activity
             android:name=".Cancelled_Courses_Activity"
-            android:label="Ausfallende Veranstaltungen"
+            android:label="@string/ausfallende_V"
             android:launchMode="standard"
             android:parentActivityName=".NotificationActivity">
             <meta-data
@@ -63,17 +63,13 @@
         </activity>
         <activity
             android:name=".Single_View_With_Fragments"
-            android:label="DetailActivityWithFragments">
+            android:label="@string/detailFragment">
         </activity>
 
         <activity
             android:name=".NavigationActivity"
-            android:label="NavigationActivity">
+            android:label="@string/navigation">
         </activity>
     </application>
 
 </manifest>
-
-    <!--verglichen
-von Susi gebaut, notification...  von Sabi hinzugefügt
--->

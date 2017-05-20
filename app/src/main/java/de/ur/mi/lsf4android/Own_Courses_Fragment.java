@@ -46,26 +46,6 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
             ArrayList<Course> courseListDB = dataSource.getAllCourses();
             Own_Courses_ArrayAdapter adapter = new Own_Courses_ArrayAdapter(context, courseListDB);
             own_Courses_ListView.setAdapter(adapter);
-
-            //TODO: wenn ich noch zeit hab lösung findne sonst löschen!!
-            //Abgleich mit Downloadergebnis aus BackgroundService
-            //Problem: result = null
-          /* BackgroundService bS = new BackgroundService();
-            if(bS.result != null) {
-                arrayListAusfallende_Number = new ArrayList<>();
-                for (int i = 1; i < bS.result.size(); i++) {
-                    arrayListAusfallende_Number.add(bS.result.get(i));
-                }
-            }
-            if(ArrayListAusfallendeVeranstaltungen!= null && courseListDB != null){
-                for(int i=0; i<courseListDB.size(); i++){
-                    for(int j = 0; j< arrayListAusfallende_Number.size(); j++){
-                        if(courseListDB.get(i).getNumber().equals(arrayListAusfallende_Number.get(j))){
-                            own_Courses_ListView.getChildAt(i).setBackgroundColor(Color.GREEN);
-                        }
-                    }
-                }
-            }*/
         }
     }
 

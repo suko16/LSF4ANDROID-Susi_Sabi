@@ -11,6 +11,10 @@
     <string name="grunddaten">Grunddaten</string>
     <string name="termine">Termine</string>
     <string name="inhalt">Inhalt</string>
+    <string name="detail">Detailansicht</string>
+    <string name="notification">NotificationActivity</string>
+    <string name="detailFragment">DetailActivityWithFragments</string>
+    <string name="navigation">NavigationActivity</string>
 
     <!--Tabellenüberschriften-->
     <string name="gruppe">Gr.</string>
