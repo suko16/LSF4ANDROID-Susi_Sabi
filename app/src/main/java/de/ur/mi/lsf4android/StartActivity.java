@@ -79,7 +79,7 @@ public class StartActivity extends AppCompatActivity {
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
         String date = datumsformat.format(calendar.getTime());
 
-        Intent i = new Intent(this,AusfallendeActivity.class);
+        Intent i = new Intent(this,Cancelled_Courses_Activity.class);
         i.putExtra("date", date);
         startActivity(i);
     }
@@ -92,14 +92,14 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void clickAlle(){
-        Intent i = new Intent(this,BaumActivity.class);
+        Intent i = new Intent(this,Course_Overview_Path_Activity.class);
         i.putExtra("HtmlExtra", vorlesungsverzeichnis_html);
         i.putExtra("Button_VorVerzeichnis", vorVerzeichnisButton.getText());
         startActivity(i);
     }
 
     private void clickBaumLetzte () {
-        Intent intent = new Intent(this,BaumLetzteActivity.class);
+        Intent intent = new Intent(this,Course_Listing_Activity.class);
         intent.putExtra("html", "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&root120171=40852|38761|38743|38726&trex=step");
         intent.putExtra("header", "Beispiel");
         startActivity(intent);

@@ -1,8 +1,6 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,14 +15,14 @@ import java.util.ArrayList;
  * Created by Sabi on 17.05.2017.
  */
 
-public class TermineArrayAdapter extends ArrayAdapter<Veranstaltung> {
+public class TermineArrayAdapter extends ArrayAdapter<Course> {
     private final Context context;
-    private final ArrayList<Veranstaltung> veranstaltungen;
+    private final ArrayList<Course> courseArrayList;
 
-    public TermineArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
-        super(context, -1, veranstaltungen);
+    public TermineArrayAdapter(@NonNull Context context, ArrayList<Course> courseArrayList) {
+        super(context, -1, courseArrayList);
         this.context = context;
-        this.veranstaltungen = veranstaltungen;
+        this.courseArrayList = courseArrayList;
 
     }
 
@@ -32,24 +30,24 @@ public class TermineArrayAdapter extends ArrayAdapter<Veranstaltung> {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.row_termin, parent, false);
+        View rowView = inflater.inflate(R.layout.single_view_time_row, parent, false);
         TextView group = (TextView) rowView.findViewById(R.id.group);
         TextView day = (TextView) rowView.findViewById(R.id.day);
         TextView time = (TextView) rowView.findViewById(R.id.time);
         TextView room = (TextView) rowView.findViewById(R.id.room);
         TextView teacher = (TextView) rowView.findViewById(R.id.teacher);
-        group.setText("" + veranstaltungen.get(position).getGroup());
-        day.setText(veranstaltungen.get(position).getTitel());
-        time.setText(veranstaltungen.get(position).getBeginn());
-        room.setText(veranstaltungen.get(position).getEnde());
-        teacher.setText(veranstaltungen.get(position).getNumber());
+        group.setText("" + courseArrayList.get(position).getGroup());
+        day.setText(courseArrayList.get(position).getTitle());
+        time.setText(courseArrayList.get(position).getBegin());
+        room.setText(courseArrayList.get(position).getEnd());
+        teacher.setText(courseArrayList.get(position).getNumber());
 
         return rowView;
     }
 
     @Override
     public int getCount() {
-        return veranstaltungen.size();
+        return courseArrayList.size();
     }
 
 }

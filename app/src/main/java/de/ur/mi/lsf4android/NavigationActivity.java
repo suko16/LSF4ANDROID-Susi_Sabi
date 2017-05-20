@@ -92,7 +92,7 @@ public class NavigationActivity extends AppCompatActivity
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
         String date = datumsformat.format(calendar.getTime());
-        Intent intentAusfallende = new Intent(this, AusfallendeActivity.class);
+        Intent intentAusfallende = new Intent(this, Cancelled_Courses_Activity.class);
         intentAusfallende.putExtra("date", date);
         startActivity(intentAusfallende);
     }
@@ -106,7 +106,7 @@ public class NavigationActivity extends AppCompatActivity
 
 
     private void startAlleActivity(){
-        Intent intentAlle = new Intent(this, BaumActivity.class);
+        Intent intentAlle = new Intent(this, Course_Overview_Path_Activity.class);
         intentAlle.putExtra("HtmlExtra","https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel");
         startActivity(intentAlle);
     }

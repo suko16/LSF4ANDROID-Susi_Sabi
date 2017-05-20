@@ -32,13 +32,13 @@
                 android:value="de.ur.mi.lsf4android.StartActivity" />
         </activity>
         <activity
-            android:name=".DetailActivity"
+            android:name=".Singe_View_Activity"
             android:label="Detailansicht">
 
         </activity>
 
         <activity
-            android:name=".CreateNotificationActivity"
+            android:name=".NotificationActivity"
             android:label="Ausfallende Veranstaltungen"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -46,33 +46,23 @@
                 android:value="de.ur.mi.lsf4android.MainActivity" />
         </activity>
         <activity
-            android:name=".NotificationReceiverActivity"
-            android:label="NotificationReceiverActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".CreateNotificationActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.ur.mi.lsf4android.CreateNotificationActivity" />
-                <!--launchMode?!-->
-        </activity>
-        <activity
-            android:name=".BaumActivity"
+            android:name=".Course_Overview_Path_Activity"
             android:label="Vorlesungsverzeichnis" />
 
         <activity
-            android:name=".BaumLetzteActivity"
+            android:name=".Course_Listing_Activity"
             android:label="Vorlesungsverzeichnis" />
         <activity
-            android:name=".AusfallendeActivity"
+            android:name=".Cancelled_Courses_Activity"
             android:label="Ausfallende Veranstaltungen"
             android:launchMode="standard"
-            android:parentActivityName=".CreateNotificationActivity">
+            android:parentActivityName=".NotificationActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="de.ur.mi.lsf4android.CreateNotificationActivity" />
+                android:value="de.ur.mi.lsf4android.NotificationActivity" />
         </activity>
         <activity
-            android:name=".DetailActivityWithFragments"
+            android:name=".Single_View_With_Fragments"
             android:label="DetailActivityWithFragments">
         </activity>
     </application>

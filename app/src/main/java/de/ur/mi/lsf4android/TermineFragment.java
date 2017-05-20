@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,7 +29,7 @@ public class TermineFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_termine, container, false);
+        View view = inflater.inflate(R.layout.single_view_time, container, false);
         listView = (ListView)view.findViewById(R.id.termine_listView);
         TextView header = (TextView) view.findViewById(R.id.termine_header);
         header.setText(getArguments().getString("titel"));
@@ -81,15 +80,15 @@ public class TermineFragment extends android.support.v4.app.Fragment {
 
         protected void onPostExecute(ArrayList<String[][]> result) {
             if (result.size() != 0) {
-                final ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
+                final ArrayList<Course> courseArrayList = new ArrayList<Course>();
                 for (int i = 0; i < result.get(0).length; i++) {
                     for (int s = 0; s < result.get(0)[0].length; s++){
-                        veranstaltungen.add(new Veranstaltung(result.get(0)[i][s], result.get(1)[i][s], result.get(2)[i][s], result.get(3)[i][s],result.get(0).length));
+                        courseArrayList.add(new Course(result.get(0)[i][s], result.get(1)[i][s], result.get(2)[i][s], result.get(3)[i][s],result.get(0).length));
                     }
                 }
                 Context context = getActivity();
                 if (context != null) {
-                ArrayAdapter adapter = new TermineArrayAdapter(context, veranstaltungen);
+                ArrayAdapter adapter = new TermineArrayAdapter(context, courseArrayList);
                 listView.setAdapter(adapter);
                 }
             }
