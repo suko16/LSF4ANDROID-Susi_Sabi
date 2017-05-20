@@ -11,9 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Sabi on 17.05.2017.
- */
+
 
 public class TermineArrayAdapter extends ArrayAdapter<Course> {
     private final Context context;

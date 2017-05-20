@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/detail_header"
+        android:id="@+id/single_view_fragment_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -17,7 +17,7 @@
         android:textColor="@android:color/black" />
 
     <ListView
-        android:id="@+id/detail_listView"
+        android:id="@+id/single_view_fragment_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="5dp"

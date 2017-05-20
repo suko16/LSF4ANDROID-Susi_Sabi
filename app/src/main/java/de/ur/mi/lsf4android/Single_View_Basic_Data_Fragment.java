@@ -33,11 +33,11 @@ public class Single_View_Basic_Data_Fragment extends android.support.v4.app.Frag
 
             View view = inflater.inflate(R.layout.single_view_fragment, container, false);
 
-            TextView header = (TextView) view.findViewById(R.id.detail_header);
+            TextView header = (TextView) view.findViewById(R.id.single_view_fragment_header);
             header.setText(getArguments().getString("titel"));
             header.setBackgroundColor(getResources().getColor(R.color.Biologie_VKLMedizin));
 
-            basic_data_Listview = (ListView) view.findViewById(R.id.detail_listView);
+            basic_data_Listview = (ListView) view.findViewById(R.id.single_view_fragment_listView);
 
             new DownloadDetailsTask().execute(getArguments().getString("html"));
 

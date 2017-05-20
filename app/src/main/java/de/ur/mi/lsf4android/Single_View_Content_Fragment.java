@@ -28,8 +28,8 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
         super.onCreate(savedInstanceState);
 
         View view = inflater.inflate(R.layout.single_view_fragment, container, false);
-        TextView header = (TextView) view.findViewById(R.id.detail_header);
-        inhalt = (ListView) view.findViewById(R.id.detail_listView);
+        TextView header = (TextView) view.findViewById(R.id.single_view_fragment_header);
+        inhalt = (ListView) view.findViewById(R.id.single_view_fragment_listView);
         header.setText(getArguments().getString("titel"));
 
         new DownloadDetailsTask().execute(getArguments().getString("html"));
@@ -66,7 +66,7 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
         protected void onPostExecute(String[][] result) {
             Context context = getActivity();
             if (context != null) {
-                Single_View_Basic_Data_ArrayAdapter arrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context, R.layout.single_view_content_row, result);
+                Single_View_Basic_Data_ArrayAdapter arrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context, R.layout.single_view_basic_data_row, result);
                 inhalt.setAdapter(arrayAdapter);
             }
         }
