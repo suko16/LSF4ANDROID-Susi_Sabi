@@ -26,10 +26,6 @@
     <!--Button-->
     <string name="set_date">Set Date</string>
 
-    <!--Ausgabe-->
-    <string name="created"> wurde in Eigene Veranstaltungen gespeichert</string>
-    <string name="deleted"> wurde gelöscht</string>
-
 
     <!--Anweisung-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
