@@ -4,7 +4,7 @@
     android:layout_height="?android:attr/listPreferredItemHeight">
 
     <TextView
-        android:id="@+id/begin"
+        android:id="@+id/cancelled_courses_begin"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -13,7 +13,7 @@
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/end"
+        android:id="@+id/cancelled_courses_end"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -22,7 +22,7 @@
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/number"
+        android:id="@+id/cancelled_courses_number"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
@@ -31,7 +31,7 @@
         android:textSize="18sp"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/cancelled_courses_title"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="4"

@@ -91,7 +91,6 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
         if (modulAuflistung[1] == null){
             Intent intent = new Intent(this, Course_Overview_Path_Activity.class);
             intent.putExtra("HtmlExtra", headers[j]);
-            intent.putExtra("child", listView.getChildAt(j).toString());
             listView.getChildAt(j).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             this.finish();
             startActivity(intent);

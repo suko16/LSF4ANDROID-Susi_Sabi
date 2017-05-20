@@ -58,12 +58,12 @@ public class StartActivity extends AppCompatActivity {
 
         buttonLast = (Button) findViewById(R.id.button_last);
 
-        buttonLast.setOnClickListener(new View.OnClickListener() {
+       /* buttonLast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickBaumLetzte();
             }
-        });
+        });**/
 
 
 

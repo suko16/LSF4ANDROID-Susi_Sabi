@@ -35,6 +35,7 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         //setTextSize ist vmlt schlecht fürs responsive oder? kann man des im layout mit dimens angeben? //
         // android:textSize="@dimen/font_size"/> funktioniert aber nur bei TextViews und wir haben ja n listview
         //oder wir legen ein layout textview an das alle textviews referenzieren und geben da ne size mit dimens an?
+        // TODO: Sabi, du musst des einfach im Layout gleich beim textview selber anlegen. und des ListView besteht ja auch aus textViews. und später in Dimens legt man dann ne Variable an.
 
         number.setTextSize(18);
         number.setTextColor(Color.BLACK);
