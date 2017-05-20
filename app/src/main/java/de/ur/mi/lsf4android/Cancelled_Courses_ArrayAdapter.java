@@ -37,10 +37,10 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.cancelled_courses_row, parent, false);
-            TextView begin = (TextView) rowView.findViewById(R.id.cancelled_courses_begin);
-            TextView end = (TextView) rowView.findViewById(R.id.cancelled_courses_end);
-            TextView number = (TextView) rowView.findViewById(R.id.cancelled_courses_number);
-            title = (TextView) rowView.findViewById(R.id.cancelled_courses_title);
+            TextView begin = (TextView) rowView.findViewById(R.id.begin);
+            TextView end = (TextView) rowView.findViewById(R.id.end);
+            TextView number = (TextView) rowView.findViewById(R.id.number);
+            title = (TextView) rowView.findViewById(R.id.title);
             begin.setText(courseArrayList.get(position).getBegin());
             end.setText(courseArrayList.get(position).getEnd());
             number.setText(courseArrayList.get(position).getNumber());
