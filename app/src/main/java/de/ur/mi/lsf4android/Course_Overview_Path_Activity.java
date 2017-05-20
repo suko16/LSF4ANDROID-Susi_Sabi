@@ -6,7 +6,6 @@ import android.support.constraint.ConstraintLayout;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import org.jsoup.Jsoup;
@@ -17,15 +16,14 @@ import java.util.ArrayList;
 
 
 public class Course_Overview_Path_Activity extends NavigationActivity {
-    private Intent extra;
-    private ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation);
         getLayoutInflater().inflate(R.layout.course_overview_path_activity, contentConstraintLayout);
-        extra = getIntent();
+        Intent extra = getIntent();
         new DownloadHeadsTask().execute(extra.getStringExtra("HtmlExtra"));
     }
 
@@ -74,7 +72,7 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
 
     private void buildList(String[] headers, final String[] headerHtmls, final String[] modulAuflistung ) {
         Course_Overview_Path_ArrayAdapter adapter = new Course_Overview_Path_ArrayAdapter(this, headers);
-        listView = (ListView) findViewById(R.id.course_overview_path_listView);
+        ListView listView = (ListView) findViewById(R.id.course_overview_path_listView);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

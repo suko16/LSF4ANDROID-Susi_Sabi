@@ -18,7 +18,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
 
 
     private Own_Courses_DataSource dataSource;
-    public ListView own_Courses_ListView;
+    private ListView own_Courses_ListView;
     private TextView number;
     private TextView title;
 
@@ -39,7 +39,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
     }
 
 
-    public void showAllListEntries() {
+    private void showAllListEntries() {
 
         number.setText(R.string.number);
         title.setText(R.string.title);
@@ -116,7 +116,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         showAllListEntries();
         return true;
 
-    };
+    }
 
 
     public Own_Courses_Fragment() {
@@ -124,7 +124,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
     }
 
     public static Own_Courses_Fragment newInstance() {
-        Own_Courses_Fragment fragment = new Own_Courses_Fragment();
-        return fragment;
+        Own_Courses_Fragment own_courses_fragment = new Own_Courses_Fragment();
+        return own_courses_fragment;
     }
 }

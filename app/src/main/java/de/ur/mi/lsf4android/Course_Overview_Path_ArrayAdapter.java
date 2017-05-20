@@ -1,16 +1,12 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/**
- * Created by Susanne on 20.05.2017.
- */
 
 public class Course_Overview_Path_ArrayAdapter extends ArrayAdapter<String> {
 

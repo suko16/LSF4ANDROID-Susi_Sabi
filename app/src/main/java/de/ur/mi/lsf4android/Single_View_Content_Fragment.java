@@ -16,7 +16,7 @@ import java.io.IOException;
 
 
 public class Single_View_Content_Fragment extends android.support.v4.app.Fragment {
-    ListView inhalt;
+    private ListView inhalt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

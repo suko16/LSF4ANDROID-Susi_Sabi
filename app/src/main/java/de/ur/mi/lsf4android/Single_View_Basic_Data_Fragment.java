@@ -18,7 +18,6 @@ import java.io.IOException;
 public class Single_View_Basic_Data_Fragment extends android.support.v4.app.Fragment{
 
         private ListView basic_data_Listview;
-        private Single_View_Basic_Data_ArrayAdapter basic_data_ArrayAdapter;
 
 
         @Override
@@ -58,7 +57,7 @@ public class Single_View_Basic_Data_Fragment extends android.support.v4.app.Frag
             protected void onPostExecute(String[][] result) {
                 Context context = getActivity();
                 if (context != null) {
-                    basic_data_ArrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context,R.layout.single_view_basic_data_row, result);
+                    Single_View_Basic_Data_ArrayAdapter basic_data_ArrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context,R.layout.single_view_basic_data_row, result);
                     basic_data_Listview.setAdapter(basic_data_ArrayAdapter);
                 }
             }

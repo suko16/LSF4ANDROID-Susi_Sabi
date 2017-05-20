@@ -10,8 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Own_Courses_DbHelper extends SQLiteOpenHelper{
 
 
-    public static final String DB_NAME = "dbEeigeneVeranstaltungen.db";
-    public static final int DB_VERSION = 1;
+    private static final String DB_NAME = "dbEeigeneVeranstaltungen.db";
+    private static final int DB_VERSION = 1;
     public static final String TABLE_OWN_COURSES = "TabelleDerEigenenVeranstaltungen";
 
     public static final String COLUMN_ID = "_id";

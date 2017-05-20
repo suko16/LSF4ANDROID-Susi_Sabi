@@ -27,13 +27,10 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
     private TextView end;
     private TextView number;
     private ListView list;
-    private Cancelled_Courses_ArrayAdapter adapter;
     private ArrayList<String> htmlList;
-    private ArrayList<String[]> result;
     private DatePickerDialog datePickerDialog;
     private Button datePickerButton;
-    private TextView dateTextView;
-    private  Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +43,7 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
         new DownloadLSFTask().execute(url);
         list = (ListView) findViewById(R.id.cancelled_courses_listView);
         datePickerButton = (Button) findViewById(R.id.button_date_picker);
-        dateTextView = (TextView) findViewById(R.id.textView_date);
+        TextView dateTextView = (TextView) findViewById(R.id.textView_date);
         dateTextView.setText(date);
         title = (TextView) findViewById(R.id.cancelled_courses_title);
         begin = (TextView) findViewById(R.id.cancelled_courses_begin);
@@ -96,7 +93,7 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
     //downloads the cancelled courses from LSF
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
-            result = new ArrayList<>();
+            ArrayList<String[]> result = new ArrayList<>();
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
@@ -145,13 +142,13 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
 
             //filling an ArrayList with courses and set the adapter
             if (result.size() != 0) {
-                final ArrayList<Course> courseArrayList = new ArrayList<Course>();
+                final ArrayList<Course> courseArrayList = new ArrayList<>();
                 for (int i = 1; i < result.size(); i++) {
                     courseArrayList.add(new Course(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3], result.get(i)[4]));
                 }
-                context = Cancelled_Courses_Activity.this;
+                Context context = Cancelled_Courses_Activity.this;
                 if (context != null) {
-                    adapter = new Cancelled_Courses_ArrayAdapter(context, courseArrayList);
+                    Cancelled_Courses_ArrayAdapter adapter = new Cancelled_Courses_ArrayAdapter(context, courseArrayList);
                     list.setAdapter(adapter);
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override

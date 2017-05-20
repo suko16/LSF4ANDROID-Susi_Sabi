@@ -19,7 +19,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
     private final String[] number;
     private final String[] title;
     private final String[] html;
-    public Own_Courses_DataSource dataSource;
+    private Own_Courses_DataSource dataSource;
 
 
     //constructor

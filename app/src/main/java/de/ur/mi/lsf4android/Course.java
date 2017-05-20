@@ -4,13 +4,13 @@ package de.ur.mi.lsf4android;
 public class Course {
 
     // variables
-    public String title;
-    public String begin;
-    public String end;
-    public String number;
-    public String html;
-    public long id;
-    public int group;
+    private String title;
+    private String begin;
+    private String end;
+    private String number;
+    private String html;
+    private long id;
+    private int group;
 
 
     //creates multiple constructors for different usages

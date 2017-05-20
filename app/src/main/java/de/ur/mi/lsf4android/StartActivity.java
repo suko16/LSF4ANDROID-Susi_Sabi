@@ -14,10 +14,9 @@ import java.util.Calendar;
 
 public class StartActivity extends AppCompatActivity {
 
-    private Button cancelled_courses_button;
+
     private Button own_courses_button;
     private Button course_overview_button;
-    private String course_overview_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
 
 
 
@@ -25,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        cancelled_courses_button = (Button)findViewById(R.id.ausfallende_v_button);
+        Button cancelled_courses_button = (Button)findViewById(R.id.ausfallende_v_button);
         own_courses_button = (Button)findViewById(R.id.eigene_v_button);
         course_overview_button = (Button)findViewById(R.id.alle_v_button);
 
@@ -73,6 +72,7 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void clickAlle(){
+        String course_overview_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
         Intent i = new Intent(this,Course_Overview_Path_Activity.class);
         i.putExtra("HtmlExtra", course_overview_html);
         i.putExtra("Button_VorVerzeichnis", course_overview_button.getText());

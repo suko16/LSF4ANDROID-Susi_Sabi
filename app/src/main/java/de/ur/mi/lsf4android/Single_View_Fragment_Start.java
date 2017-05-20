@@ -9,7 +9,7 @@ import android.widget.Button;
 
 
 public class Single_View_Fragment_Start extends android.support.v4.app.Fragment  {
-    OpenOtherFragment mCallback;
+    private OpenOtherFragment mCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +34,7 @@ public class Single_View_Fragment_Start extends android.support.v4.app.Fragment 
     }
 
     public interface OpenOtherFragment {
-        public void getFragment(Class fragmentClass, String fragmentName);
+        void getFragment(Class fragmentClass, String fragmentName);
     }
 
     @Override

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 public class Single_View_Time_Fragment extends android.support.v4.app.Fragment {
-    ListView listView;
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +75,7 @@ public class Single_View_Time_Fragment extends android.support.v4.app.Fragment {
 
         protected void onPostExecute(ArrayList<String[][]> result) {
             if (result.size() != 0) {
-                final ArrayList<Course> courseArrayList = new ArrayList<Course>();
+                final ArrayList<Course> courseArrayList = new ArrayList<>();
                 for (int i = 0; i < result.get(0).length; i++) {
                     for (int s = 0; s < result.get(0)[0].length; s++){
                         courseArrayList.add(new Course(result.get(0)[i][s], result.get(1)[i][s], result.get(2)[i][s], result.get(3)[i][s],result.get(0).length));

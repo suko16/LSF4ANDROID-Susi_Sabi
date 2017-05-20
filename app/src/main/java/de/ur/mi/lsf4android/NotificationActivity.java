@@ -1,7 +1,6 @@
 package de.ur.mi.lsf4android;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,8 +14,8 @@ public class NotificationActivity extends Activity {
 
 
 
-    NotificationManager notificationManager;
-    NotificationCompat.Builder b;
+    private NotificationManager notificationManager;
+    private NotificationCompat.Builder b;
     private Context context;
 
 

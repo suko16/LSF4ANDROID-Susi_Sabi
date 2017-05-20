@@ -12,7 +12,7 @@ public class Own_Courses_Activity extends NavigationActivity {
 
 //TODO: wenn noch zeit nochmal versuchen (manifest, layout und main ändern), wenn nicht löschen
     private Own_Courses_DataSource dataSource;
-    public ListView own_Courses_ListView;
+    private ListView own_Courses_ListView;
     private TextView number;
     private TextView title;
     private  Context context =Own_Courses_Activity.this;
@@ -34,7 +34,7 @@ public class Own_Courses_Activity extends NavigationActivity {
 
 
 
-    public void showAllListEntries() {
+    private void showAllListEntries() {
 
         number.setText(R.string.number);
         title.setText(R.string.title);
@@ -105,8 +105,8 @@ public class Own_Courses_Activity extends NavigationActivity {
     }
 
     public static Own_Courses_Activity newInstance() {
-        Own_Courses_Activity activity = new Own_Courses_Activity();
-        return activity;
+        Own_Courses_Activity ownCoursesActivity = new Own_Courses_Activity();
+        return ownCoursesActivity;
     }
 }
 

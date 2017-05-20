@@ -18,9 +18,8 @@ import java.util.List;
 public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
     private final Context context;
     private final ArrayList<Course> courseArrayList;
-    private Own_Courses_DataSource dataSource;
-    View rowView;
-    TextView title;
+    private View rowView;
+    private TextView title;
 
     //constructor
     public Cancelled_Courses_ArrayAdapter(@NonNull Context context, ArrayList<Course> courseArrayList) {
@@ -52,7 +51,7 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
             });
 
         //changes the backgroundcolor if one of the cancelled courses is stored in the database
-        dataSource = new Own_Courses_DataSource(context);
+        Own_Courses_DataSource dataSource = new Own_Courses_DataSource(context);
         dataSource.open();
         List<Course> CourseListDB = dataSource.getAllCourses();
 

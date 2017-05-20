@@ -15,9 +15,8 @@ import java.util.List;
 
 
 public class BackgroundService extends IntentService {
-    private ArrayList<String[]> result;
-    private Own_Courses_DataSource dataSource;
-    private String url;
+
+
     private String date;
     private int countNotifications=0;
     private ArrayList<String[]> remindNotifications;
@@ -51,7 +50,7 @@ public class BackgroundService extends IntentService {
     }
 
 
-    public void downLoadCancelledLectures() {
+    private void downLoadCancelledLectures() {
         //set the current date for the first download
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR); // current year
@@ -61,7 +60,7 @@ public class BackgroundService extends IntentService {
 
         //change the date to get the cancelled courses of the next 3 days
         for(int k=3; k>0; k--){
-            url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
+            String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
             new DownloadLSFTask().execute(url);
             c.add(Calendar.DATE, 1);
             int newDay =c.get(Calendar.DAY_OF_MONTH);
@@ -78,7 +77,7 @@ public class BackgroundService extends IntentService {
         String saveDate = date;
 
         protected ArrayList<String[]> doInBackground(String... urls) {
-            result = new ArrayList<>();
+            ArrayList<String[]> result = new ArrayList<>();
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
@@ -119,7 +118,7 @@ public class BackgroundService extends IntentService {
 
     //the method checks if one of the cancelled courses matches with one of the entries in the database
     private void checkifMatching(ArrayList<String[]> cancelled_Courses_ArrayList){
-        dataSource = new Own_Courses_DataSource(this);
+        Own_Courses_DataSource dataSource = new Own_Courses_DataSource(this);
         dataSource.open();
         List<Course> coursesDB = dataSource.getAllCourses();
         for (int j = 0; j < coursesDB.size(); j++) {

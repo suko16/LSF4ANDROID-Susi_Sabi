@@ -14,7 +14,7 @@ public class Own_Courses_DataSource {
 
     private SQLiteDatabase database;
     private Own_Courses_DbHelper dbHelper;
-    private Cursor cursor;
+
 
     private String[] columns = {
             Own_Courses_DbHelper.COLUMN_ID,
@@ -70,7 +70,7 @@ public class Own_Courses_DataSource {
     //provide all entries in the database
     public ArrayList<Course> getAllCourses() {
         ArrayList<Course> Courselist = new ArrayList<>();
-        cursor = database.query(Own_Courses_DbHelper.TABLE_OWN_COURSES,
+        Cursor cursor = database.query(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 columns, null, null, null, null, null);
         cursor.moveToFirst();
         Course course;
@@ -97,8 +97,8 @@ public class Own_Courses_DataSource {
         long id = cursor.getLong(idIndex);
         String html = cursor.getString(idHtml);
 
-        Course course = new Course(title, number, id, html);
+        Course newCourse = new Course(title, number, id, html);
 
-        return course;
+        return newCourse;
     }
 }
