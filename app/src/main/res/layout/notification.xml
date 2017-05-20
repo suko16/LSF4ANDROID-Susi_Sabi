@@ -8,6 +8,7 @@
         android:id="@+id/notification_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="R.string.UR_Logo"
         android:text="@string/create_notification"
         app:srcCompat="@android:drawable/sym_def_app_icon">
     </ImageView>

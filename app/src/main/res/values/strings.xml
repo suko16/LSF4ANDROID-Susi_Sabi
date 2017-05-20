@@ -8,7 +8,6 @@
     <string name="alle_V">Vorlesungsverzeichnis</string>
     <string name="eigene_V">Eigene Veranstaltungen</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_detail">DetailActivity</string>
     <string name="grunddaten">Grunddaten</string>
     <string name="termine">Termine</string>
     <string name="inhalt">Inhalt</string>
@@ -19,10 +18,13 @@
     <string name="zeit">Zeit</string>
     <string name="raum">Raum</string>
     <string name="lehrperson">Lehr-person</string>
+    <string name="begin">Beginn</string>
+    <string name="end">Ende</string>
+    <string name="number">Nr.</string>
+    <string name="title">Titel</string>
 
     <!--Button-->
     <string name="set_date">Set Date</string>
-    <string name="action_settings">Settings</string>
 
     <!--Ausgabe-->
     <string name="created"> wurde in Eigene Veranstaltungen gespeichert</string>
@@ -33,12 +35,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="create_notification">Create Notification</string>
+    <string name="deleteEntry">Einträge löschen</string>
 
 
-    <!--Header-->
-    <string name="begin">Beginn</string>
-    <string name="end">Ende</string>
-    <string name="number">Nr.</string>
-    <string name="title">Titel</string>
+    <string name="UR_Logo">Logo Universität Regensburg</string>
 
 </resources>

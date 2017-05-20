@@ -16,6 +16,7 @@
         android:layout_marginRight="@dimen/margin_none"
         android:layout_marginTop="@dimen/margin_none"
         android:src="@mipmap/uni_logo"
+        android:contentDescription="R.string.UR_Logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -104,8 +105,3 @@
         app:layout_constraintTop_toBottomOf="@+id/eigene_v_button"
         app:layout_constraintHorizontal_bias="0.5" />
 </android.support.constraint.ConstraintLayout>
-
-<!--verglichen
-von Susi gebaut-->
-
-<!--fertig-->

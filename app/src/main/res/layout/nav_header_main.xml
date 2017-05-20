@@ -17,6 +17,7 @@
         android:layout_height="@dimen/ur_logo_height_nav"
         android:adjustViewBounds="true"
         android:cropToPadding="false"
+        android:contentDescription="R.string.UR_Logo"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@mipmap/uni_logo"
         android:clickable="true"/>

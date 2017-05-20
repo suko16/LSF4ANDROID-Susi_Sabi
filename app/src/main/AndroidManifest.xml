@@ -65,6 +65,11 @@
             android:name=".Single_View_With_Fragments"
             android:label="DetailActivityWithFragments">
         </activity>
+
+        <activity
+            android:name=".NavigationActivity"
+            android:label="NavigationActivity">
+        </activity>
     </application>
 
 </manifest>

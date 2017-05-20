@@ -4,6 +4,6 @@
     <item
         android:id="@+id/cab_delete"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="Einträge löschen" />
+        android:title="@string/deleteEntry" />
 
 </menu>
