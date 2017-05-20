@@ -41,9 +41,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
         Button button = (Button) rowView.findViewById(R.id.course_listing_button);
         button.setId(position);
         textViewNumber.setText(number[position]);
-        textViewNumber.setTextColor(Color.BLACK);
         textViewName.setText(title[position]);
-        textViewName.setTextColor(Color.BLACK);
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +52,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                 context.startActivity(intent);
             }
         });
-
-
-
-
 
        //Überprüft vor dem erstellen welche Buttons für welche Veranstaltung
         //dementsprechender ClickListener gesetzt

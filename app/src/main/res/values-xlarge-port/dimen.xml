@@ -9,7 +9,14 @@
     <!-- Text sizes -->
     <dimen name="lsf4android_fontSize">80sp</dimen>
     <dimen name="homescreen_button_text">45sp</dimen>
+    <dimen name="text_mini">24sp</dimen>
+    <dimen name="text_small">30sp</dimen>
+    <dimen name="text_medium">36sp</dimen>
+    <dimen name="text_large">40sp</dimen>
+    <dimen name="text_x_large">50dp</dimen>
+    <dimen name="text_x_x_large">60sp</dimen>
 
     <!-- Picture sizes -->
     <dimen name="ur_logo_height">200dp</dimen>
+    <dimen name="divider_hight">10dp</dimen>
 </resources>
