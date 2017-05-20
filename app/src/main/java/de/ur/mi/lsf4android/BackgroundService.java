@@ -15,8 +15,9 @@ import java.util.List;
 
 
 public class BackgroundService extends IntentService {
-
-
+    private ArrayList<String[]> result;
+    private Own_Courses_DataSource dataSource;
+    private String url;
     private String date;
     private int countNotifications=0;
     private ArrayList<String[]> remindNotifications;
@@ -67,7 +68,6 @@ public class BackgroundService extends IntentService {
             int newMonth = c.get(Calendar.MONTH)+1;
             int newYear = c.get(Calendar.YEAR);
             date = newDay + "." + newMonth + "." + newYear;
-
         }
     }
 
@@ -82,7 +82,6 @@ public class BackgroundService extends IntentService {
                 Document doc = Jsoup.connect(urls[0]).get();
                 Element table = doc.select("table").last();
                 Elements rows = table.select("tr");
-
                 for (Element row : rows) {
                     Elements columns = row.select("td");
                     int i = 0;
@@ -93,23 +92,18 @@ public class BackgroundService extends IntentService {
                                 NumberAndDate[0] = column.text();
                                 NumberAndDate[1] = saveDate;
                                 result.add(NumberAndDate);
-
                                 break;
                         }
                         i++;
                     }
                 }
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
 
                 return result;
             }
-
         }
-
 
         protected void onPostExecute(ArrayList<String[]> result) {
             checkifMatching(result);
@@ -151,11 +145,9 @@ public class BackgroundService extends IntentService {
         current[1]= date;
         remindNotifications.add(current);
 
-
         //create the new notification
         NotificationActivity cN = new NotificationActivity(getApplicationContext());
         cN.createNotification(title_cancelled_course, date, countNotifications);
-
     }
 }
 

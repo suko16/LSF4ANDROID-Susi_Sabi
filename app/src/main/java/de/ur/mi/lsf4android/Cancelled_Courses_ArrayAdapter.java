@@ -54,7 +54,6 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         Own_Courses_DataSource dataSource = new Own_Courses_DataSource(context);
         dataSource.open();
         List<Course> CourseListDB = dataSource.getAllCourses();
-
         for (int j = 0; j < CourseListDB.size(); j++) {
                 if (CourseListDB.get(j).getNumber().equals(number.getText().toString())) {
                     title.setText(title.getText().toString().toUpperCase());

@@ -18,7 +18,6 @@ public class NotificationActivity extends Activity {
     private NotificationCompat.Builder b;
     private Context context;
 
-
     public NotificationActivity(){
     }
 
@@ -26,7 +25,6 @@ public class NotificationActivity extends Activity {
         this.context = context;
         notificationManager = (NotificationManager) context.getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         b = new NotificationCompat.Builder(context);
-
     }
 
     @Override
@@ -34,7 +32,6 @@ public class NotificationActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
     }
-
 
     public void createNotification(String titelAusfallendeVeranstaltung, String date, int notificationID) {
 
@@ -64,10 +61,6 @@ public class NotificationActivity extends Activity {
                 .setContentIntent(pIntent)
                 .setColor(Color.BLUE)
                 .setTicker(titelAusfallendeVeranstaltung);
-
         notificationManager.notify(notificationID, b.build());
-
-
     }
-
 }

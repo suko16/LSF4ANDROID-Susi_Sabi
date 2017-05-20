@@ -9,17 +9,14 @@ import android.widget.TextView;
 
 
 public class Course_Overview_Path_ArrayAdapter extends ArrayAdapter<String> {
-
     private final Context context;
     private final String[] string;
-
 
     public Course_Overview_Path_ArrayAdapter (Context context, String[] string) {
         super(context,R.layout.simple_row, string);
 
         this.string = string;
         this.context = context;
-
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -29,6 +26,4 @@ public class Course_Overview_Path_ArrayAdapter extends ArrayAdapter<String> {
         view.setText(string[position]);
         return rowView;
     }
-
-
 }

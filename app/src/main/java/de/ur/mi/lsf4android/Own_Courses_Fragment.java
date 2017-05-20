@@ -9,24 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import java.util.ArrayList;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Own_Courses_Fragment extends android.support.v4.app.Fragment implements ListView.OnItemClickListener, ListView.OnItemLongClickListener {
-
-
     private Own_Courses_DataSource dataSource;
     private ListView own_Courses_ListView;
     private TextView number;
     private TextView title;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.own_courses_fragment, container, false);
         number = (TextView) view.findViewById(R.id.own_courses_fragment_number);
@@ -86,8 +83,6 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         dataSource.close();
     }
 
-
-
     //open the single view if the user clicks at the course
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -97,7 +92,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         Intent intent = new Intent(getActivity(), Single_View_With_Fragments.class);
         intent.putExtra("titel", selectedCourse.getTitle());
         intent.putExtra("html", selectedCourse.getHtml());
-        intent.putExtra("open_detail_start",true);
+        intent.putExtra("open_detail_start", true);
         startActivity(intent);
     }
 
@@ -118,6 +113,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
 
     }
 
+    }
 
     public Own_Courses_Fragment() {
         // Required empty public constructor

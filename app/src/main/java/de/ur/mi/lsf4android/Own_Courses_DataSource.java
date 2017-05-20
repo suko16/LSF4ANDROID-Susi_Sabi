@@ -45,13 +45,11 @@ public class Own_Courses_DataSource {
         values.put(Own_Courses_DbHelper.COLUMN_TITEL, titel);
         values.put(Own_Courses_DbHelper.COLUMN_NUMBER, number);
         values.put(Own_Courses_DbHelper.COLUMN_HTML, html);
-
         open();
         long insertId = database.insert(Own_Courses_DbHelper.TABLE_OWN_COURSES, null, values);
         Cursor cursor = database.query(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 columns, Own_Courses_DbHelper.COLUMN_ID + "=" + insertId,
                 null, null, null, null);
-
         cursor.moveToFirst();
         Course course = cursorToCourse(cursor);
         cursor.close();
@@ -64,7 +62,6 @@ public class Own_Courses_DataSource {
         database.delete(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 Own_Courses_DbHelper.COLUMN_ID + "=" + id,
                 null);
-
     }
 
     //provide all entries in the database
@@ -80,7 +77,6 @@ public class Own_Courses_DataSource {
             Courselist.add(course);
             cursor.moveToNext();
         }
-
         cursor.close();
         return Courselist;
     }

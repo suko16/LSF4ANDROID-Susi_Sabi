@@ -37,6 +37,8 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation);
         getLayoutInflater().inflate(R.layout.cancelled_courses_activity, contentConstraintLayout);
+
+        //gets Date from other activity and greates url for the right day.
         Intent intent = getIntent();
         String date = intent.getStringExtra("date");
         String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
@@ -49,6 +51,8 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
         begin = (TextView) findViewById(R.id.cancelled_courses_begin);
         number = (TextView) findViewById(R.id.cancelled_courses_number);
         end = (TextView) findViewById(R.id.cancelled_courses_end);
+
+        //creates the DatePicker.
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,7 +163,6 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
                         }
                     });
                 }
-
             }
         }
     }

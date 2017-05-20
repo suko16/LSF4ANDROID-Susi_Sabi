@@ -17,22 +17,16 @@ public class Own_Courses_Activity extends NavigationActivity {
     private TextView title;
     private  Context context =Own_Courses_Activity.this;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.own_courses_fragment, contentConstraintLayout);
-
         number = (TextView) findViewById(R.id.own_courses_fragment_number);
         title = (TextView) findViewById(R.id.own_courses_fragment_title);
         own_Courses_ListView = (ListView) findViewById(R.id.own_courses_fragment_listView);
         dataSource = new Own_Courses_DataSource(Own_Courses_Activity.this);
-
     }
-
-
 
     private void showAllListEntries() {
 

@@ -23,13 +23,11 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.navigation_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ImageView urLogo = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.urLogo);
@@ -39,7 +37,6 @@ public class NavigationActivity extends AppCompatActivity
                 onUrLogoClicked();
             }
         });
-
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }
@@ -83,6 +80,7 @@ public class NavigationActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    //if Cancelled_Courses_Activity is started, a date extra is passed.
     private void startAusfallendeActivity(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat datumsformat = new SimpleDateFormat("dd.MM.yyyy");
@@ -99,12 +97,10 @@ public class NavigationActivity extends AppCompatActivity
         startActivity(i);
     }
 
-
     private void startAlleActivity(){
         Intent intentAlle = new Intent(this, Course_Overview_Path_Activity.class);
         intentAlle.putExtra("HtmlExtra","https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel");
         startActivity(intentAlle);
     }
-
 }
 

@@ -2,7 +2,6 @@
 package de.ur.mi.lsf4android;
 
 
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -36,10 +35,8 @@ public class Own_Courses_DbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-
             db.execSQL(SQL_CREATE_TABLE);
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
         }
     }
 
