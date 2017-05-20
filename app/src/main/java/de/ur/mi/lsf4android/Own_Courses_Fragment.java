@@ -109,7 +109,7 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         Course selectedCourse = (Course) own_Courses_ListView.getItemAtPosition(positionListView);
 
         dataSource.deleteCourse(selectedCourse);
-        CharSequence text = selectedCourse.getTitle() + " wurde gelöscht";
+        CharSequence text = selectedCourse.getTitle() + R.string.deleted;
         Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
         toast.show();
 

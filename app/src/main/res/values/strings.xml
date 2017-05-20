@@ -25,6 +25,8 @@
     <string name="action_settings">Settings</string>
 
     <!--Ausgabe-->
+    <string name="created"> wurde in Eigene Veranstaltungen gespeichert</string>
+    <string name="deleted"> wurde gelöscht</string>
 
 
     <!--Anweisung-->

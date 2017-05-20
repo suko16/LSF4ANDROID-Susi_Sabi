@@ -3,12 +3,8 @@ package de.ur.mi.lsf4android;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
@@ -40,8 +36,8 @@ public class Own_Courses_Activity extends NavigationActivity {
 
     public void showAllListEntries() {
 
-        number.setText("Nr.");
-        title.setText("Titel");
+        number.setText(R.string.number);
+        title.setText(R.string.title);
         if (context != null) {
             dataSource.open();
             ArrayList<Course> courseListDB = dataSource.getAllCourses();

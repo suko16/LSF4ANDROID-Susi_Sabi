@@ -78,7 +78,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         LinearLayout vwParentRow = (LinearLayout)view.getParent();
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
                         dataSource.deleteCourse(CourseListDB.get(temp));
-                        CharSequence text = CourseListDB.get(temp).getTitle() + " wurde gelöscht";
+                        CharSequence text = CourseListDB.get(temp).getTitle() + R.string.deleted;
 
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
@@ -100,7 +100,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         TextView tempNumber = (TextView) vwParentRow.getChildAt(0);
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
                         dataSource.createCourse(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
-                        CharSequence text = tempTitle.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
+                        CharSequence text = tempTitle.getText().toString() + R.string.created;
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.remove_button);
