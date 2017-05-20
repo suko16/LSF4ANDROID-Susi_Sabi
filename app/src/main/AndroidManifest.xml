@@ -32,7 +32,7 @@
                 android:value="de.ur.mi.lsf4android.StartActivity" />
         </activity>
         <activity
-            android:name=".Singe_View_Activity"
+            android:name=".Single_View_Activity"
             android:label="Detailansicht">
 
         </activity>

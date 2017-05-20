@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-public class TimePickerFragment extends DialogFragment{
+public class Single_View_TimePicker_Fragment extends DialogFragment{
         //implements TimePickerDialog.OnTimeSetListener {
 
    /*@Override

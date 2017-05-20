@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 
 
-public class TermineFragment extends android.support.v4.app.Fragment {
+public class Single_View_Time_Fragment extends android.support.v4.app.Fragment {
     ListView listView;
 
     @Override
@@ -83,7 +83,7 @@ public class TermineFragment extends android.support.v4.app.Fragment {
                 }
                 Context context = getActivity();
                 if (context != null) {
-                ArrayAdapter adapter = new TermineArrayAdapter(context, courseArrayList);
+                ArrayAdapter adapter = new Single_View_TimeArrayAdapter(context, courseArrayList);
                 listView.setAdapter(adapter);
                 }
             }
