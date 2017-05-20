@@ -66,7 +66,7 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
         protected void onPostExecute(String[][] result) {
             Context context = getActivity();
             if (context != null) {
-                Single_View_Basic_Data_ArrayAdapter arrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context, R.layout.single_view_basic_data_row, result);
+                Single_View_Basic_Data_ArrayAdapter arrayAdapter = new Single_View_Basic_Data_ArrayAdapter(context, R.layout.single_view_content_row, result);
                 inhalt.setAdapter(arrayAdapter);
             }
         }
