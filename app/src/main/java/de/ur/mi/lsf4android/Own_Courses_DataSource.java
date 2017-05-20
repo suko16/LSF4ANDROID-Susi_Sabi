@@ -42,7 +42,7 @@ public class Own_Courses_DataSource {
     }
 
 
-    public Course createVeranstaltung(String titel, String number, String html) {
+    public Course createCourse(String titel, String number, String html) {
         ContentValues values = new ContentValues();
         values.put(Own_Courses_DbHelper.COLUMN_TITEL, titel);
         values.put(Own_Courses_DbHelper.COLUMN_NUMBER, number);

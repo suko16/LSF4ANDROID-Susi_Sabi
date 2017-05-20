@@ -19,7 +19,8 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
     private final String[] number;
     private final String[] title;
     private final String[] html;
-    public Own_Courses_DataSource dataSource;
+    private Own_Courses_DataSource dataSource;
+    private boolean isInDB = false;
 
 
     public Course_Listing_ArrayAdapter(Context context, String[] number, String[] title, String[] html) {
@@ -69,6 +70,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
         String current = textViewNumber.getText().toString();
         for(int j=0; j< CourseListDB.size(); j++) {
             if (CourseListDB.get(j).getNumber().equals(current)) {
+                isInDB = true;
                 final int temp = j;
 
                 button.setBackgroundResource(R.mipmap.remove_button);
@@ -85,14 +87,17 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.add_button);
+                        isInDB = false;
+                        notifyDataSetChanged();
+
                     }
                 });
 
                 break;
             } else {
-
-              button.setBackgroundResource(R.mipmap.add_button);
-              button.setOnClickListener(new View.OnClickListener() {
+                isInDB = false;
+                button.setBackgroundResource(R.mipmap.add_button);
+                button.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
@@ -100,11 +105,13 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         TextView tempTitle = (TextView) vwParentRow.getChildAt(1);
                         TextView tempNumber = (TextView) vwParentRow.getChildAt(0);
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
-                        dataSource.createVeranstaltung(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
+                        dataSource.createCourse(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
                         CharSequence text = tempTitle.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.remove_button);
+                        isInDB = true;
+                        notifyDataSetChanged();
                     }
                 });
             }
@@ -112,4 +119,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
 
         return rowView;
     }
+
+
 }

@@ -1,6 +1,7 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,24 +27,48 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.own_courses_row, parent, false);
         TextView number = (TextView) rowView.findViewById(R.id.own_courses_number);
         TextView title = (TextView) rowView.findViewById(R.id.own_courses_title);
-
-        //TODO: Textsize
-        //setTextSize ist vmlt schlecht fürs responsive oder? kann man des im layout mit dimens angeben? //
-        // android:textSize="@dimen/font_size"/> funktioniert aber nur bei TextViews und wir haben ja n listview
-        //oder wir legen ein layout textview an das alle textviews referenzieren und geben da ne size mit dimens an?
-        // TODO: Sabi, du musst des einfach im Layout gleich beim textview selber anlegen. und des ListView besteht ja auch aus textViews. und später in Dimens legt man dann ne Variable an.
-
         number.setTextSize(18);
         number.setTextColor(Color.BLACK);
         title.setTextSize(18);
         title.setTextColor(Color.BLACK);
         number.setText(own_courses_arrayList.get(position).getNumber());
         title.setText(own_courses_arrayList.get(position).getTitle());
+
+        title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Single_View_With_Fragments.class);
+                intent.putExtra("titel", own_courses_arrayList.get(position).getTitle());
+                intent.putExtra("html", own_courses_arrayList.get(position).getHtml());
+                intent.putExtra("open_detail_start",true);
+                context.startActivity(intent);
+            }
+        });
+
+        /*title.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                Course selectedCourse = (Course) own_Courses_ListView.getItemAtPosition(positionListView);
+
+                dataSource.deleteCourse(selectedCourse);
+
+                CharSequence text = selectedCourse.getTitle() + " wurde gelöscht";
+
+                Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
+                toast.show();
+
+                showAllListEntries();
+                return true;
+            }
+
+        });
+*/
         return rowView;
     }
 

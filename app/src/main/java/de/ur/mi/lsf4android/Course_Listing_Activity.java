@@ -84,10 +84,12 @@ public class Course_Listing_Activity extends NavigationActivity {
 
             Course_Listing_ArrayAdapter adapter = new Course_Listing_ArrayAdapter(Course_Listing_Activity.this, result.get(1), result.get(2), result.get(3));
             listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
         }
 
     }
+
 }
 
 
