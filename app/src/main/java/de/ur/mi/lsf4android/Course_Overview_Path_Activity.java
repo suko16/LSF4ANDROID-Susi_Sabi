@@ -25,7 +25,7 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation);
-        getLayoutInflater().inflate(R.layout.couse_overview_fragment, contentConstraintLayout);
+        getLayoutInflater().inflate(R.layout.course_overview_path_activity, contentConstraintLayout);
         extra = getIntent();
         new DownloadHeadsTask().execute(extra.getStringExtra("HtmlExtra"));
     }
