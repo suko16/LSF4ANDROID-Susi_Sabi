@@ -15,9 +15,7 @@ import java.util.List;
 
 
 public class BackgroundService extends IntentService {
-    private ArrayList<String[]> result;
-    private Own_Courses_DataSource dataSource;
-    private String url;
+
     private String date;
     private int countNotifications=0;
     private ArrayList<String[]> remindNotifications;

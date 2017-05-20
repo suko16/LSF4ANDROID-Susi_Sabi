@@ -18,7 +18,6 @@ public class StartActivity extends AppCompatActivity {
 
     private Button own_courses_button;
     private Button course_overview_button;
-    private String course_overview_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +71,6 @@ public class StartActivity extends AppCompatActivity {
 
     private void clickAlle(){
         String course_overview_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
-        Intent i = new Intent(this,Course_Overview_Path_Activity.class);
-    private void clickAlle() {
         Intent i = new Intent(this, Course_Overview_Path_Activity.class);
         i.putExtra("HtmlExtra", course_overview_html);
         i.putExtra("Button_VorVerzeichnis", course_overview_button.getText());

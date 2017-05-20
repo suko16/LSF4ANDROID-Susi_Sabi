@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+
 
 
 public class Own_Courses_Fragment extends android.support.v4.app.Fragment implements ListView.OnItemClickListener, ListView.OnItemLongClickListener {
@@ -113,7 +114,6 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
 
     }
 
-    }
 
     public Own_Courses_Fragment() {
         // Required empty public constructor
