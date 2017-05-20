@@ -36,7 +36,6 @@ public class Singe_View_Activity extends NavigationActivity{
         String titel = intent.getStringExtra(TITEL_EXTRA);
         TextView tvTitel = (TextView) findViewById(R.id.singleView_title);
         tvTitel.setText(titel);
-        tvTitel.setBackgroundColor(getResources().getColor(R.color.Biologie_VKLMedizin));
         detailActivityListview = (ListView) findViewById(R.id.singleView_listView);
         new DownloadDetailsTask().execute(intent.getStringExtra(HTML_EXTRA));
 

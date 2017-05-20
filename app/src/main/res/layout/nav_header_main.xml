@@ -11,7 +11,6 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
     <ImageView
         android:id="@+id/urLogo"
         android:layout_width="wrap_content"
@@ -21,7 +20,6 @@
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@mipmap/uni_logo"
         android:clickable="true"/>
-
     <TextView
         android:id="@+id/LSF4Android"
         android:layout_width="match_parent"
@@ -30,8 +28,9 @@
         android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/lsf4android_fontSize_nav"/>
-
 </LinearLayout>
 
 <!--verglichen
 von System gebaut-->
+
+<!--fertig-->

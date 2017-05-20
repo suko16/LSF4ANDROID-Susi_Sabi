@@ -4,20 +4,17 @@
     android:layout_height="match_parent"
     tools:context="de.ur.mi.lsf4android.Cancelled_Courses_Activity"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
     <Button
         android:id="@+id/button_date_picker"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Set date"
+        android:text="@string/set_date"
         android:layout_gravity="center_horizontal" />
-
     <TextView
         android:id="@+id/textView_date"
         android:layout_width="0dp"
@@ -25,10 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/text_large"/>
     </LinearLayout>
-
-
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -40,21 +35,19 @@
             android:layout_weight="4"
             android:layout_height="wrap_content"
             android:layout_marginStart="1dp"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="20dp"/>
-
+            android:textColor="@color/text_black"
+            android:layout_marginBottom="@dimen/margin_large"/>
         <TextView
             android:id="@+id/cancelled_courses_end"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="20dp"/>
-
+            android:textColor="@color/text_black"
+            android:layout_marginBottom="@dimen/margin_large"/>
         <TextView
             android:id="@+id/cancelled_courses_number"
             android:layout_width="0dp"
@@ -62,24 +55,23 @@
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_black"
             android:layout_marginBottom="20dp"/>
-
         <TextView
             android:id="@+id/cancelled_courses_title"
             android:layout_width="0dp"
             android:layout_weight="12"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/text_black"
+            android:layout_marginBottom="@dimen/margin_large"/>
     </LinearLayout>
-
     <ListView
         android:id="@+id/cancelled_courses_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
-
 </LinearLayout>
+
+<!--fertig-->

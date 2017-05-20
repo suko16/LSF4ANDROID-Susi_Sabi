@@ -1,26 +1,34 @@
 <resources>
+
+    <!--Appname-->
     <string name="app_name">LSF4Android</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-
+    <!--Activityüberschriften-->
     <string name="ausfallende_V">Ausfallende Veranstaltungen</string>
     <string name="alle_V">Vorlesungsverzeichnis</string>
     <string name="eigene_V">Eigene Veranstaltungen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="grunddaten">Grunddaten</string>
+    <string name="termine">Termine</string>
+    <string name="inhalt">Inhalt</string>
 
+    <!--Tabellenüberschriften-->
+    <string name="gruppe">Gr.</string>
+    <string name="tag">Tag</string>
+    <string name="zeit">Zeit</string>
+    <string name="raum">Raum</string>
+    <string name="lehrperson">Lehr-person</string>
+
+    <!--Button-->
+    <string name="set_date">Set Date</string>
     <string name="action_settings">Settings</string>
 
+    <!--Ausgabe-->
 
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_baum_aktivity">BaumAktivity</string>
-    <string name="title_activity_test">TestActivity</string>-->
-
-
-
-
-
+    <!--Anweisung-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="create_notification">Create Notification</string>
 </resources>

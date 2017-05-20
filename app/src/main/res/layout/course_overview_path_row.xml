@@ -3,21 +3,20 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:id="@+id/course_listing_number"
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="wrap_content"
-        android:textAlignment="center"/>
-
+        android:textAlignment="center"
+        android:textSize="@dimen/text_medium"/>
     <TextView
         android:id="@+id/course_listing_name"
         android:layout_width="0dp"
         android:layout_weight="5"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"/>
-
+        android:layout_marginRight="@dimen/margin_medium"
+        android:textSize="@dimen/text_medium"/>
     <Button
         android:id="@+id/course_listing_button"
         android:layout_width="0dp"
@@ -26,8 +25,8 @@
         android:background="@mipmap/add_button"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="@dimen/margin_medium"
         android:focusable="false"/>
-
-
 </LinearLayout>
+
+<!--fertig-->

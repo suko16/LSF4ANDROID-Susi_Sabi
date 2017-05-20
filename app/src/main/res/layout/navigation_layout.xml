@@ -7,19 +7,15 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
     <include
         layout="@layout/app_bar_navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
     </LinearLayout>
-
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_nav_view"
         android:layout_width="wrap_content"
@@ -28,10 +24,8 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
-
-
 </android.support.v4.widget.DrawerLayout>
-
-
     <!--
     von Susi gebaut-->
+
+<!--fertig-->
