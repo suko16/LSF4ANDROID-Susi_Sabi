@@ -14,8 +14,8 @@ import java.io.IOException;
 
 
 public class Singe_View_Activity extends NavigationActivity{
-    public static final String TITEL_EXTRA = "titel_extra";
-    public static final String HTML_EXTRA = "html_extra";
+    private static final String TITEL_EXTRA = "titel_extra";
+    private static final String HTML_EXTRA = "html_extra";
     private ListView detailActivityListview;
     private Single_View_Basic_Data_ArrayAdapter single_View_ArrayAdapter;
 

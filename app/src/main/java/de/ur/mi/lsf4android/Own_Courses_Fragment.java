@@ -41,8 +41,8 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
 
     public void showAllListEntries() {
 
-        number.setText("Nr.");
-        title.setText("Titel");
+        number.setText(R.string.number);
+        title.setText(R.string.title);
         Context context = getActivity();
         if (context != null) {
             ArrayList<Course> courseListDB = dataSource.getAllCourses();

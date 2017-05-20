@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * Created by Susanne on 19.05.2017.
- */
 
 public class Single_View_Fragment_Start extends android.support.v4.app.Fragment  {
     OpenOtherFragment mCallback;
