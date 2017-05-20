@@ -1,12 +1,9 @@
-//fertig
-//hat Sabi gebaut
-
-
 package de.ur.mi.lsf4android;
 
 
 public class Course {
-    // Variablen anlegen
+
+    // variables
     public String title;
     public String begin;
     public String end;
@@ -15,6 +12,8 @@ public class Course {
     public long id;
     public int group;
 
+
+    //creates multiple constructors for different usages
 
     public Course(String begin, String end, String number, String title, String html) {
         this.title = title;
@@ -45,6 +44,8 @@ public class Course {
         Course v = new Course("", "", "", "", "");
     }
 
+
+    //Getter and Setter
 
     public void setTitle(String title) {
         this.title = title;

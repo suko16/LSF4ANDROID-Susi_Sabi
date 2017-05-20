@@ -1,7 +1,3 @@
-//fertig
-//von Susi gebaut
-
-
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -9,18 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+
 public class StartActivity extends AppCompatActivity {
 
-    private Button ausfallendeVButton;
-    private Button eigeneVButton;
-    private Button vorVerzeichnisButton;
-    private Button buttonLast;
-    private Button buttonDetail2;
-    private String vorlesungsverzeichnis_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
+    private Button cancelled_courses_button;
+    private Button own_courses_button;
+    private Button course_overview_button;
+    private String course_overview_html = "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&trex=step&root120171=40852&P.vx=mittel";
 
 
 
@@ -28,47 +22,31 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        ausfallendeVButton = (Button)findViewById(R.id.ausfallende_v_button);
-        eigeneVButton = (Button)findViewById(R.id.eigene_v_button);
-        vorVerzeichnisButton = (Button)findViewById(R.id.alle_v_button);
+        cancelled_courses_button = (Button)findViewById(R.id.ausfallende_v_button);
+        own_courses_button = (Button)findViewById(R.id.eigene_v_button);
+        course_overview_button = (Button)findViewById(R.id.alle_v_button);
 
-        ausfallendeVButton.setOnClickListener(new View.OnClickListener() {
+        //clickListener for all buttons
+        cancelled_courses_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickAusfallend();
             }
         });
-
-        eigeneVButton.setOnClickListener(new View.OnClickListener() {
+        own_courses_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickEigene();
             }
         });
 
-        vorVerzeichnisButton.setOnClickListener(new View.OnClickListener() {
+        course_overview_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickAlle();
             }
         });
-
-
-
-
-        buttonLast = (Button) findViewById(R.id.button_last);
-
-       /* buttonLast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clickBaumLetzte();
-            }
-        });**/
-
-
-
-
-
+        //start the Service in the background
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }
@@ -87,29 +65,21 @@ public class StartActivity extends AppCompatActivity {
     private void clickEigene (){
         Intent i = new Intent(this,MainActivity.class);
         i.putExtra("open_eigene_fragment", true);
-        i.putExtra("Button_Eigene", eigeneVButton.getText());
+        i.putExtra("Button_Eigene", own_courses_button.getText());
         startActivity(i);
     }
 
     private void clickAlle(){
         Intent i = new Intent(this,Course_Overview_Path_Activity.class);
-        i.putExtra("HtmlExtra", vorlesungsverzeichnis_html);
-        i.putExtra("Button_VorVerzeichnis", vorVerzeichnisButton.getText());
+        i.putExtra("HtmlExtra", course_overview_html);
+        i.putExtra("Button_VorVerzeichnis", course_overview_button.getText());
         startActivity(i);
-    }
-
-    private void clickBaumLetzte () {
-        Intent intent = new Intent(this,Course_Listing_Activity.class);
-        intent.putExtra("html", "https://lsf.uni-regensburg.de/qisserver/rds?state=wtree&search=1&root120171=40852|38761|38743|38726&trex=step");
-        intent.putExtra("header", "Beispiel");
-        startActivity(intent);
     }
 
 
     @Override
     public void onPause(){
         super.onPause();
-
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }

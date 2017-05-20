@@ -2,7 +2,6 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,16 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
+
 
 public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
 
     private final Context context;
     private final ArrayList<Course> own_courses_arrayList;
-    private Own_Courses_DataSource dataSource;
+    private Own_Courses_DataSource dataSource; //TODO: löschen, wenn Activity nicht geht
 
+    //constructor
     public Own_Courses_ArrayAdapter(@NonNull Context context, ArrayList<Course> own_courses_arrayList) {
         super(context, -1, own_courses_arrayList);
         this.context = context;

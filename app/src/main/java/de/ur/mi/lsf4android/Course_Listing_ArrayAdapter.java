@@ -20,9 +20,9 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
     private final String[] title;
     private final String[] html;
     private Own_Courses_DataSource dataSource;
-    private boolean isInDB = false;
 
 
+    //constructor
     public Course_Listing_ArrayAdapter(Context context, String[] number, String[] title, String[] html) {
         super(context, R.layout.course_overview_path_row, number);
         this.context = context;
@@ -45,6 +45,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
         textViewNumber.setTextColor(Color.BLACK);
         textViewName.setText(title[position]);
         textViewName.setTextColor(Color.BLACK);
+        //onClickListener to call the single view activity if the title is clicked
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,27 +59,22 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
 
 
 
-
-
-       //Überprüft vor dem erstellen welche Buttons für welche Veranstaltung
-        //dementsprechender ClickListener gesetzt
-
+        //compare the list of courses with the database entries
+        //depending if the course is already in the database choosing the button und clickListener
 
         dataSource = new Own_Courses_DataSource(getContext());
         dataSource.open();
         final List<Course> CourseListDB = dataSource.getAllCourses();
         String current = textViewNumber.getText().toString();
         for(int j=0; j< CourseListDB.size(); j++) {
-            if (CourseListDB.get(j).getNumber().equals(current)) {
-                isInDB = true;
-                final int temp = j;
 
+            if (CourseListDB.get(j).getNumber().equals(current)) {
+                final int temp = j;
                 button.setBackgroundResource(R.mipmap.remove_button);
                 button.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view){
-
                         LinearLayout vwParentRow = (LinearLayout)view.getParent();
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
                         dataSource.deleteCourse(CourseListDB.get(temp));
@@ -87,7 +83,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.add_button);
-                        isInDB = false;
                         notifyDataSetChanged();
 
                     }
@@ -95,7 +90,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
 
                 break;
             } else {
-                isInDB = false;
                 button.setBackgroundResource(R.mipmap.add_button);
                 button.setOnClickListener(new View.OnClickListener() {
 
@@ -110,7 +104,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.remove_button);
-                        isInDB = true;
                         notifyDataSetChanged();
                     }
                 });

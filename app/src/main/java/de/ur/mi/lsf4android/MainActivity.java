@@ -1,7 +1,3 @@
-//fertig
-//von Susi gebaut
-
-
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -130,6 +126,7 @@ public class MainActivity extends AppCompatActivity
     public void onPause(){
         super.onPause();
 
+        //starts the Service in the background when App pauses/ is minimized
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }

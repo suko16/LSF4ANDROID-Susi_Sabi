@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Course_Listing_Activity extends NavigationActivity {
 
 
-    ListView listView;
+    private ListView listView;
     private TextView vstNr;
     private TextView title;
 
@@ -38,6 +38,7 @@ public class Course_Listing_Activity extends NavigationActivity {
        this.setTitle(intent.getStringExtra("header"));
     }
 
+    //download the list of courses
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> result = new ArrayList<>();
@@ -79,9 +80,11 @@ public class Course_Listing_Activity extends NavigationActivity {
 
         protected void onPostExecute(ArrayList<String[]> result) {
 
+            //set the header
            vstNr.setText(result.get(0)[0]);
            title.setText(result.get(0)[1]);
 
+            //set the arrayAdapter on the listView
             Course_Listing_ArrayAdapter adapter = new Course_Listing_ArrayAdapter(Course_Listing_Activity.this, result.get(1), result.get(2), result.get(3));
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();

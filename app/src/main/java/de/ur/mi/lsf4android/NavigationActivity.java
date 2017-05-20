@@ -1,7 +1,3 @@
-//fertig
-//von Susi gebaut
-
-
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -15,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 

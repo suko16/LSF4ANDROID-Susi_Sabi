@@ -1,8 +1,3 @@
-//verglichen
-//hat Susi gebaut
-//mit ArrayAdapter und Gridview umabuen
-
-
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -15,8 +10,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
+
 
 public class Singe_View_Activity extends NavigationActivity{
     public static final String TITEL_EXTRA = "titel_extra";

@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="5dp"
-        android:divider="@color/colorPrimaryOpaque"
+        android:divider="@color/color_lsf4Android_opaque"
         android:layout_marginTop="@dimen/margin_x_x_large">
     </ListView>
 </LinearLayout>

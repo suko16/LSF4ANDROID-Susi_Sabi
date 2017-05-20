@@ -18,12 +18,12 @@ public class BackgroundService extends IntentService {
 
 
 
-    public ArrayList<String[]> result;
+    private ArrayList<String[]> result;
     private Own_Courses_DataSource dataSource;
-    String url;
-    String date;
-    int countNotifications=0;
-    ArrayList<String[]> remindNotifications;
+    private String url;
+    private String date;
+    private int countNotifications=0;
+    private ArrayList<String[]> remindNotifications;
 
 
     public BackgroundService(String name){
@@ -40,15 +40,11 @@ public class BackgroundService extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleIntent(Intent intent) {}
 
-    }
-
-
-
+    //called via StartService in MainActivity to download the cancelled courses from LSF
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         downLoadCancelledLectures();
         return Service.START_NOT_STICKY;
     }
@@ -59,13 +55,14 @@ public class BackgroundService extends IntentService {
 
 
     public void downLoadCancelledLectures() {
+        //set the current date for the first download
         final Calendar c = Calendar.getInstance();
         int mYear = c.get(Calendar.YEAR); // current year
         int mMonth = c.get(Calendar.MONTH)+1; // current month
         int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
         date = mDay + "." + mMonth + "." + mYear;
 
-        
+        //change the date to get the cancelled courses of the next 3 days
         for(int k=3; k>0; k--){
             url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
             new DownloadLSFTask().execute(url);
@@ -79,7 +76,7 @@ public class BackgroundService extends IntentService {
     }
 
 
-
+        //download via AsyncTask in the background, returning an Arraylist with Stringarray
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         String saveDate = date;
 
@@ -119,18 +116,15 @@ public class BackgroundService extends IntentService {
 
 
         protected void onPostExecute(ArrayList<String[]> result) {
-
-            checkIfCollision(result);
-
+            checkifMatching(result);
         }
     }
 
-    private void checkIfCollision(ArrayList<String[]> cancelled_Courses_ArrayList){
+    //the method checks if one of the cancelled courses matches with one of the entries in the database
+    private void checkifMatching(ArrayList<String[]> cancelled_Courses_ArrayList){
         dataSource = new Own_Courses_DataSource(this);
         dataSource.open();
         List<Course> coursesDB = dataSource.getAllCourses();
-
-
         for (int j = 0; j < coursesDB.size(); j++) {
             for (int i = 0; i < cancelled_Courses_ArrayList.size(); i++) {
                 if (coursesDB.get(j).getNumber().equals(cancelled_Courses_ArrayList.get(i)[0])) {
@@ -139,34 +133,30 @@ public class BackgroundService extends IntentService {
                 }
             }
         }
-
         dataSource.close();
     }
 
-
+    //gets called if a match is found
+    //call the notificationActivity with the relevant parameters
     private void sendNotification(String title_cancelled_course, String date, int countNotifications){
 
-        // wenn bereits über eine ausfallende Veranstaltung an einem bestimmten Tag benachrichtigt wurde, dann nicht nochmal benachrichtigen
-        //(nur wenn andere Veranstaltung oder anderer Tag)
-        // Damit der Nutzer nicht jeden Tag die Notification für die Benachrichtigung wegen der Veranstaltung bekommt, die in 3 Tagen ausfällt
-
-
+        //just send a notification if the same wasn't send before and already deleted by the user
         if(remindNotifications!=null){
             for(int w=0; w<remindNotifications.size(); w++){
+                //so just send a notification if different name OR date
                 if(remindNotifications.get(w)[0].equals(title_cancelled_course) && remindNotifications.get(w)[1].equals(date)){
                         return;
                 }
             }
         }
-
+        //includes new notification in Arraylist
         String[] current = new String[2];
         current[0]=title_cancelled_course;
         current[1]= date;
         remindNotifications.add(current);
 
 
-        //neue Benachrichtigung erzeugen
-
+        //create the new notification
         NotificationActivity cN = new NotificationActivity(getApplicationContext());
         cN.createNotification(title_cancelled_course, date, countNotifications);
 
