@@ -29,6 +29,7 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
         new DownloadHeadsTask().execute(extra.getStringExtra("HtmlExtra"));
     }
 
+    //loads content from LSF
     private class DownloadHeadsTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             ArrayList<String[]> arrayList = new ArrayList<>();
@@ -67,11 +68,13 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
         }
     }
 
+    //sets the header.
     private void writeHeader(String totalHeader){
         TextView view = (TextView) findViewById(R.id.course_overview_path_header);
         view.setText(totalHeader);
     }
 
+    //builds List and sets clickListener.
     private void buildList(String[] headers, final String[] headerHtmls, final String[] modulAuflistung ) {
         Course_Overview_Path_ArrayAdapter adapter = new Course_Overview_Path_ArrayAdapter(this, headers);
         listView = (ListView) findViewById(R.id.course_overview_path_listView);
@@ -85,11 +88,11 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
         });
     }
 
+    //handle Clicklistener
     private void handleClickOnListItem(String[] headers, int j, String[] modulAuflistung){
         if (modulAuflistung[1] == null){
             Intent intent = new Intent(this, Course_Overview_Path_Activity.class);
             intent.putExtra("HtmlExtra", headers[j]);
-           // listView.getChildAt(j).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             this.finish();
             startActivity(intent);
         }else{
@@ -99,9 +102,4 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
             startActivity(openDetailActivity);
         }
     }
-
-    //TODO: Man muss zweimal auf lettes Item klicken, um Course_Listing_Activity zu öffnen. ALso um die Veranstaltungen des Moduls anzeigen zu lassen.
-    //TODO: Wenn man von BaumLetzte wieder zurück geht, kann man andere Zeilen nicht mehr drücken.
-    //TODO: Hintergrundfarbe vonStufe ändern, auf der man gerade ist.
-    //Susi - krieg ich iwie alles nicht hin...
 }

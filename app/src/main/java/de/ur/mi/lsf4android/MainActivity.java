@@ -26,13 +26,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ImageView urLogo = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.urLogo);
@@ -43,14 +41,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //Bei Activitywechseln von StartActivity auf MainActivity
-        // wird zusätzlich richtiges Fragment durch Extra geladen.
+        //If Activity changes right Fragment loads by Extra.
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("open_eigene_fragment",false)){
             startEigeneFragment();
             setTitle(intent.getStringExtra("Button_Eigene"));
         }
-
         Intent Service = new Intent(this, BackgroundService.class);
         startService(Service);
     }
@@ -81,7 +77,6 @@ public class MainActivity extends AppCompatActivity
             default:
                 startAusfallendeActivity();
         }
-
         item.setChecked(true);
         setTitle(item.getTitle());
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -89,6 +84,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    //redirects to homescreen when logo s clicked
    private void onUrLogoClicked(){
         Intent i = new Intent(this,StartActivity.class);
         startActivity(i);

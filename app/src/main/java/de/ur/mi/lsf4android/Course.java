@@ -12,7 +12,6 @@ public class Course {
     public long id;
     public int group;
 
-
     //creates multiple constructors for different usages
 
     public Course(String begin, String end, String number, String title, String html) {
@@ -43,7 +42,6 @@ public class Course {
     public Course(){
         Course v = new Course("", "", "", "", "");
     }
-
 
     //Getter and Setter
 
@@ -88,6 +86,4 @@ public class Course {
     public int getGroup() {return group;}
 
     public void setGroup(int group) {this.group = group;}
-
-
 }

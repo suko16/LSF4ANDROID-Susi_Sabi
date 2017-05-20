@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-
 public class Single_View_Basic_Data_ArrayAdapter extends ArrayAdapter<String[]> {
     private final Context context;
     private final String[][] values;
@@ -25,11 +24,9 @@ public class Single_View_Basic_Data_ArrayAdapter extends ArrayAdapter<String[]> 
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View rowView = inflater.inflate(layoutRow, parent, false);
         TextView identifier = (TextView) rowView.findViewById(R.id.basic_data_row_identifier);
         TextView context = (TextView) rowView.findViewById(R.id.basic_data_row_context);
-
         identifier.setText(values[position][0]);
         context.setText(values[position][1]);
         return rowView;

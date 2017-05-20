@@ -14,27 +14,20 @@ import java.util.ArrayList;
 
 
 public class Course_Listing_Activity extends NavigationActivity {
-
-
     private ListView listView;
     private TextView vstNr;
     private TextView title;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.course_listing_activity, contentConstraintLayout);
-
         Intent intent = getIntent();
-
         new DownloadLSFTask().execute(intent.getStringExtra("html"));
         listView = (ListView) findViewById(R.id.course_listing_listView);
         vstNr = (TextView) findViewById(R.id.course_listing_vst_Nr);
         title = (TextView) findViewById(R.id.course_listing_title);
-
        this.setTitle(intent.getStringExtra("header"));
     }
 
@@ -47,13 +40,10 @@ public class Course_Listing_Activity extends NavigationActivity {
                 Elements table = doc.select("table[summary=Übersicht über alle Veranstaltungen]");
                 Elements rows = table.select("tr");
                 Elements header = rows.select("th");
-
                 String[] headLine = new String[header.size()];
                 String[] numbers = new String[rows.size()-1];
                 String[] titles = new String[rows.size()-1];
                 String[] html = new String[rows.size()-1];
-
-
                 for (int s = 0; s < rows.size(); s++) {
                     if (s == 0) {
                         headLine[0] = header.get(0).text();
@@ -64,12 +54,10 @@ public class Course_Listing_Activity extends NavigationActivity {
                         html[s-1] = rows.get(s).select("td").get(1).select("a").attr("href");
                     }
                 }
-
                 result.add(headLine);
                 result.add(numbers);
                 result.add(titles);
                 result.add(html);
-
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
@@ -88,11 +76,8 @@ public class Course_Listing_Activity extends NavigationActivity {
             Course_Listing_ArrayAdapter adapter = new Course_Listing_ArrayAdapter(Course_Listing_Activity.this, result.get(1), result.get(2), result.get(3));
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
         }
-
     }
-
 }
 
 

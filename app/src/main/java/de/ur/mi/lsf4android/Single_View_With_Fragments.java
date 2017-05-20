@@ -1,7 +1,6 @@
 package de.ur.mi.lsf4android;
 
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -20,13 +19,10 @@ public class Single_View_With_Fragments extends NavigationActivity implements Si
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
         getLayoutInflater().inflate(R.layout.single_view_with_fragments, contentConstraintLayout);
-
         Intent intent = getIntent();
-
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             if (intent != null && intent.getBooleanExtra("open_detail_start", false)) {
                 Fragment fragment = null;
                 Class fragmentClass = null;
@@ -42,43 +38,22 @@ public class Single_View_With_Fragments extends NavigationActivity implements Si
         }
     }
 
-    public void getFragment (Class fragmentClass, String fragmentName) {
+    public void getFragment(Class fragmentClass, String fragmentName) {
         Intent intent = getIntent();
         Bundle bundle = new Bundle();
         bundle.putString("titel", intent.getStringExtra("titel"));
         bundle.putString("html", intent.getStringExtra("html"));
-
-            Fragment fragment = null;
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            fragment.setArguments(bundle);
-            fragmentManager.beginTransaction().replace(R.id.fragment_content_navigation, fragment, fragmentName).commit();
-            setTitle(fragmentName);
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-   /*     @Override
-    public void onBackPressed(){
-            Fragment nextFragment = null;
-            Class fragmentClass;
-            fragmentClass = Single_View_Fragment_Start.class;
-            try {
-                nextFragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (nextFragment != null && nextFragment.isVisible() == false) {
-                fragmentManager.beginTransaction().replace(R.id.fragment_content_navigation, nextFragment, "DETAIL_FRAGMENT").commit();
-                fragmentManager.beginTransaction().show(nextFragment).commit();
-            }else if (nextFragment != null && nextFragment.isVisible() == true){
-                super.onBackPressed();
-            }
-        }*/
+        fragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.fragment_content_navigation, fragment, fragmentName).commit();
+        setTitle(fragmentName);
     }
+}
 
 
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class Single_View_Fragment_Start extends android.support.v4.app.Fragment  {
+public class Single_View_Fragment_Start extends android.support.v4.app.Fragment {
     OpenOtherFragment mCallback;
 
     @Override
@@ -30,7 +30,7 @@ public class Single_View_Fragment_Start extends android.support.v4.app.Fragment 
                 }
             });
         }
-            return view;
+        return view;
     }
 
     public interface OpenOtherFragment {
@@ -48,7 +48,7 @@ public class Single_View_Fragment_Start extends android.support.v4.app.Fragment 
         }
     }
 
-    private void handleClickOnButton (int counter){
+    private void handleClickOnButton(int counter) {
         Class fragmentClass;
         String fragmentName;
         switch (counter) {

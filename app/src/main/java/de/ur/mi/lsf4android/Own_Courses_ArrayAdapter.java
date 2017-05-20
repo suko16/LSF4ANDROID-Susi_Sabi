@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 
 public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
-
     private final Context context;
     private final ArrayList<Course> own_courses_arrayList;
     private Own_Courses_DataSource dataSource; //TODO: löschen, wenn Activity nicht geht

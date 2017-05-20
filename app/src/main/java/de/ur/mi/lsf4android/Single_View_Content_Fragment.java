@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import java.io.IOException;
 
+import java.io.IOException;
 
 
 public class Single_View_Content_Fragment extends android.support.v4.app.Fragment {
@@ -22,12 +23,10 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View view = inflater.inflate(R.layout.single_view_fragment, container, false);
         TextView header = (TextView) view.findViewById(R.id.single_view_fragment_header);
         inhalt = (ListView) view.findViewById(R.id.single_view_fragment_listView);
         header.setText(getArguments().getString("titel"));
-
         new DownloadDetailsTask().execute(getArguments().getString("html"));
         return view;
     }
@@ -42,20 +41,15 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
                 Elements tableRow = tbody.select("tr");
                 Elements th = tbody.select("th");
                 Elements td = tableRow.select("td");
-
                 result = new String[tableRow.size()][2];
-
                 for (int i = 0; i < result.length; i++) {
                     result[i][0] = th.get(i).text();
                     result[i][1] = td.get(i).text();
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-
                 return result;
-
             }
         }
 
@@ -66,7 +60,5 @@ public class Single_View_Content_Fragment extends android.support.v4.app.Fragmen
                 inhalt.setAdapter(arrayAdapter);
             }
         }
-
     }
-
 }
