@@ -15,24 +15,28 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="1dp"
-            android:textSize="@dimen/text_medium"
+            android:textSize="@dimen/text_x_large"
             android:textStyle="bold"
             android:textColor="@color/text_black"
+            android:textAlignment="center"
             android:layout_marginBottom="@dimen/margin_large"/>
         <TextView
             android:id="@+id/own_courses_fragment_title"
             android:layout_width="0dp"
             android:layout_weight="5"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_medium"
+            android:textSize="@dimen/text_x_large"
             android:textStyle="bold"
             android:textColor="@color/text_black"
+            android:textAlignment="center"
             android:layout_marginBottom="@dimen/margin_large"/>
        </LinearLayout>
     <ListView
         android:id="@+id/own_courses_fragment_listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:divider="@color/color_lsf4Android_opaque"
+        android:dividerHeight="@dimen/divider_hight">
     </ListView>
 </LinearLayout>
 

@@ -6,7 +6,7 @@
         android:id="@+id/cancelled_courses_begin"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:textAlignment="center"
         android:textColor="@color/text_black"
         android:textSize="@dimen/text_medium"/>
@@ -14,7 +14,7 @@
         android:id="@+id/cancelled_courses_end"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:textAlignment="center"
         android:textColor="@color/text_black"
         android:textSize="@dimen/text_medium"/>
@@ -32,7 +32,8 @@
         android:layout_height="match_parent"
         android:layout_weight="4"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/text_medium"/>
+        android:textSize="@dimen/text_medium"
+        android:textAlignment="center"/>
 </LinearLayout>
 
 <!--fertig-->
