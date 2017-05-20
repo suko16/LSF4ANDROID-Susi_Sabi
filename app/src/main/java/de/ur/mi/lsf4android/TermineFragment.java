@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -29,13 +30,10 @@ public class TermineFragment extends android.support.v4.app.Fragment {
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_detail, container, false);
-        listView = (ListView)view.findViewById(R.id.detail_listView);
-        TextView header = (TextView) view.findViewById(R.id.detail_header);
+        View view = inflater.inflate(R.layout.fragment_termine, container, false);
+        listView = (ListView)view.findViewById(R.id.termine_listView);
+        TextView header = (TextView) view.findViewById(R.id.termine_header);
         header.setText(getArguments().getString("titel"));
-
-
-
 
         new DownloadDetailsTask().execute(getArguments().getString("html"));
         return view;

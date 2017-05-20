@@ -11,14 +11,16 @@ import android.widget.TextView;
  * Created by Susanne on 17.05.2017.
  */
 
-public class DetailActivityArrayAdapter extends ArrayAdapter<String[]> {
+public class GrunddatenArrayAdapter extends ArrayAdapter<String[]> {
     private final Context context;
     private final String[][] values;
+    private final int layoutRow;
 
-    public DetailActivityArrayAdapter(Context context, String[][] values) {
-        super(context, R.layout.row_detail_activity, values);
+    public GrunddatenArrayAdapter(Context context, int layoutRow, String[][] values) {
+        super(context, layoutRow, values);
         this.context = context;
         this.values = values;
+        this.layoutRow = layoutRow;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class DetailActivityArrayAdapter extends ArrayAdapter<String[]> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View rowView = inflater.inflate(R.layout.row_detail_activity, parent, false);
+        View rowView = inflater.inflate(layoutRow, parent, false);
         TextView identifier = (TextView) rowView.findViewById(R.id.row_detail_activity_identifier);
         TextView context = (TextView) rowView.findViewById(R.id.row_detail_activity_context);
 

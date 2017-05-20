@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,45 +30,31 @@ import java.util.Calendar;
 import java.util.List;
 
 public class AusfallendeActivity extends NavigationActivity {
-
-    public Veranstaltung veranstaltung;
     private TextView title;
     private TextView begin;
     private TextView ende;
     private TextView number;
-    public ListView list;
-    public AusfallendeActivityArrayAdapter adapter;
-    public TableLayout table;
-    public TableRow row;
+    private ListView list;
+    private AusfallendeActivityArrayAdapter adapter;
     private int rowCount = 0;
     private ArrayList<String> htmlList;
     private EigeneVeranstaltungenDataSource dataSource;
-    public static final String LOG_TAG = MainActivity.class.getSimpleName();
-    public ArrayList<String[]> result;
-    //EditText dateEditText;
+    private ArrayList<String[]> result;
     private DatePickerDialog datePickerDialog;
     private Button datePickerButton;
     private TextView dateTextView;
-
-
-
+    private  Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation);
         getLayoutInflater().inflate(R.layout.activity_ausfallende, contentConstraintLayout);
-
         Intent intent = getIntent();
         String date = intent.getStringExtra("date");
-
         String url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
         new DownloadLSFTask().execute(url);
-
         list = (ListView) findViewById(R.id.ausfallendeActivity_ListView);
-
-        //dateEditText = (EditText) view.findViewById(R.id.date);
         datePickerButton = (Button) findViewById(R.id.button_date_picker);
         dateTextView = (TextView) findViewById(R.id.textView_date);
         dateTextView.setText(date);
@@ -75,9 +62,6 @@ public class AusfallendeActivity extends NavigationActivity {
         begin = (TextView) findViewById(R.id.textView_ausfallendeActivity_beginn);
         number = (TextView) findViewById(R.id.textView_ausfallendeActivity_number);
         ende = (TextView) findViewById(R.id.textView_ausfallendeActivity_ende);
-
-
-
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +97,6 @@ public class AusfallendeActivity extends NavigationActivity {
         intent.putExtra("html", htmlList.get(j));
         startActivity(intent);
     }
-
 
     @Override
     public void onPause() {
@@ -164,10 +147,6 @@ public class AusfallendeActivity extends NavigationActivity {
         }
 
         protected void onPostExecute(ArrayList<String[]> result) {
-            // Tabelle in fragment_ausfallende.xml bauen und mit result befüllen
-            //String titel = result.get(1)[2];
-            //callDetailActivity(titel);
-
             begin.setText("Beginn");
             ende.setText("Ende");
             number.setText("Nr.");
@@ -175,11 +154,10 @@ public class AusfallendeActivity extends NavigationActivity {
 
             if (result.size() != 0) {
                 final ArrayList<Veranstaltung> veranstaltungen = new ArrayList<Veranstaltung>();
-              //  veranstaltungen.add(new Veranstaltung("Beginn", "Ende", "Nummer", "Titel"));
                 for (int i = 1; i < result.size(); i++) {
                     veranstaltungen.add(new Veranstaltung(result.get(i)[0], result.get(i)[1], result.get(i)[2], result.get(i)[3], result.get(i)[4]));
                 }
-                Context context = AusfallendeActivity.this;
+                context = AusfallendeActivity.this;
                 if (context != null) {
                     adapter = new AusfallendeActivityArrayAdapter(context, veranstaltungen);
                     list.setAdapter(adapter);
@@ -193,26 +171,24 @@ public class AusfallendeActivity extends NavigationActivity {
                         }
                     });
                 }
-
-
-
                 dataSource = new EigeneVeranstaltungenDataSource(AusfallendeActivity.this);
                 dataSource.open();
                 List<Veranstaltung> VeranstaltungslisteDB = dataSource.getAllVeranstaltungen();
-
                 for (int j = 0; j < VeranstaltungslisteDB.size(); j++) {
                     for (int i = 0; i < veranstaltungen.size(); i++) {
                         if (VeranstaltungslisteDB.get(j).getNumber().equals(veranstaltungen.get(i).getNumber())) {
                             veranstaltungen.get(i).setTitel(veranstaltungen.get(i).getTitel().toUpperCase());
 
                             //TODO: neues Layout erstellen und Zeile übergeben
-
+                        }
+                    }
                 }
-
-
             }
         }
-        }
-
-
     }
+}
+
+
+
+
+//Susi - fertig

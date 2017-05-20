@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/termine_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:padding="20dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight">
+
+        <TextView
+            android:id="@+id/group_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:text="Gr."
+            />
+        <TextView
+            android:id="@+id/day_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:text="Tag"
+            />
+
+        <TextView
+            android:id="@+id/time_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:text="Zeit"
+            />
+
+        <TextView
+            android:id="@+id/room_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:text="Raum"/>
+
+        <TextView
+            android:id="@+id/teacher_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:text="Lehr-person"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/termine_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="5dp"
+        android:divider="@color/Biologie_VKLMedizin_opaque"
+        android:layout_marginTop="30dp"
+        ></ListView>
+
+</LinearLayout>

@@ -63,13 +63,13 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.nav_ausfallende_V:
+            case R.id.menu_point_1:
                 startAusfallendeActivity();
                 break;
-            case R.id.nav_eigene_V:
+            case R.id.menu_point_2:
                 startEigeneFragment();
                 break;
-            case R.id.nav_alle_V:
+            case R.id.menu_point_3:
                 startAlleActivity();
                 break;
             default:

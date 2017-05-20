@@ -115,12 +115,10 @@ public class EigeneFragment extends android.support.v4.app.Fragment implements L
         startActivity(intent);
     }
 
-
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
         int positionListView = (int)id;
-
 
         Veranstaltung selectedVeranstaltung = (Veranstaltung) VeranstaltngslisteListView.getItemAtPosition(positionListView);
         dataSource.deleteVeranstaltung(selectedVeranstaltung);

@@ -2,6 +2,7 @@ package de.ur.mi.lsf4android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -21,61 +22,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class BaumActivity extends NavigationActivity {
-
     private Intent extra;
     private ListView listView;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation);
         getLayoutInflater().inflate(R.layout.fragment_alle, contentConstraintLayout);
-
         extra = getIntent();
-
         new DownloadHeadsTask().execute(extra.getStringExtra("HtmlExtra"));
-
     }
 
     private class DownloadHeadsTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
-
             ArrayList<String[]> arrayList = new ArrayList<>();
-
             try {
                 Document doc = Jsoup.connect(urls[0]).get();
-
                 Elements header = doc.select("h1");
                 Elements tables = doc.select("table");
                 Elements vorlesungenTabelle = doc.select("table[summary='Übersicht über alle Veranstaltungen'");
                 Elements table_header = doc.select("a.ueb");
-
                 String[] zweigName_1 = new String[table_header.size()];
                 String[] zweigUrl_2 = new String[table_header.size()];
                 String[] headerString_0 = new String[1];
                 String[] modul_3 = new String[2];
-
                 headerString_0[0] = header.text();
-
                 for (int i = 0; i < zweigName_1.length; i++) {
                     zweigName_1[i] = table_header.get(i).text();
                     zweigUrl_2[i] = table_header.get(i).attr("href");
                 }
-
-
                 if (tables.last() == vorlesungenTabelle.last() && vorlesungenTabelle.size() != 0){
                     modul_3[0] = table_header.last().text();
                     modul_3[1] = table_header.last().attr("href");
                 }
-
                 arrayList.add(headerString_0);
                 arrayList.add(zweigName_1);
                 arrayList.add(zweigUrl_2);
                 arrayList.add(modul_3);
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,32 +83,33 @@ public class BaumActivity extends NavigationActivity {
         listView = (ListView) findViewById(R.id.fragment_alle_listView);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                handleClickOnListItem(headerHtmls,i, modulAuflistung);
+                handleClickOnListItem(headerHtmls, i, modulAuflistung);
             }
         });
     }
 
     private void handleClickOnListItem(String[] headers, int j, String[] modulAuflistung){
-
         if (modulAuflistung[1] == null){
-            Intent intent = new Intent(this,BaumActivity.class);
+            Intent intent = new Intent(this, BaumActivity.class);
             intent.putExtra("HtmlExtra", headers[j]);
+            intent.putExtra("child", listView.getChildAt(j).toString());
+            listView.getChildAt(j).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             this.finish();
             startActivity(intent);
-
         }else{
             Intent openDetailActivity = new Intent(BaumActivity.this, BaumLetzteActivity.class);
             openDetailActivity.putExtra("header", modulAuflistung[0]);
             openDetailActivity.putExtra("html", modulAuflistung[1]);
+            listView.getChildAt(j).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             startActivity(openDetailActivity);
         }
-
     }
 
     //TODO: Man muss zweimal auf lettes Item klicken, um BaumLetzteActivity zu öffnen. ALso um die Veranstaltungen des Moduls anzeigen zu lassen.
     //TODO: Wenn man von BaumLetzte wieder zurück geht, kann man andere Zeilen nicht mehr drücken.
+    //TODO: Hintergrundfarbe vonStufe ändern, auf der man gerade ist.
+    //Susi - krieg ich iwie alles nicht hin...
 }

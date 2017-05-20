@@ -9,7 +9,6 @@ import android.support.constraint.ConstraintLayout;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -19,7 +18,7 @@ import android.widget.ListView;
 
 public class DetailActivityWithFragments extends NavigationActivity implements DetailFragment.OpenOtherFragment {
     private ListView detailActivityListview;
-    private DetailActivityArrayAdapter detailActivityArrayAdapter;
+    private GrunddatenArrayAdapter detailActivityArrayAdapter;
     private Button button;
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -46,9 +45,6 @@ public class DetailActivityWithFragments extends NavigationActivity implements D
                 setTitle("Detail");
             }
         }
-
-
-
     }
 
     public void getFragment (Class fragmentClass, String fragmentName) {

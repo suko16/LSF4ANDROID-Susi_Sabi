@@ -1,13 +1,8 @@
 package de.ur.mi.lsf4android;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +23,7 @@ import java.io.IOException;
 public class GrunddatenFragment extends android.support.v4.app.Fragment{
 
         private ListView detailActivityListview;
-        private DetailActivityArrayAdapter detailActivityArrayAdapter;
+        private GrunddatenArrayAdapter detailActivityArrayAdapter;
 
 
         @Override
@@ -81,7 +76,7 @@ public class GrunddatenFragment extends android.support.v4.app.Fragment{
             protected void onPostExecute(String[][] result) {
                 Context context = getActivity();
                 if (context != null) {
-                    detailActivityArrayAdapter = new DetailActivityArrayAdapter(context, result);
+                    detailActivityArrayAdapter = new GrunddatenArrayAdapter(context,R.layout.row_grunddaten, result);
                     detailActivityListview.setAdapter(detailActivityArrayAdapter);
                 }
             }

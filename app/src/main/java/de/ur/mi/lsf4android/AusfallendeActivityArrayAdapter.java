@@ -26,7 +26,8 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
     private EigeneVeranstaltungenDataSource dataSource;
     View rowView;
     TextView nummer;
-    View row;
+    TextView title;
+    int count;
 
     public AusfallendeActivityArrayAdapter(@NonNull Context context, ArrayList<Veranstaltung> veranstaltungen) {
         super(context, -1, veranstaltungen);
@@ -38,22 +39,22 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        rowView = inflater.inflate(R.layout.row_ausfallende, parent, false);
-        TextView beginn = (TextView) rowView.findViewById(R.id.beginn);
-        TextView ende = (TextView) rowView.findViewById(R.id.ende);
-        nummer = (TextView) rowView.findViewById(R.id.nummer);
-        TextView titel = (TextView) rowView.findViewById(R.id.titel);
-        beginn.setText(veranstaltungen.get(position).getBeginn());
-        ende.setText(veranstaltungen.get(position).getEnde());
-        nummer.setText(veranstaltungen.get(position).getNumber());
-        titel.setText(veranstaltungen.get(position).getTitel());
+            rowView = inflater.inflate(R.layout.row_ausfallende, parent, false);
+            TextView beginn = (TextView) rowView.findViewById(R.id.beginn);
+            TextView ende = (TextView) rowView.findViewById(R.id.ende);
+            nummer = (TextView) rowView.findViewById(R.id.nummer);
+            title = (TextView) rowView.findViewById(R.id.titel);
+            beginn.setText(veranstaltungen.get(position).getBeginn());
+            ende.setText(veranstaltungen.get(position).getEnde());
+            nummer.setText(veranstaltungen.get(position).getNumber());
+            title.setText(veranstaltungen.get(position).getTitel());
 
-        titel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                callDetailActivity(veranstaltungen.get(position).getTitel(), veranstaltungen.get(position).getHtml());
-            }
-        });
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callDetailActivity(veranstaltungen.get(position).getTitel(), veranstaltungen.get(position).getHtml());
+                }
+            });
 
         dataSource = new EigeneVeranstaltungenDataSource(context);
         dataSource.open();
@@ -61,14 +62,11 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
 
         for (int j = 0; j < VeranstaltungslisteDB.size(); j++) {
                 if (VeranstaltungslisteDB.get(j).getNumber().equals(nummer.getText().toString())) {
-                    titel.setText(titel.getText().toString().toUpperCase());
+                    title.setText(title.getText().toString().toUpperCase());
                     rowView.setBackgroundColor(Color.YELLOW);
                 }
         }
-
         dataSource.close();
-
-
         return rowView;
     }
 
@@ -77,7 +75,6 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
         return veranstaltungen.size();
     }
 
-
     private void callDetailActivity(String title, String html) {
         Intent intent = new Intent(context, DetailActivityWithFragments.class);
         intent.putExtra("titel", title);
@@ -85,16 +82,6 @@ public class AusfallendeActivityArrayAdapter extends ArrayAdapter<Veranstaltung>
         intent.putExtra("open_detail_start",true);
         context.startActivity(intent);
     }
-
-
-
-    private void checkCollision(){
-
-
-
-    }
-
-
 }
 
 
