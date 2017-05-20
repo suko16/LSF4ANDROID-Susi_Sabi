@@ -9,8 +9,3 @@
     tools:context="de.ur.mi.lsf4android.NavigationActivity"
     tools:showIn="@layout/app_bar_navigation">
 </android.support.constraint.ConstraintLayout>
-
-    <!--verglichen
-        von System gebaut-->
-
-<!--feritg-->

@@ -35,5 +35,3 @@
         android:textSize="@dimen/text_medium"
         android:textAlignment="center"/>
 </LinearLayout>
-
-<!--fertig-->

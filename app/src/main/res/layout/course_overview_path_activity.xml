@@ -24,5 +24,3 @@
         android:divider="@color/color_lsf4Android_opaque"
         android:dividerHeight="@dimen/divider_hight"></ListView>
 </LinearLayout>
-
-<!--fertig-->

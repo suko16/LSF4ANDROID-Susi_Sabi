@@ -17,8 +17,3 @@
         android:layout_height="wrap_content"
         android:id="@+id/notification_textView"/>
 </LinearLayout>
-
-    <!--verglichen
-    hat Sabi gebaut-->
-
-<!--fertig-->

@@ -28,5 +28,3 @@
         android:layout_marginRight="@dimen/margin_medium"
         android:focusable="false"/>
 </LinearLayout>
-
-<!--fertig-->

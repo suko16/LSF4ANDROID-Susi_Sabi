@@ -30,8 +30,3 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="@dimen/lsf4android_fontSize_nav"/>
 </LinearLayout>
-
-<!--verglichen
-von System gebaut-->
-
-<!--fertig-->

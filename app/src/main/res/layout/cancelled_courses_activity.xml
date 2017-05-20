@@ -82,5 +82,3 @@
         android:dividerHeight="@dimen/divider_hight">
     </ListView>
 </LinearLayout>
-
-<!--fertig-->
