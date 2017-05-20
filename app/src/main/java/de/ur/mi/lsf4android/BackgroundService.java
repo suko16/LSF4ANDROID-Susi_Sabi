@@ -65,8 +65,8 @@ public class BackgroundService extends IntentService {
         int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
         date = mDay + "." + mMonth + "." + mYear;
 
-        //TODO: auf 3 ändern!!
-        for(int k=10; k>0; k--){
+        
+        for(int k=3; k>0; k--){
             url = "https://lsf.uni-regensburg.de/qisserver/rds?state=currentLectures&type=1&next=CurrentLectures.vm&nextdir=ressourcenManager&navigationPosition=lectures%2CcanceledLectures&breadcrumb=canceledLectures&topitem=lectures&subitem=canceledLectures&&HISCalendar_Date=" + date + "&asi=";
             new DownloadLSFTask().execute(url);
             c.add(Calendar.DATE, 1);

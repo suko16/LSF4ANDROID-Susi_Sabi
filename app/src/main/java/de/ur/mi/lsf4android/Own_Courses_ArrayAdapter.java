@@ -1,3 +1,4 @@
+
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
@@ -18,6 +19,7 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
 
     private final Context context;
     private final ArrayList<Course> own_courses_arrayList;
+    private Own_Courses_DataSource dataSource;
 
     public Own_Courses_ArrayAdapter(@NonNull Context context, ArrayList<Course> own_courses_arrayList) {
         super(context, -1, own_courses_arrayList);
@@ -27,7 +29,7 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.own_courses_row, parent, false);
         TextView number = (TextView) rowView.findViewById(R.id.own_courses_number);
@@ -39,7 +41,7 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         number.setText(own_courses_arrayList.get(position).getNumber());
         title.setText(own_courses_arrayList.get(position).getTitle());
 
-        title.setOnClickListener(new View.OnClickListener() {
+       /* title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Single_View_With_Fragments.class);
@@ -50,25 +52,27 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
             }
         });
 
-        /*title.setOnLongClickListener(new View.OnLongClickListener() {
+
+        title.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
 
-                Course selectedCourse = (Course) own_Courses_ListView.getItemAtPosition(positionListView);
-
+                Course selectedCourse = own_courses_arrayList.get(position);
+                dataSource = new Own_Courses_DataSource(getContext());
+                dataSource.open();
                 dataSource.deleteCourse(selectedCourse);
-
+                notifyDataSetChanged();
                 CharSequence text = selectedCourse.getTitle() + " wurde gelöscht";
 
-                Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                 toast.show();
+                notifyDataSetChanged();
 
-                showAllListEntries();
                 return true;
             }
 
         });
-*/
+        notifyDataSetChanged();*/
         return rowView;
     }
 
@@ -77,6 +81,5 @@ public class Own_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         return own_courses_arrayList.size();
     }
 }
-
 
 

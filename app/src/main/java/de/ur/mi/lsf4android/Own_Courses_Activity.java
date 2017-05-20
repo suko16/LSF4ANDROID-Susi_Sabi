@@ -1,8 +1,8 @@
 package de.ur.mi.lsf4android;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,21 +14,26 @@ import java.util.ArrayList;
 
 public class Own_Courses_Activity extends NavigationActivity {
 
-
+//TODO: wenn noch zeit nochmal versuchen (manifest, layout und main ändern), wenn nicht löschen
     private Own_Courses_DataSource dataSource;
     public ListView own_Courses_ListView;
     private TextView number;
     private TextView title;
-    private  Context context;
+    private  Context context =Own_Courses_Activity.this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ConstraintLayout contentConstraintLayout = (ConstraintLayout) findViewById(R.id.fragment_content_navigation); //Remember this is the FrameLayout area within your activity_main.xml
+        getLayoutInflater().inflate(R.layout.own_courses_fragment, contentConstraintLayout);
+
         number = (TextView) findViewById(R.id.own_courses_fragment_number);
         title = (TextView) findViewById(R.id.own_courses_fragment_title);
         own_Courses_ListView = (ListView) findViewById(R.id.own_courses_fragment_listView);
-        dataSource = new Own_Courses_DataSource(context);
+        dataSource = new Own_Courses_DataSource(Own_Courses_Activity.this);
+
     }
 
 
@@ -38,12 +43,13 @@ public class Own_Courses_Activity extends NavigationActivity {
         number.setText("Nr.");
         title.setText("Titel");
         if (context != null) {
+            dataSource.open();
             ArrayList<Course> courseListDB = dataSource.getAllCourses();
             Own_Courses_ArrayAdapter adapter = new Own_Courses_ArrayAdapter(context, courseListDB);
             own_Courses_ListView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
-            own_Courses_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /*own_Courses_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int position, long ld) {
 
@@ -53,7 +59,7 @@ public class Own_Courses_Activity extends NavigationActivity {
                     Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                     toast.show();
                 }
-            });
+            });*/
 
             adapter.notifyDataSetChanged();
 
@@ -107,3 +113,4 @@ public class Own_Courses_Activity extends NavigationActivity {
         return activity;
     }
 }
+
