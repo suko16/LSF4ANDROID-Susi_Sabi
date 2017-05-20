@@ -16,14 +16,12 @@ public class Own_Courses_DataSource {
     private Own_Courses_DbHelper dbHelper;
     private Cursor cursor;
 
-
     private String[] columns = {
             Own_Courses_DbHelper.COLUMN_ID,
             Own_Courses_DbHelper.COLUMN_NUMBER,
             Own_Courses_DbHelper.COLUMN_TITEL,
             Own_Courses_DbHelper.COLUMN_HTML
     };
-
 
 
 
@@ -41,18 +39,15 @@ public class Own_Courses_DataSource {
         dbHelper.close();
     }
 
-
-    public Course createVeranstaltung(String titel, String number, String html) {
+    //write a new Course-entry in the database
+    public Course createCourse(String titel, String number, String html) {
         ContentValues values = new ContentValues();
         values.put(Own_Courses_DbHelper.COLUMN_TITEL, titel);
         values.put(Own_Courses_DbHelper.COLUMN_NUMBER, number);
         values.put(Own_Courses_DbHelper.COLUMN_HTML, html);
 
         open();
-
-
         long insertId = database.insert(Own_Courses_DbHelper.TABLE_OWN_COURSES, null, values);
-
         Cursor cursor = database.query(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 columns, Own_Courses_DbHelper.COLUMN_ID + "=" + insertId,
                 null, null, null, null);
@@ -63,26 +58,22 @@ public class Own_Courses_DataSource {
         return course;
     }
 
-
+    //delete one entry of the database
     public void deleteCourse(Course course) {
         long id = course.getId();
-
         database.delete(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 Own_Courses_DbHelper.COLUMN_ID + "=" + id,
                 null);
 
     }
 
-
+    //provide all entries in the database
     public ArrayList<Course> getAllCourses() {
         ArrayList<Course> Courselist = new ArrayList<>();
-
         cursor = database.query(Own_Courses_DbHelper.TABLE_OWN_COURSES,
                 columns, null, null, null, null, null);
-
         cursor.moveToFirst();
         Course course;
-
 
         while(!cursor.isAfterLast()) {
             course = cursorToCourse(cursor);
@@ -91,7 +82,6 @@ public class Own_Courses_DataSource {
         }
 
         cursor.close();
-
         return Courselist;
     }
 

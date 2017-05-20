@@ -1,6 +1,3 @@
-//verglichen
-//hat Sabi gebaut
-
 
 package de.ur.mi.lsf4android;
 
@@ -12,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Own_Courses_DbHelper extends SQLiteOpenHelper{
 
-    private static final String LOG_TAG = Own_Courses_DbHelper.class.getSimpleName();
 
     public static final String DB_NAME = "dbEeigeneVeranstaltungen.db";
     public static final int DB_VERSION = 1;
@@ -30,7 +26,7 @@ public class Own_Courses_DbHelper extends SQLiteOpenHelper{
 
 
 
-
+    //constructor
     public Own_Courses_DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
 

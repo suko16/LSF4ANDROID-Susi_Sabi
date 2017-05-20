@@ -1,8 +1,3 @@
-//verglichen
-//hat Susi gebaut
-//mit ArrayAdapter und Gridview umabuen
-
-
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -15,12 +10,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 
-public class Singe_View_Activity extends NavigationActivity{
-    public static final String TITEL_EXTRA = "titel_extra";
-    public static final String HTML_EXTRA = "html_extra";
+
+public class Single_View_Activity extends NavigationActivity{
+    private static final String TITEL_EXTRA = "titel_extra";
+    private static final String HTML_EXTRA = "html_extra";
     private ListView detailActivityListview;
     private Single_View_Basic_Data_ArrayAdapter single_View_ArrayAdapter;
 
@@ -70,7 +65,7 @@ public class Singe_View_Activity extends NavigationActivity{
 
 
         protected void onPostExecute(String[][] result) {
-            single_View_ArrayAdapter = new Single_View_Basic_Data_ArrayAdapter(Singe_View_Activity.this,R.layout.single_view_basic_data_row, result);
+            single_View_ArrayAdapter = new Single_View_Basic_Data_ArrayAdapter(Single_View_Activity.this,R.layout.single_view_basic_data_row, result);
             detailActivityListview.setAdapter(single_View_ArrayAdapter);
         }
     }

@@ -8,16 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 
-/**
- * Created by Susanne on 19.05.2017.
- */
+
 
 public class Single_View_Content_Fragment extends android.support.v4.app.Fragment {
     ListView inhalt;

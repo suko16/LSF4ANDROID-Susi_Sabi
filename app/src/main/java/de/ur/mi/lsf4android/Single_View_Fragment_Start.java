@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-/**
- * Created by Susanne on 19.05.2017.
- */
 
 public class Single_View_Fragment_Start extends android.support.v4.app.Fragment  {
     OpenOtherFragment mCallback;
@@ -60,7 +57,7 @@ public class Single_View_Fragment_Start extends android.support.v4.app.Fragment 
                 fragmentName = "GRUNDDATEN";
                 break;
             case 1:
-                fragmentClass = TermineFragment.class;
+                fragmentClass = Single_View_Time_Fragment.class;
                 fragmentName = "TERMINE";
                 break;
             case 2:

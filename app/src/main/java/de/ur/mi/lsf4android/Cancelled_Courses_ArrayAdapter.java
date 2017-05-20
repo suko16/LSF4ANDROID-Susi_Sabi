@@ -10,13 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Sabi on 17.05.2017.
- */
+
 
 public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
     private final Context context;
@@ -25,7 +22,7 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
     View rowView;
     TextView title;
 
-
+    //constructor
     public Cancelled_Courses_ArrayAdapter(@NonNull Context context, ArrayList<Course> courseArrayList) {
         super(context, -1, courseArrayList);
         this.context = context;
@@ -46,13 +43,15 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
             number.setText(courseArrayList.get(position).getNumber());
             title.setText(courseArrayList.get(position).getTitle());
 
+            //onClickListener to call the single view activity if the title is clicked
             title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    callDetailActivity(courseArrayList.get(position).getTitle(), courseArrayList.get(position).getHtml());
+                    callSingleViewActivity(courseArrayList.get(position).getTitle(), courseArrayList.get(position).getHtml());
                 }
             });
 
+        //changes the backgroundcolor if one of the cancelled courses is stored in the database
         dataSource = new Own_Courses_DataSource(context);
         dataSource.open();
         List<Course> CourseListDB = dataSource.getAllCourses();
@@ -72,7 +71,7 @@ public class Cancelled_Courses_ArrayAdapter extends ArrayAdapter<Course> {
         return courseArrayList.size();
     }
 
-    private void callDetailActivity(String title, String html) {
+    private void callSingleViewActivity(String title, String html) {
         Intent intent = new Intent(context, Single_View_With_Fragments.class);
         intent.putExtra("titel", title);
         intent.putExtra("html", html);

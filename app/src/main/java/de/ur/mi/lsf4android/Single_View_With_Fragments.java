@@ -2,19 +2,14 @@ package de.ur.mi.lsf4android;
 
 
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.widget.Button;
 import android.widget.ListView;
 
-/**
- * Created by Susanne on 19.05.2017.
- */
 
 public class Single_View_With_Fragments extends NavigationActivity implements Single_View_Fragment_Start.OpenOtherFragment {
     private ListView detailActivityListview;

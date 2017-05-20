@@ -25,11 +25,20 @@
     <string name="action_settings">Settings</string>
 
     <!--Ausgabe-->
+    <string name="created"> wurde in Eigene Veranstaltungen gespeichert</string>
+    <string name="deleted"> wurde gelöscht</string>
 
 
     <!--Anweisung-->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="create_notification">Create Notification</string>
-    <string name="eintraege_loeschen">Einträge löschen</string>
+<string name="eintraege_loeschen">Einträge Löschen</string>
+
+    <!--Header-->
+    <string name="begin">Beginn</string>
+    <string name="end">Ende</string>
+    <string name="number">Nr.</string>
+    <string name="title">Titel</string>
+
 </resources>

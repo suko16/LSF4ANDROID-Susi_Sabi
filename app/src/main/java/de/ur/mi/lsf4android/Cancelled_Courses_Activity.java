@@ -12,16 +12,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
 
 public class Cancelled_Courses_Activity extends NavigationActivity {
     private TextView title;
@@ -31,7 +29,6 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
     private ListView list;
     private Cancelled_Courses_ArrayAdapter adapter;
     private ArrayList<String> htmlList;
-    private Own_Courses_DataSource dataSource;
     private ArrayList<String[]> result;
     private DatePickerDialog datePickerDialog;
     private Button datePickerButton;
@@ -84,7 +81,8 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
         });
     }
 
-    private void callDetailActivity(String title, int j) {
+    //passes to the single view version of the special activity
+    private void callSingeViewActivity(String title, int j) {
         Intent intent = new Intent(this, Single_View_Fragment_Start.class);
         intent.putExtra("titel", title);
         intent.putExtra("html", htmlList.get(j));
@@ -95,7 +93,7 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
     public void onPause() {
         super.onPause();
     }
-
+    //downloads the cancelled courses from LSF
     private class DownloadLSFTask extends AsyncTask<String, Integer, ArrayList<String[]>> {
         protected ArrayList<String[]> doInBackground(String... urls) {
             result = new ArrayList<>();
@@ -139,11 +137,13 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
         }
 
         protected void onPostExecute(ArrayList<String[]> result) {
-            begin.setText("Beginn");
-            end.setText("Ende");
-            number.setText("Nr.");
-            title.setText("Titel");
+            //insert captions for the columns
+            begin.setText(R.string.begin);
+            end.setText(R.string.end);
+            number.setText(R.string.number);
+            title.setText(R.string.title);
 
+            //filling an ArrayList with courses and set the adapter
             if (result.size() != 0) {
                 final ArrayList<Course> courseArrayList = new ArrayList<Course>();
                 for (int i = 1; i < result.size(); i++) {
@@ -153,27 +153,16 @@ public class Cancelled_Courses_Activity extends NavigationActivity {
                 if (context != null) {
                     adapter = new Cancelled_Courses_ArrayAdapter(context, courseArrayList);
                     list.setAdapter(adapter);
-
                     list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                             if (i != 0) {
-                                callDetailActivity(courseArrayList.get(i).getTitle(), i - 1);
+                                callSingeViewActivity(courseArrayList.get(i).getTitle(), i - 1);
                             }
                         }
                     });
                 }
-                dataSource = new Own_Courses_DataSource(Cancelled_Courses_Activity.this);
-                dataSource.open();
-                List<Course> VeranstaltungslisteDB = dataSource.getAllCourses();
-                for (int j = 0; j < VeranstaltungslisteDB.size(); j++) {
-                    for (int i = 0; i < courseArrayList.size(); i++) {
-                        if (VeranstaltungslisteDB.get(j).getNumber().equals(courseArrayList.get(i).getNumber())) {
-                            courseArrayList.get(i).setTitle(courseArrayList.get(i).getTitle().toUpperCase());
 
-                        }
-                    }
-                }
             }
         }
     }

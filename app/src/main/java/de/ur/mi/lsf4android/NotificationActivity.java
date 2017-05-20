@@ -1,7 +1,3 @@
-//verglichen
-//hat Sabi gebaut
-
-
 package de.ur.mi.lsf4android;
 
 import android.app.Activity;
@@ -15,20 +11,12 @@ import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
 import android.support.v4.app.NotificationCompat;
 
-/**
- * Created by Sabi on 07.05.2017.
- */
-
 public class NotificationActivity extends Activity {
 
 
 
-
     NotificationManager notificationManager;
-    Notification noti;
-    long[] vibrate = {0,100};
     NotificationCompat.Builder b;
-    public static final String LOG_TAG = MainActivity.class.getSimpleName();
     private Context context;
 
 
@@ -51,9 +39,7 @@ public class NotificationActivity extends Activity {
 
     public void createNotification(String titelAusfallendeVeranstaltung, String date, int notificationID) {
 
-
-
-        //Erstellt trotz permanenter Aktulaisierung keine Notations, die bereits angezeigt werden
+        //check if the notification comming from the service is already displayed
         StatusBarNotification[] AllActiveNotifications = notificationManager.getActiveNotifications();
         if(AllActiveNotifications!= null) {
             for(int r = 0; r<AllActiveNotifications.length; r++) {
@@ -63,16 +49,14 @@ public class NotificationActivity extends Activity {
             }
         }
 
-
+        //calls the cancelledCoursesActivity if the notification is clicked
         Intent notificationIntent = new Intent(context, Cancelled_Courses_Activity.class);
-
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
 
-
+        //the builder creates the notification/-layout
         b.setSmallIcon(R.mipmap.uni_logo)
-
                 .setContentText("Am " + date + " entfällt '" + titelAusfallendeVeranstaltung + "'")
                 .setContentTitle("LSF4Android")
                 .setSortKey(date)
@@ -80,9 +64,7 @@ public class NotificationActivity extends Activity {
                 .setVibrate(new long[] { 1000, 1000, 1000 })
                 .setContentIntent(pIntent)
                 .setColor(Color.BLUE)
-                .setTicker(titelAusfallendeVeranstaltung)
-
-        ;
+                .setTicker(titelAusfallendeVeranstaltung);
 
         notificationManager.notify(notificationID, b.build());
 

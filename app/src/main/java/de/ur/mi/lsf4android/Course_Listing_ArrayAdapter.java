@@ -22,6 +22,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
     public Own_Courses_DataSource dataSource;
 
 
+    //constructor
     public Course_Listing_ArrayAdapter(Context context, String[] number, String[] title, String[] html) {
         super(context, R.layout.course_overview_path_row, number);
         this.context = context;
@@ -41,7 +42,10 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
         Button button = (Button) rowView.findViewById(R.id.course_listing_button);
         button.setId(position);
         textViewNumber.setText(number[position]);
+        textViewNumber.setTextColor(Color.BLACK);
         textViewName.setText(title[position]);
+        textViewName.setTextColor(Color.BLACK);
+        //onClickListener to call the single view activity if the title is clicked
         textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,9 +57,10 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
             }
         });
 
-       //Überprüft vor dem erstellen welche Buttons für welche Veranstaltung
-        //dementsprechender ClickListener gesetzt
 
+
+        //compare the list of courses with the database entries
+        //depending if the course is already in the database choosing the button und clickListener
 
         dataSource = new Own_Courses_DataSource(getContext());
         dataSource.open();
@@ -70,23 +75,23 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
 
                     @Override
                     public void onClick(View view){
-
                         LinearLayout vwParentRow = (LinearLayout)view.getParent();
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
                         dataSource.deleteCourse(CourseListDB.get(temp));
-                        CharSequence text = CourseListDB.get(temp).getTitle() + " wurde gelöscht";
+                        CharSequence text = CourseListDB.get(temp).getTitle() + R.string.deleted;
 
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.add_button);
+                        notifyDataSetChanged();
+
                     }
                 });
 
                 break;
             } else {
-
-              button.setBackgroundResource(R.mipmap.add_button);
-              button.setOnClickListener(new View.OnClickListener() {
+                button.setBackgroundResource(R.mipmap.add_button);
+                button.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
@@ -94,11 +99,12 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
                         TextView tempTitle = (TextView) vwParentRow.getChildAt(1);
                         TextView tempNumber = (TextView) vwParentRow.getChildAt(0);
                         Button tempButton = (Button) vwParentRow.getChildAt(2);
-                        dataSource.createVeranstaltung(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
-                        CharSequence text = tempTitle.getText().toString() + " wurde in Eigene Veranstaltungen gespeichert";
+                        dataSource.createCourse(tempTitle.getText().toString(), tempNumber.getText().toString(), html[position]);
+                        CharSequence text = tempTitle.getText().toString() + R.string.created;
                         Toast toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                         toast.show();
                         tempButton.setBackgroundResource(R.mipmap.remove_button);
+                        notifyDataSetChanged();
                     }
                 });
             }
@@ -106,4 +112,6 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
 
         return rowView;
     }
+
+
 }

@@ -9,19 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Susanne on 19.05.2017.
- */
 
-public class TermineFragment extends android.support.v4.app.Fragment {
+
+public class Single_View_Time_Fragment extends android.support.v4.app.Fragment {
     ListView listView;
 
     @Override
@@ -45,7 +41,6 @@ public class TermineFragment extends android.support.v4.app.Fragment {
 
 
             try {
-
                 Document doc = Jsoup.connect(urls[0]).get();
                 Elements tableGrunddaten = doc.select("table[summary='Übersicht über alle Veranstaltungstermine']");
                 int group = tableGrunddaten.size();
@@ -88,7 +83,7 @@ public class TermineFragment extends android.support.v4.app.Fragment {
                 }
                 Context context = getActivity();
                 if (context != null) {
-                ArrayAdapter adapter = new TermineArrayAdapter(context, courseArrayList);
+                ArrayAdapter adapter = new Single_View_TimeArrayAdapter(context, courseArrayList);
                 listView.setAdapter(adapter);
                 }
             }

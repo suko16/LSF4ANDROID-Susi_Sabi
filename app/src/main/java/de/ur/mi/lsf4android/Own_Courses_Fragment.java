@@ -1,6 +1,3 @@
-//verglichen
-//hat Sabi gebaut
-
 
 package de.ur.mi.lsf4android;
 
@@ -12,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import java.util.ArrayList;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +21,6 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
     public ListView own_Courses_ListView;
     private TextView number;
     private TextView title;
-
-
 
 
     @Override
@@ -42,21 +35,21 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         dataSource = new Own_Courses_DataSource(getActivity());
         own_Courses_ListView.setOnItemClickListener(this);
         own_Courses_ListView.setOnItemLongClickListener(this);
-
         return view;
     }
 
 
     public void showAllListEntries() {
 
-        number.setText("Nr.");
-        title.setText("Titel");
+        number.setText(R.string.number);
+        title.setText(R.string.title);
         Context context = getActivity();
         if (context != null) {
             ArrayList<Course> courseListDB = dataSource.getAllCourses();
             Own_Courses_ArrayAdapter adapter = new Own_Courses_ArrayAdapter(context, courseListDB);
             own_Courses_ListView.setAdapter(adapter);
 
+            //TODO: wenn ich noch zeit hab lösung findne sonst löschen!!
             //Abgleich mit Downloadergebnis aus BackgroundService
             //Problem: result = null
           /* BackgroundService bS = new BackgroundService();
@@ -75,7 +68,6 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
                     }
                 }
             }*/
-
         }
     }
 
@@ -96,12 +88,10 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
 
 
 
-
+    //open the single view if the user clicks at the course
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         int positionListView = (int)id;
-
         Course selectedCourse = (Course) own_Courses_ListView.getItemAtPosition(positionListView);
 
         Intent intent = new Intent(getActivity(), Single_View_With_Fragments.class);
@@ -111,16 +101,15 @@ public class Own_Courses_Fragment extends android.support.v4.app.Fragment implem
         startActivity(intent);
     }
 
+
+    //delete the course if the user clicks long at one entry
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
         int positionListView = (int)id;
-
         Course selectedCourse = (Course) own_Courses_ListView.getItemAtPosition(positionListView);
+
         dataSource.deleteCourse(selectedCourse);
-
-        CharSequence text = selectedCourse.getTitle() + " wurde gelöscht";
-
+        CharSequence text = selectedCourse.getTitle() + R.string.deleted;
         Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
         toast.show();
 
