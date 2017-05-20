@@ -16,6 +16,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="@string/set_date"
+        android:textSize="@dimen/text_medium"
         android:layout_gravity="center_horizontal" />
     <TextView
         android:id="@+id/textView_date"
@@ -57,7 +58,7 @@
             android:layout_width="0dp"
             android:layout_weight="1.2"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_medium"
             android:textStyle="bold"
             android:textColor="@color/text_black"
             android:textAlignment="center"
@@ -76,7 +77,9 @@
     <ListView
         android:id="@+id/cancelled_courses_listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:divider="@color/color_lsf4Android_opaque"
+        android:dividerHeight="@dimen/divider_hight">
     </ListView>
 </LinearLayout>
 

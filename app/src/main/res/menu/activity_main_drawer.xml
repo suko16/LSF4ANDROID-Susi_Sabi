@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_point_1"
-            android:title="@string/ausfallende_V"/>
+            android:title="@string/ausfallende_V" />
         <item
             android:id="@+id/menu_point_2"
             android:title="@string/eigene_V" />

@@ -73,8 +73,7 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
     }
 
     private void buildList(String[] headers, final String[] headerHtmls, final String[] modulAuflistung ) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, headers);
+        Course_Overview_Path_ArrayAdapter adapter = new Course_Overview_Path_ArrayAdapter(this, headers);
         listView = (ListView) findViewById(R.id.course_overview_path_listView);
         listView.setAdapter(adapter);
         listView.setItemsCanFocus(true);
@@ -97,7 +96,6 @@ public class Course_Overview_Path_Activity extends NavigationActivity {
             Intent openDetailActivity = new Intent(Course_Overview_Path_Activity.this, Course_Listing_Activity.class);
             openDetailActivity.putExtra("header", modulAuflistung[0]);
             openDetailActivity.putExtra("html", modulAuflistung[1]);
-            listView.getChildAt(j).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             startActivity(openDetailActivity);
         }
     }

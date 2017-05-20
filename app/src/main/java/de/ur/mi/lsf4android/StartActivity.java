@@ -1,3 +1,7 @@
+//fertig
+//von Susi gebaut
+
+
 package de.ur.mi.lsf4android;
 
 import android.content.Intent;
@@ -7,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 
 public class StartActivity extends AppCompatActivity {
 

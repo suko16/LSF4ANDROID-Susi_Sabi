@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:text="@string/app_name"
         android:textSize="@dimen/lsf4android_fontSize"
-        android:textColor="#000000"
+        android:textColor="@color/text_black"
         android:textStyle="bold"
         android:textAlignment="center"
         tools:layout_constraintTop_creator="1"
@@ -42,13 +42,12 @@
         app:layout_constraintLeft_toLeftOf="@+id/imageView"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
     <Button
         android:id="@+id/ausfallende_v_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#1F4C8E"
-        android:textColor="#FFFFFF"
+        android:background="@color/color_lsf4Android"
+        android:textColor="@color/text_white"
         android:textSize="@dimen/homescreen_button_text"
         android:textAllCaps="false"
         android:text="@string/ausfallende_V"
@@ -65,7 +64,6 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.95" />
-
     <Button
         android:id="@+id/eigene_v_button"
         android:layout_width="wrap_content"
@@ -74,11 +72,11 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:background="#1F4C8E"
-        android:padding="14dp"
+        android:background="@color/color_lsf4Android"
+        android:padding="@dimen/padding_large"
         android:text="@string/eigene_V"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_white"
         android:textSize="@dimen/homescreen_button_text"
         app:layout_constraintBottom_toTopOf="@+id/alle_v_button"
         app:layout_constraintHorizontal_bias="0.419"
@@ -87,14 +85,13 @@
         app:layout_constraintTop_toBottomOf="@+id/ausfallende_v_button"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
-
     <Button
         android:id="@+id/alle_v_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#1F4C8E"
-        android:textColor="#FFFFFF"
-        android:padding="14dp"
+        android:background="@color/color_lsf4Android"
+        android:textColor="@color/text_white"
+        android:padding="@dimen/padding_large"
         android:textSize="@dimen/homescreen_button_text"
         android:textAllCaps="false"
         android:text="@string/alle_V"
@@ -106,13 +103,4 @@
         app:layout_constraintRight_toRightOf="@+id/eigene_v_button"
         app:layout_constraintBottom_toBottomOf="@+id/caption"
         android:layout_marginBottom="7dp" />
-
-    <Button
-        android:id="@+id/button_last"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_dark"
-        android:text="Letzte Seite"/>
-
-
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>

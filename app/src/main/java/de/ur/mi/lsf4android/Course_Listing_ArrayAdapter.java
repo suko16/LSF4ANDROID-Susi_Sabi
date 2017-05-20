@@ -19,7 +19,7 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
     private final String[] number;
     private final String[] title;
     private final String[] html;
-    private Own_Courses_DataSource dataSource;
+    public Own_Courses_DataSource dataSource;
 
 
     //constructor
@@ -67,9 +67,9 @@ public class Course_Listing_ArrayAdapter extends ArrayAdapter<String> {
         final List<Course> CourseListDB = dataSource.getAllCourses();
         String current = textViewNumber.getText().toString();
         for(int j=0; j< CourseListDB.size(); j++) {
-
             if (CourseListDB.get(j).getNumber().equals(current)) {
                 final int temp = j;
+
                 button.setBackgroundResource(R.mipmap.remove_button);
                 button.setOnClickListener(new View.OnClickListener() {
 

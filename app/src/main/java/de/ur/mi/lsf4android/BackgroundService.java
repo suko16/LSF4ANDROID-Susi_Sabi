@@ -15,9 +15,6 @@ import java.util.List;
 
 
 public class BackgroundService extends IntentService {
-
-
-
     private ArrayList<String[]> result;
     private Own_Courses_DataSource dataSource;
     private String url;
